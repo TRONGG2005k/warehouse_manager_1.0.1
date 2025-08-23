@@ -15,6 +15,13 @@ namespace warehouse_manager.ui.user_control
         public Dashboard()
         {
             InitializeComponent();
+            this.BackColor = Color.AliceBlue;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MainForm mainForm = (MainForm)this.Parent!.Parent!;
+            mainForm.LoadPage(new Login());// new Login là tên class của UserControl 
         }
     }
 }

@@ -23,7 +23,7 @@ namespace warehouse_manager.service
                         MessageBox.Show("Vui lòng nhập đầy đủ thông tin");
                         return false;
                     }
-
+                    
                     var user = context.NguoiDungs
                               .FirstOrDefault(
                                   u => u.TenDangNhap == nguoiDung.TenDangNhap
