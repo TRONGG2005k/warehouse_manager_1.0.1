@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using Microsoft.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -11,16 +11,19 @@ using System.Windows.Forms;
 using warehouse_manager.configuration;
 using warehouse_manager.context;
 using warehouse_manager.Models;
+using warehouse_manager.service;
+using warehouse_manager.ui.user_control;
 
 namespace warehouse_manager.ui
 {
     public partial class Login : UserControl
     {
+        private NguoiDungService nguoiDungService;
         public Login()
         {
             InitializeComponent();
             this.BackColor = Color.AliceBlue;
-           
+            nguoiDungService = new NguoiDungService();
         }
 
         private void Login_Load(object sender, EventArgs e)
@@ -30,27 +33,16 @@ namespace warehouse_manager.ui
 
         private void button1_Click(object sender, EventArgs e)
         {
-            try
+            Boolean resultLogin = nguoiDungService.login(new NguoiDung
             {
-                using (var context = new WarehouseManagerContext())
-                {
-                    if (textBox1.Text == "" || textBox2.Text == "")
-                    {
-                        MessageBox.Show("Vui lòng nhập đầy đủ thông tin");
-                        return;
-                    }
+                TenDangNhap = textBox1.Text,
+                MatKhau = textBox2.Text
+            });
 
-                    var users = context.NguoiDungs;
-
-                    var user = users.Where(
-                        u => u.TenDangNhap == textBox1.Text
-                        &&
-                        u.MatKhau == textBox2.Text).FirstOrDefault();
-                }
-            }
-            catch (Exception ex)
+            if (resultLogin)
             {
-                MessageBox.Show("action failed" + ex.Message);
+                MainForm mainForm = (MainForm)this.Parent!.Parent!;
+                mainForm.LoadPage(new Dashboard());
             }
         }
 

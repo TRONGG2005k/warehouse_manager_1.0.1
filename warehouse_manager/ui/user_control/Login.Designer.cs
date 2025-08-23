@@ -164,6 +164,7 @@
             textBox2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 163);
             textBox2.Location = new Point(100, 132);
             textBox2.Name = "textBox2";
+            textBox2.PasswordChar = '@';
             textBox2.Size = new Size(247, 34);
             textBox2.TabIndex = 1;
             // 
@@ -199,7 +200,7 @@
             button1.TabIndex = 3;
             button1.Text = "login";
             button1.UseVisualStyleBackColor = false;
-            button1.Click += this.button1_Click;
+            button1.Click += button1_Click;
             // 
             // panel4
             // 
