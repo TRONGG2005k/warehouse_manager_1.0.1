@@ -34,7 +34,8 @@ namespace warehouse_manager.ui.user_control
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            MainForm mainForm = (MainForm)this.Parent!.Parent!;
+            mainForm.LoadPage(new DanhSachNhapKho());
         }
 
         private void button3_Click(object sender, EventArgs e)

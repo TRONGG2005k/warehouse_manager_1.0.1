@@ -48,6 +48,8 @@
             Name = "MainForm";
             Text = "LoginForm";
             WindowState = FormWindowState.Maximized;
+            FormClosing += MainForm_FormClosing;
+            FormClosed += MainForm_FormClosed;
             Load += MainForm_Load;
             ResumeLayout(false);
         }

@@ -20,7 +20,7 @@ namespace warehouse_manager.ui
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         public void LoadPage(UserControl page)
@@ -29,6 +29,23 @@ namespace warehouse_manager.ui
             page.Dock = DockStyle.Fill; // Trang chiếm hết panel
             panel1.Controls.Add(page);
             System.Console.WriteLine("Load page" + page.Name);
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            string filePath = "user.txt";
+
+            if (File.Exists(filePath))
+            {
+                // Xóa nội dung file
+                File.WriteAllText(filePath, string.Empty);
+                // Hoặc xóa hẳn file: File.Delete(filePath);
+            }
         }
     }
 }
