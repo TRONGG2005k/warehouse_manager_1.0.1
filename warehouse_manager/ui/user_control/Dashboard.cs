@@ -18,10 +18,34 @@ namespace warehouse_manager.ui.user_control
             this.BackColor = Color.AliceBlue;
         }
 
+        private void Dashboard_Load(object sender, EventArgs e)
+        {
+            var service = new service.PhieuService();
+            var phieuNhapDtos = service.danhSachPhieuNhap();
+            dataGridView1.DataSource = phieuNhapDtos;
+            var phieuXuatDtos = service.danhSachPhieuXuat();
+            dataGridView2.DataSource = phieuXuatDtos;
+        }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             MainForm mainForm = (MainForm)this.Parent!.Parent!;
-            mainForm.LoadPage(new Login());// new Login là tên class của UserControl 
+            mainForm.LoadPage(new Login());
         }
     }
 }

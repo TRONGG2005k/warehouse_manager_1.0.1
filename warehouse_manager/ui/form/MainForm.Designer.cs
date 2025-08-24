@@ -47,6 +47,7 @@
             Controls.Add(panel1);
             Name = "MainForm";
             Text = "LoginForm";
+            WindowState = FormWindowState.Maximized;
             Load += MainForm_Load;
             ResumeLayout(false);
         }

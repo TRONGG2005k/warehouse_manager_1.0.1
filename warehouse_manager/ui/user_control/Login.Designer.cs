@@ -88,8 +88,8 @@
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 3;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 30F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 34.2342339F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 35.81081F));
             tableLayoutPanel2.Size = new Size(394, 444);
             tableLayoutPanel2.TabIndex = 0;
             // 
@@ -97,13 +97,14 @@
             // 
             label1.AutoSize = true;
             label1.Dock = DockStyle.Fill;
-            label1.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 163);
+            label1.Font = new Font("Segoe UI", 48F, FontStyle.Regular, GraphicsUnit.Point, 163);
             label1.Location = new Point(3, 0);
             label1.Name = "label1";
+            label1.Padding = new Padding(20);
             label1.Size = new Size(388, 133);
             label1.TabIndex = 0;
             label1.Text = "login";
-            label1.TextAlign = ContentAlignment.MiddleCenter;
+            label1.TextAlign = ContentAlignment.BottomLeft;
             // 
             // panel2
             // 
@@ -116,13 +117,13 @@
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(3, 136);
             panel2.Name = "panel2";
-            panel2.Size = new Size(388, 216);
+            panel2.Size = new Size(388, 145);
             panel2.TabIndex = 1;
             // 
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(40, 132);
+            pictureBox2.Location = new Point(40, 168);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(39, 34);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
@@ -153,7 +154,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 163);
-            label3.Location = new Point(100, 106);
+            label3.Location = new Point(100, 142);
             label3.Name = "label3";
             label3.Size = new Size(82, 23);
             label3.TabIndex = 3;
@@ -162,10 +163,10 @@
             // textBox2
             // 
             textBox2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 163);
-            textBox2.Location = new Point(100, 132);
+            textBox2.Location = new Point(100, 168);
             textBox2.Name = "textBox2";
             textBox2.PasswordChar = '@';
-            textBox2.Size = new Size(247, 34);
+            textBox2.Size = new Size(285, 34);
             textBox2.TabIndex = 1;
             // 
             // textBox1
@@ -173,16 +174,16 @@
             textBox1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 163);
             textBox1.Location = new Point(100, 49);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(247, 34);
+            textBox1.Size = new Size(285, 34);
             textBox1.TabIndex = 0;
             // 
             // panel3
             // 
             panel3.Controls.Add(button1);
             panel3.Dock = DockStyle.Fill;
-            panel3.Location = new Point(3, 358);
+            panel3.Location = new Point(3, 287);
             panel3.Name = "panel3";
-            panel3.Size = new Size(388, 83);
+            panel3.Size = new Size(388, 154);
             panel3.TabIndex = 2;
             // 
             // button1
@@ -194,9 +195,9 @@
             button1.FlatAppearance.BorderSize = 0;
             button1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 163);
             button1.ForeColor = SystemColors.ButtonHighlight;
-            button1.Location = new Point(40, 19);
+            button1.Location = new Point(40, 18);
             button1.Name = "button1";
-            button1.Size = new Size(307, 61);
+            button1.Size = new Size(345, 61);
             button1.TabIndex = 3;
             button1.Text = "login";
             button1.UseVisualStyleBackColor = false;
