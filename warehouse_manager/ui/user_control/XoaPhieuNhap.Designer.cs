@@ -1,6 +1,6 @@
 ﻿namespace warehouse_manager.ui.user_control
 {
-    partial class TaoDonNhapKho
+    partial class XoaPhieuNhap : UserControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaoDonNhapKho));
             panel10 = new Panel();
             label9 = new Label();
             comboBox4 = new ComboBox();
@@ -249,7 +248,7 @@
             // 
             // button3
             // 
-            button3.BackgroundImage = (Image)resources.GetObject("button3.BackgroundImage");
+            button3.BackgroundImage = Properties.Resources.conveyorbelt_116577;
             button3.BackgroundImageLayout = ImageLayout.Zoom;
             button3.ForeColor = SystemColors.ControlText;
             button3.ImageAlign = ContentAlignment.MiddleLeft;
@@ -260,6 +259,7 @@
             button3.Text = "Xuất kho";
             button3.TextAlign = ContentAlignment.MiddleRight;
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // panel2
             // 
@@ -272,7 +272,7 @@
             // 
             // button2
             // 
-            button2.BackgroundImage = (Image)resources.GetObject("button2.BackgroundImage");
+            button2.BackgroundImage = Properties.Resources.conveyorbelt_118075;
             button2.BackgroundImageLayout = ImageLayout.Zoom;
             button2.ForeColor = SystemColors.ControlText;
             button2.ImageAlign = ContentAlignment.MiddleLeft;
@@ -283,6 +283,7 @@
             button2.Text = "Thoát";
             button2.TextAlign = ContentAlignment.MiddleRight;
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // panel1
             // 
@@ -295,7 +296,7 @@
             // 
             // button4
             // 
-            button4.BackgroundImage = (Image)resources.GetObject("button4.BackgroundImage");
+            button4.BackgroundImage = Properties.Resources.loupe_78956;
             button4.BackgroundImageLayout = ImageLayout.Zoom;
             button4.ForeColor = SystemColors.ControlText;
             button4.ImageAlign = ContentAlignment.MiddleLeft;
@@ -306,6 +307,7 @@
             button4.Text = "Tìm kiếm";
             button4.TextAlign = ContentAlignment.MiddleRight;
             button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // panel3
             // 
@@ -318,7 +320,7 @@
             // 
             // button5
             // 
-            button5.BackgroundImage = (Image)resources.GetObject("button5.BackgroundImage");
+            button5.BackgroundImage = Properties.Resources.iconfinder_warehouse_3992927_112594;
             button5.BackgroundImageLayout = ImageLayout.Zoom;
             button5.ForeColor = SystemColors.ControlText;
             button5.ImageAlign = ContentAlignment.MiddleLeft;
@@ -329,6 +331,7 @@
             button5.Text = "Hàng tồn kho";
             button5.TextAlign = ContentAlignment.MiddleRight;
             button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
             // 
             // panel4
             // 
@@ -341,7 +344,7 @@
             // 
             // button6
             // 
-            button6.BackgroundImage = (Image)resources.GetObject("button6.BackgroundImage");
+            button6.BackgroundImage = Properties.Resources.business_table_order_report_history_2332;
             button6.BackgroundImageLayout = ImageLayout.Zoom;
             button6.ForeColor = SystemColors.ControlText;
             button6.ImageAlign = ContentAlignment.MiddleLeft;
@@ -352,6 +355,7 @@
             button6.Text = "Báo cáo";
             button6.TextAlign = ContentAlignment.MiddleRight;
             button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
             // 
             // panel5
             // 
@@ -386,13 +390,13 @@
             // 
             // button1
             // 
-            button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
             button1.BackgroundImageLayout = ImageLayout.Zoom;
             button1.Location = new Point(3, 3);
             button1.Name = "button1";
             button1.Size = new Size(64, 33);
             button1.TabIndex = 0;
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // label3
             // 
@@ -431,10 +435,11 @@
             button7.TabIndex = 0;
             button7.Text = "Tạo đơn ";
             button7.UseVisualStyleBackColor = false;
+            button7.Click += button7_Click;
             // 
             // panel6
             // 
-            panel6.BackColor = Color.FromArgb(255, 128, 128);
+            panel6.BackColor = Color.White;
             panel6.Controls.Add(button7);
             panel6.Dock = DockStyle.Fill;
             panel6.Location = new Point(3, 3);
@@ -492,6 +497,7 @@
             // 
             button10.BackColor = Color.FromArgb(255, 128, 128);
             button10.Dock = DockStyle.Fill;
+            button10.FlatAppearance.BorderColor = Color.Black;
             button10.Location = new Point(20, 20);
             button10.Name = "button10";
             button10.Size = new Size(219, 44);
@@ -502,6 +508,7 @@
             // 
             // panel9
             // 
+            panel9.BackColor = Color.FromArgb(255, 128, 128);
             panel9.Controls.Add(button10);
             panel9.Dock = DockStyle.Fill;
             panel9.Location = new Point(792, 3);
@@ -575,14 +582,13 @@
             button11.UseVisualStyleBackColor = false;
             button11.Click += button11_Click;
             // 
-            // TaoDonNhapKho
+            // XoaPhieuNhap
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(tableLayoutPanel1);
-            Name = "TaoDonNhapKho";
+            Name = "XoaPhieuNhap";
             Size = new Size(1177, 468);
-            Load += TaoDonNhapKho_Load;
             panel10.ResumeLayout(false);
             panel10.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown2).EndInit();

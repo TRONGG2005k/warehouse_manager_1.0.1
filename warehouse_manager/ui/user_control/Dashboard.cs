@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace warehouse_manager.ui.user_control
 {
-    public partial class Dashboard : UserControl
+    public partial class DanhSachDonNhapKho : UserControl
     {
-        public Dashboard()
+        public DanhSachDonNhapKho()
         {
             InitializeComponent();
             this.BackColor = Color.AliceBlue;

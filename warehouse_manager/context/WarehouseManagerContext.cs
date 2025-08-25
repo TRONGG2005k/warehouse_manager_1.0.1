@@ -41,6 +41,7 @@ public partial class WarehouseManagerContext : DbContext
 
     public virtual DbSet<VatLieu> VatLieus { get; set; }
 
+    public virtual DbSet<VaiTro> VaiTros { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseSqlServer(Config.GetConnectionString("MyDb"));
@@ -88,7 +89,7 @@ public partial class WarehouseManagerContext : DbContext
         modelBuilder.Entity<NguoiDung>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__nguoi_du__3213E83F34795468");
-                
+           
             entity.Property(e => e.HoatDong).HasDefaultValue(true);
         });
 
@@ -150,11 +151,11 @@ public partial class WarehouseManagerContext : DbContext
                     "KeVatLieu",
                     r => r.HasOne<Ke>().WithMany()
                         .HasForeignKey("KeId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .HasConstraintName("fk_k"),
                     l => l.HasOne<VatLieu>().WithMany()
                         .HasForeignKey("VatLieuId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .HasConstraintName("fk_vl"),
                     j =>
                     {
@@ -162,6 +163,29 @@ public partial class WarehouseManagerContext : DbContext
                         j.ToTable("ke_vat_lieu");
                         j.IndexerProperty<long>("VatLieuId").HasColumnName("vat_lieu_id");
                         j.IndexerProperty<long>("KeId").HasColumnName("ke_id");
+                    });
+        });
+
+        modelBuilder.Entity<VaiTro>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__vai_tro__3213E83F2D7E2C8E");
+            entity.HasMany(d => d.NguoiDungs).WithMany(p => p.VaiTros)
+                .UsingEntity<Dictionary<string, object>>(
+                    "NguoiDungVaiTro",
+                    r => r.HasOne<NguoiDung>().WithMany()
+                        .HasForeignKey("NguoiDungId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("fk_nd"),
+                    l => l.HasOne<VaiTro>().WithMany()
+                        .HasForeignKey("VaiTroId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("fk_vt"),
+                    j =>
+                    {
+                        j.HasKey("VaiTroId", "NguoiDungId").HasName("pk_nguoi_dung_vai_tro");
+                        j.ToTable("nguoi_dung_vai_tro");
+                        j.IndexerProperty<long>("VaiTroId").HasColumnName("vai_tro_id");
+                        j.IndexerProperty<long>("NguoiDungId").HasColumnName("nguoi_dung_id");
                     });
         });
 

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace warehouse_manager.dto
+namespace warehouse_manager.dto.o
 {
     internal class PhieuDto
     {

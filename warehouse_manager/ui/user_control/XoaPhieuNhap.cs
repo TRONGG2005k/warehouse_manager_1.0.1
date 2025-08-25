@@ -7,16 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using warehouse_manager.dto.i;
-using warehouse_manager.dto.o;
+using warehouse_manager.dto;
 using warehouse_manager.Models;
 using warehouse_manager.service;
 
 namespace warehouse_manager.ui.user_control
 {
-    public partial class TaoDonNhapKho : UserControl
+    public partial class XoaPhieuNhap : UserControl
     {
-        public TaoDonNhapKho()
+        public XoaPhieuNhap()
         {
             InitializeComponent();
         }
@@ -76,6 +75,13 @@ namespace warehouse_manager.ui.user_control
             });
         }
 
+
+
+        private void TaoDonNhapKho_Load_1(object sender, EventArgs e)
+        {
+
+        }
+
         private void button8_Click(object sender, EventArgs e)
         {
             MainForm mainForm = (MainForm)this.Parent!.Parent!;
@@ -86,13 +92,47 @@ namespace warehouse_manager.ui.user_control
         {
             MainForm mainForm = (MainForm)this.Parent!.Parent!;
             mainForm.LoadPage(new SuaPhieuNhap());
-
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
             MainForm mainForm = (MainForm)this.Parent!.Parent!;
-            mainForm.LoadPage(new XoaPhieuNhap());
+            mainForm.LoadPage(new TaoDonNhapKho());
         }
     }
 }

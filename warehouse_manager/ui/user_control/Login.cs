@@ -42,7 +42,7 @@ namespace warehouse_manager.ui
             if (resultLogin)
             {
                 MainForm mainForm = (MainForm)this.Parent!.Parent!;
-                mainForm.LoadPage(new Dashboard());
+                mainForm.LoadPage(new DanhSachDonNhapKho());
             }
         }
 

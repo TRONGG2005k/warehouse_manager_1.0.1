@@ -25,7 +25,7 @@ namespace warehouse_manager.ui.user_control
         {
             // TODO: xử lý khi nhấn button5
             MainForm mainForm = (MainForm)this.Parent!.Parent!;
-            mainForm.LoadPage(new Dashboard());
+            mainForm.LoadPage(new DanhSachDonNhapKho());
         }
 
         private void DanhSachNhapKho_Load(object sender, EventArgs e)
@@ -49,6 +49,27 @@ namespace warehouse_manager.ui.user_control
         {
             MainForm mainForm = (MainForm)this.Parent!.Parent!;
             mainForm.LoadPage(new TaoDonNhapKho());
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            MainForm mainForm = (MainForm)this.Parent!.Parent!;
+            mainForm.LoadPage(new SuaPhieuNhap());
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

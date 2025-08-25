@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace warehouse_manager.dto
+namespace warehouse_manager.dto.i
 {
     internal class PhieuNhapDto
     {
@@ -15,7 +15,7 @@ namespace warehouse_manager.dto
         public DateTime NgayNhap { get; set; }
 
         [Display(Name = "Người Dùng ID")]
-        public String MaNguoiLap{ get; set; } = string.Empty;
+        public string MaNguoiLap{ get; set; } = string.Empty;
 
         [Display(Name = "Tên Nhà Cung Cấp")]
         public string TenNhaCungCap { get; set; } = string.Empty;

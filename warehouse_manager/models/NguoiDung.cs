@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using warehouse_manager.Models;
 
 namespace warehouse_manager.Models;
 
@@ -31,4 +32,7 @@ public partial class NguoiDung
 
     [InverseProperty("NguoiDung")]
     public virtual ICollection<PhieuXuat> PhieuXuats { get; set; } = new List<PhieuXuat>();
+
+    [InverseProperty("NguoiDungs")]
+    public virtual ICollection<VaiTro> VaiTros { get; set; } = new List<VaiTro>();
 }

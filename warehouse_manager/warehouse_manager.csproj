@@ -44,6 +44,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="ui\user_control\XoaPhieuNhap.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="ui\user_control\SuaPhieuNhap.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -51,6 +57,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="service\" />
   </ItemGroup>
 
 </Project>

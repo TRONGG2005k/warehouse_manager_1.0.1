@@ -131,6 +131,7 @@
             button10.TabIndex = 1;
             button10.Text = "xoá đơn ";
             button10.UseVisualStyleBackColor = false;
+            button10.Click += button10_Click;
             // 
             // panel8
             // 
@@ -152,6 +153,7 @@
             button9.TabIndex = 1;
             button9.Text = "Chỉnh sửa đơn";
             button9.UseVisualStyleBackColor = false;
+            button9.Click += button9_Click;
             // 
             // panel7
             // 
@@ -174,6 +176,7 @@
             button8.TabIndex = 1;
             button8.Text = "Danh sách đơn";
             button8.UseVisualStyleBackColor = false;
+            button8.Click += button8_Click;
             // 
             // panel6
             // 
@@ -278,6 +281,7 @@
             button6.Text = "Báo cáo";
             button6.TextAlign = ContentAlignment.MiddleRight;
             button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
             // 
             // panel4
             // 
@@ -325,6 +329,7 @@
             button4.Text = "Tìm kiếm";
             button4.TextAlign = ContentAlignment.MiddleRight;
             button4.UseVisualStyleBackColor = true;
+            
             // 
             // panel1
             // 
@@ -372,6 +377,7 @@
             button3.Text = "Xuất kho";
             button3.TextAlign = ContentAlignment.MiddleRight;
             button3.UseVisualStyleBackColor = true;
+            
             // 
             // tableLayoutPanel2
             // 
