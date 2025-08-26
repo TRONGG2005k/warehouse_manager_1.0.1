@@ -61,7 +61,8 @@ namespace warehouse_manager.ui.user_control
 
         private void button10_Click(object sender, EventArgs e)
         {
-
+            MainForm mainForm = (MainForm)this.Parent!.Parent!;
+            mainForm.LoadPage(new XoaPhieuNhap());
         }
 
         private void button8_Click(object sender, EventArgs e)

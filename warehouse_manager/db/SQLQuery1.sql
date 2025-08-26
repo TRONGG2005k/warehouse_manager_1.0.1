@@ -164,3 +164,74 @@ alter table ke
 add constraint unique_ma_ke unique (ma_ke)
 
 EXEC sp_rename '[dbo].[ke].[vi_tri]', 'khu', 'COLUMN';
+
+-- bảng loại vật liệu
+alter table loai_vat_lieu alter column ten_loai nvarchar(255) not null;
+
+-- bảng loại sản phẩm
+alter table loai_san_pham alter column ten_loai nvarchar(255) not null;
+
+-- bảng nhà cung cấp
+alter table nha_cung_cap alter column ten_nha_cung_cap nvarchar(250);
+
+-- vật liệu
+alter table vat_lieu alter column ten nvarchar(500);
+
+-- sản phẩm
+alter table san_pham alter column ten nvarchar(250);
+
+ALTER TABLE vat_lieu
+DROP CONSTRAINT DF__vat_lieu__don_vi__3E52440B;
+
+alter table vat_lieu alter column don_vi_tinh nvarchar(250)
+
+ALTER TABLE vat_lieu
+ADD CONSTRAINT DF_vat_lieu_don_vi_tinh DEFAULT (N'Thùng') FOR don_vi_tinh;
+
+ALTER TABLE chi_tiet_phieu_nhap
+DROP CONSTRAINT [DF__chi_tiet___don_v__59FA5E80];
+
+
+alter table [dbo].[chi_tiet_phieu_nhap] alter column [don_vi_tinh] nvarchar(250)
+
+ALTER TABLE chi_tiet_phieu_nhap
+ADD CONSTRAINT DF_chi_tiet_phieu_nhap_don_vi_tinh DEFAULT N'Cái' FOR don_vi_tinh;
+
+-- Thêm loại vật liệu
+
+
+create table vai_tro (
+    id bigint primary key identity(1,1),
+    ten_vai_tro nvarchar(100) not null unique,
+    mo_ta nvarchar(max)
+);
+
+-- Bảng vai trò người dùng (quan hệ N-N giữa nguoi_dung và vai_tro)
+create table nguoi_dung_vai_tro (
+    nguoi_dung_id bigint not null,
+    vai_tro_id bigint not null,
+    constraint pk_nd_vt primary key (nguoi_dung_id, vai_tro_id),
+    constraint fk_ndvt_nd foreign key (nguoi_dung_id) references nguoi_dung(id) on delete cascade,
+    constraint fk_ndvt_vt foreign key (vai_tro_id) references vai_tro(id) on delete cascade
+);
+
+-- Thêm cột số lượng vào bảng kệ
+alter table ke add so_luong int default 0;
+
+ALTER TABLE ke_vat_lieu
+DROP CONSTRAINT fk_vl;
+
+ALTER TABLE ke_vat_lieu
+DROP CONSTRAINT fk_k;
+
+-- Bước 2: Tạo lại ràng buộc với ON DELETE CASCADE
+ALTER TABLE ke_vat_lieu
+ADD CONSTRAINT fk_vl
+FOREIGN KEY (vat_lieu_id) REFERENCES vat_lieu(id) ON DELETE CASCADE;
+
+ALTER TABLE ke_vat_lieu
+ADD CONSTRAINT fk_k
+FOREIGN KEY (ke_id) REFERENCES ke(id) ON DELETE CASCADE;
+
+alter table [dbo].[vat_lieu] 
+

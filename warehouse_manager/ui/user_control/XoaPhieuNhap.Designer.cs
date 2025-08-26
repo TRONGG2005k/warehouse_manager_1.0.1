@@ -115,9 +115,9 @@ namespace warehouse_manager.ui.user_control
             // 
             panel2.Controls.Add(button3);
             panel2.Dock = DockStyle.Fill;
-            panel2.Location = new Point(8, 128);
+            panel2.Location = new Point(8, 129);
             panel2.Name = "panel2";
-            panel2.Size = new Size(154, 114);
+            panel2.Size = new Size(154, 115);
             panel2.TabIndex = 1;
             // 
             // button2
@@ -141,7 +141,7 @@ namespace warehouse_manager.ui.user_control
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(8, 8);
             panel1.Name = "panel1";
-            panel1.Size = new Size(154, 114);
+            panel1.Size = new Size(154, 115);
             panel1.TabIndex = 0;
             // 
             // button4
@@ -163,9 +163,9 @@ namespace warehouse_manager.ui.user_control
             // 
             panel3.Controls.Add(button4);
             panel3.Dock = DockStyle.Fill;
-            panel3.Location = new Point(8, 248);
+            panel3.Location = new Point(8, 250);
             panel3.Name = "panel3";
-            panel3.Size = new Size(154, 114);
+            panel3.Size = new Size(154, 115);
             panel3.TabIndex = 2;
             // 
             // button5
@@ -187,9 +187,9 @@ namespace warehouse_manager.ui.user_control
             // 
             panel4.Controls.Add(button5);
             panel4.Dock = DockStyle.Fill;
-            panel4.Location = new Point(8, 368);
+            panel4.Location = new Point(8, 371);
             panel4.Name = "panel4";
-            panel4.Size = new Size(154, 114);
+            panel4.Size = new Size(154, 115);
             panel4.TabIndex = 3;
             // 
             // button6
@@ -211,9 +211,9 @@ namespace warehouse_manager.ui.user_control
             // 
             panel5.Controls.Add(button6);
             panel5.Dock = DockStyle.Fill;
-            panel5.Location = new Point(8, 488);
+            panel5.Location = new Point(8, 492);
             panel5.Name = "panel5";
-            panel5.Size = new Size(154, 116);
+            panel5.Size = new Size(154, 115);
             panel5.TabIndex = 4;
             // 
             // tableLayoutPanel7
@@ -226,7 +226,7 @@ namespace warehouse_manager.ui.user_control
             tableLayoutPanel7.Controls.Add(panel1, 0, 0);
             tableLayoutPanel7.Controls.Add(panel2, 0, 1);
             tableLayoutPanel7.Dock = DockStyle.Fill;
-            tableLayoutPanel7.Location = new Point(3, 90);
+            tableLayoutPanel7.Location = new Point(3, 87);
             tableLayoutPanel7.Name = "tableLayoutPanel7";
             tableLayoutPanel7.Padding = new Padding(5);
             tableLayoutPanel7.RowCount = 5;
@@ -235,7 +235,7 @@ namespace warehouse_manager.ui.user_control
             tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
             tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
             tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
-            tableLayoutPanel7.Size = new Size(170, 612);
+            tableLayoutPanel7.Size = new Size(170, 615);
             tableLayoutPanel7.TabIndex = 3;
             // 
             // button1
@@ -282,7 +282,7 @@ namespace warehouse_manager.ui.user_control
             button7.Dock = DockStyle.Fill;
             button7.Location = new Point(20, 20);
             button7.Name = "button7";
-            button7.Size = new Size(215, 35);
+            button7.Size = new Size(215, 32);
             button7.TabIndex = 0;
             button7.Text = "Tạo đơn ";
             button7.UseVisualStyleBackColor = false;
@@ -296,7 +296,7 @@ namespace warehouse_manager.ui.user_control
             panel6.Location = new Point(3, 3);
             panel6.Name = "panel6";
             panel6.Padding = new Padding(20);
-            panel6.Size = new Size(255, 75);
+            panel6.Size = new Size(255, 72);
             panel6.TabIndex = 0;
             // 
             // button8
@@ -305,7 +305,7 @@ namespace warehouse_manager.ui.user_control
             button8.Dock = DockStyle.Fill;
             button8.Location = new Point(20, 20);
             button8.Name = "button8";
-            button8.Size = new Size(215, 35);
+            button8.Size = new Size(215, 32);
             button8.TabIndex = 1;
             button8.Text = "Danh sách đơn";
             button8.UseVisualStyleBackColor = false;
@@ -319,7 +319,7 @@ namespace warehouse_manager.ui.user_control
             panel7.Location = new Point(264, 3);
             panel7.Name = "panel7";
             panel7.Padding = new Padding(20);
-            panel7.Size = new Size(255, 75);
+            panel7.Size = new Size(255, 72);
             panel7.TabIndex = 1;
             // 
             // button9
@@ -328,7 +328,7 @@ namespace warehouse_manager.ui.user_control
             button9.Dock = DockStyle.Fill;
             button9.Location = new Point(20, 20);
             button9.Name = "button9";
-            button9.Size = new Size(215, 35);
+            button9.Size = new Size(215, 32);
             button9.TabIndex = 1;
             button9.Text = "Chỉnh sửa đơn";
             button9.UseVisualStyleBackColor = false;
@@ -341,7 +341,7 @@ namespace warehouse_manager.ui.user_control
             panel8.Location = new Point(525, 3);
             panel8.Name = "panel8";
             panel8.Padding = new Padding(20);
-            panel8.Size = new Size(255, 75);
+            panel8.Size = new Size(255, 72);
             panel8.TabIndex = 2;
             // 
             // button10
@@ -351,7 +351,7 @@ namespace warehouse_manager.ui.user_control
             button10.FlatAppearance.BorderColor = Color.Black;
             button10.Location = new Point(20, 20);
             button10.Name = "button10";
-            button10.Size = new Size(216, 35);
+            button10.Size = new Size(216, 32);
             button10.TabIndex = 1;
             button10.Text = "xoá đơn ";
             button10.UseVisualStyleBackColor = false;
@@ -365,7 +365,7 @@ namespace warehouse_manager.ui.user_control
             panel9.Location = new Point(786, 3);
             panel9.Name = "panel9";
             panel9.Padding = new Padding(20);
-            panel9.Size = new Size(256, 75);
+            panel9.Size = new Size(256, 72);
             panel9.TabIndex = 3;
             // 
             // tableLayoutPanel3
@@ -384,7 +384,7 @@ namespace warehouse_manager.ui.user_control
             tableLayoutPanel3.Name = "tableLayoutPanel3";
             tableLayoutPanel3.RowCount = 1;
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel3.Size = new Size(1045, 81);
+            tableLayoutPanel3.Size = new Size(1045, 78);
             tableLayoutPanel3.TabIndex = 1;
             // 
             // tableLayoutPanel1
@@ -400,8 +400,8 @@ namespace warehouse_manager.ui.user_control
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 2;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 12.3404255F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 87.65958F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 12.0409908F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 87.9590149F));
             tableLayoutPanel1.Size = new Size(1227, 705);
             tableLayoutPanel1.TabIndex = 3;
             // 
@@ -413,13 +413,13 @@ namespace warehouse_manager.ui.user_control
             tableLayoutPanel2.Controls.Add(panel11, 0, 1);
             tableLayoutPanel2.Controls.Add(dataGridView1, 0, 2);
             tableLayoutPanel2.Dock = DockStyle.Fill;
-            tableLayoutPanel2.Location = new Point(179, 90);
+            tableLayoutPanel2.Location = new Point(179, 87);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 3;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 16.666666F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 83.3333359F));
-            tableLayoutPanel2.Size = new Size(1045, 612);
+            tableLayoutPanel2.Size = new Size(1045, 615);
             tableLayoutPanel2.TabIndex = 4;
             // 
             // panel10
@@ -662,7 +662,7 @@ namespace warehouse_manager.ui.user_control
             dataGridView1.Location = new Point(3, 138);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(1039, 471);
+            dataGridView1.Size = new Size(1039, 474);
             dataGridView1.TabIndex = 5;
             dataGridView1.CellClick += dataGridView1_CellClick;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;

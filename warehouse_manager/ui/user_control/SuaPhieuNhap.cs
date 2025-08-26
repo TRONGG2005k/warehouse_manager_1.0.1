@@ -198,5 +198,16 @@ namespace warehouse_manager.ui.user_control
         {
 
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            MainForm mainForm = (MainForm)this.Parent!.Parent!;
+            mainForm.LoadPage(new TaoDonNhapKho());
+        }
+
+        private void panel6_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
