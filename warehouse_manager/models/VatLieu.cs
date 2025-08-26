@@ -26,7 +26,7 @@ public partial class VatLieu
 
     [Column("don_vi_tinh")]
     [StringLength(50)]
-    [Unicode(false)]
+    [Unicode(true)]
     public string? DonViTinh { get; set; }
 
     [Column("mo_ta")]
@@ -34,12 +34,12 @@ public partial class VatLieu
 
     [Column("ten")]
     [StringLength(500)]
-    [Unicode(false)]
+    [Unicode(true)]
     public string? Ten { get; set; }
 
     [Column("trang_thai")]
     [StringLength(50)]
-    [Unicode(false)]
+    [Unicode(true)]
     public string? TrangThai { get; set; }
 
     [Column("so_luong_ton")]
@@ -62,7 +62,6 @@ public partial class VatLieu
     [InverseProperty("VatLieus")]
     public virtual NhaCungCap? MaNhaCungCapNavigation { get; set; }
 
-    [ForeignKey("VatLieuId")]
     [InverseProperty("VatLieus")]
     public virtual ICollection<Ke> Kes { get; set; } = new List<Ke>();
 }

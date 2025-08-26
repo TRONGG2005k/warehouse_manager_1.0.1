@@ -18,15 +18,6 @@ namespace warehouse_manager.dto.i
         public string MaVatLieu { get; set; } = string.Empty;
         public string Make { get; set; } = string.Empty;
 
-        public bool HasNullOrEmptyProperties()
-        {
-            return string.IsNullOrEmpty(LoaiVatLieu) ||
-                   string.IsNullOrEmpty(TenVatLieu) ||
-                   string.IsNullOrEmpty(DonViTinh) ||
-                   string.IsNullOrEmpty(NhaCungCap) ||
-                   string.IsNullOrEmpty(MaNguoiLap) ||
-                   string.IsNullOrEmpty(MaVatLieu) ||
-                   string.IsNullOrEmpty(Make);
-        }
+        
     }
 }

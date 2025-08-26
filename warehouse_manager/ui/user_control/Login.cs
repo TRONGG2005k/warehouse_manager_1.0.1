@@ -46,5 +46,26 @@ namespace warehouse_manager.ui
             }
         }
 
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                textBox2.PasswordChar = '\0';
+            }
+            else
+            {
+                textBox2.PasswordChar = '@';
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            MainForm mainForm = (MainForm)this.Parent!.Parent!;
+            mainForm.LoadPage(new DangKy());
+        }
+
+        private void panel4_Paint(object sender, PaintEventArgs e)
+        {
+        }
     }
 }

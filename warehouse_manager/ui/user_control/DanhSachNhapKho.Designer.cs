@@ -329,7 +329,6 @@
             button4.Text = "Tìm kiếm";
             button4.TextAlign = ContentAlignment.MiddleRight;
             button4.UseVisualStyleBackColor = true;
-            
             // 
             // panel1
             // 
@@ -377,7 +376,6 @@
             button3.Text = "Xuất kho";
             button3.TextAlign = ContentAlignment.MiddleRight;
             button3.UseVisualStyleBackColor = true;
-            
             // 
             // tableLayoutPanel2
             // 

@@ -20,6 +20,9 @@ namespace warehouse_manager.service
         {
             context = new WarehouseManagerContext();
         }
+
+
+        // hàm select phiếu nhập và xuất
         public List<PhieuDto> danhSachPhieu()
         {
 
@@ -47,7 +50,7 @@ namespace warehouse_manager.service
                         SoLuong = p.ChiTietPhieuXuats!.FirstOrDefault()!.SoLuong ?? 0
                     }
                 )
-            ).OrderBy(p => p.NgayLap); ;
+            ). OrderByDescending(p => p.NgayLap); ;
 
 
             return query.ToList();
@@ -67,7 +70,7 @@ namespace warehouse_manager.service
                     TenHang = p.ChiTietPhieuNhaps!.FirstOrDefault()!.VatLieu!.Ten ?? "",
                     SoLuong = p.ChiTietPhieuNhaps!.FirstOrDefault()!.SoLuong ?? 0
                 }
-            ).OrderBy(p => p.NgayLap); ;
+            ).OrderByDescending(p => p.NgayLap); ;
 
             return query.ToList();
         }
@@ -85,11 +88,32 @@ namespace warehouse_manager.service
                     TenHang = p.ChiTietPhieuXuats!.FirstOrDefault()!.SanPham!.Ten ?? "",
                     SoLuong = p.ChiTietPhieuXuats!.FirstOrDefault()!.SoLuong ?? 0
                 }
-            ).OrderBy(p => p.NgayLap); ;
+            ).OrderByDescending(p => p.NgayLap); ;
 
             return query.ToList();
         }
 
+        public List<dto.o.PhieuNhapDto> phieuNhapResponse()
+        {
+            return context.PhieuNhaps.Select(
+                
+                p => new dto.o.PhieuNhapDto
+                {
+                    Id = p.Id,
+                    LoaiVatLieu = p.ChiTietPhieuNhaps.First()!.VatLieu.MaLoaiNavigation.TenLoai,
+                    TenHang = p.ChiTietPhieuNhaps!.FirstOrDefault()!.VatLieu!.Ten ,
+                    DonViTinh = p.ChiTietPhieuNhaps!.FirstOrDefault()!.DonViTinh ,
+                    SoLuong = p.ChiTietPhieuNhaps!.FirstOrDefault()!.SoLuong ?? 0,
+                    DonGia = p.ChiTietPhieuNhaps!.FirstOrDefault()!.DonGia ?? 0,
+                    NhaCungCap = p.MaNhaCungCapNavigation!.TenNhaCungCap ?? "",
+                    Ke = p.ChiTietPhieuNhaps.First().VatLieu.Kes.First()!.MaKe,
+                    NgayNhap = p.NgayNhap,
+                    MaVatLieu = p.ChiTietPhieuNhaps!.FirstOrDefault()!.VatLieu!.MaVatLieu,
+
+                }
+            ).OrderByDescending(p => p.NgayNhap).ToList();
+
+        }
         public List<dto.i.PhieuNhapDto> phieuNhapDtos()
         {
             return context.PhieuNhaps
@@ -107,24 +131,151 @@ namespace warehouse_manager.service
                     DonGia = ct.DonGia ?? 0,
                     DonViTinh = ct.DonViTinh ?? "",
 
-                })).ToList();
+                })).OrderByDescending(p=> p.NgayNhap).ToList();
 
         }
 
+        public List<dto.o.PhieuNhapDto> TimPhieuTheoMa(int id)
+        {
+            return context.PhieuNhaps
+                .Where(pn => pn.Id == id)
+                .Include(pn => pn.MaNhaCungCapNavigation)
+                .Include(pn => pn.ChiTietPhieuNhaps)
+                    .ThenInclude(ct => ct.VatLieu)
+                        .ThenInclude(v => v.Kes)
+                .SelectMany(pn => pn.ChiTietPhieuNhaps, (pn, ct) => new { pn, ct })
+                .SelectMany(x => x.ct.VatLieu.Kes.DefaultIfEmpty(), (x, k) => new dto.o.PhieuNhapDto
+                {
+                    Id = x.pn.Id,
+                    TenHang = x.ct.VatLieu.Ten,
+                    DonViTinh = x.ct.VatLieu.DonViTinh,
+                    SoLuong = (long)x.ct.SoLuong,
+                    DonGia = x.ct.DonGia ?? 0,
+                    NhaCungCap = x.pn.MaNhaCungCapNavigation.TenNhaCungCap,
+                    Ke = k != null ? k.MaKe : null,  // Nếu vật liệu không có kệ, vẫn ra 1 bản ghi với null
+                    NgayNhap = x.pn.NgayNhap,
+                    MaVatLieu = x.ct.VatLieu.MaVatLieu,
+                    LoaiVatLieu = x.ct.VatLieu.MaLoaiNavigation.TenLoai
+
+                }).OrderByDescending(p => p.NgayNhap).ToList();
+
+        }
+        public List<dto.o.PhieuNhapDto> TimPhieuTheoKhoangThoiGian(LocTheoNgayDto locTheoNgay)
+        {
+            return context.PhieuNhaps
+                .Where(pn => pn.NgayNhap >= locTheoNgay.Start.Date && pn.NgayNhap <= locTheoNgay.End.AddDays(1).AddTicks(-1))
+                .Include(pn => pn.MaNhaCungCapNavigation)
+                .Include(pn => pn.ChiTietPhieuNhaps)
+                    .ThenInclude(ct => ct.VatLieu)
+                        .ThenInclude(v => v.Kes)
+                .SelectMany(pn => pn.ChiTietPhieuNhaps, (pn, ct) => new { pn, ct })
+                .SelectMany(x => x.ct.VatLieu.Kes.DefaultIfEmpty(), (x, k) => new dto.o.PhieuNhapDto
+                {
+                    Id = x.pn.Id,
+                    TenHang = x.ct.VatLieu.Ten,
+                    DonViTinh = x.ct.VatLieu.DonViTinh,
+                    SoLuong = (long)x.ct.SoLuong,
+                    DonGia = x.ct.DonGia ?? 0,
+                    NhaCungCap = x.pn.MaNhaCungCapNavigation.TenNhaCungCap,
+                    Ke = k != null ? k.MaKe : null,  // Nếu vật liệu không có kệ, vẫn ra 1 bản ghi với null
+                    NgayNhap = x.pn.NgayNhap,
+                    MaVatLieu = x.ct.VatLieu.MaVatLieu,
+                    LoaiVatLieu = x.ct.VatLieu.MaLoaiNavigation.TenLoai
+
+                }).OrderByDescending(p => p.NgayNhap).ToList();
+
+        }
+
+        public List<dto.o.PhieuNhapDto> TimPhieuTheoMaLieu(string ma)
+        {
+            return context.PhieuNhaps
+                
+                .Include(pn => pn.MaNhaCungCapNavigation)
+                .Include(pn => pn.ChiTietPhieuNhaps)
+                    .ThenInclude(ct => ct.VatLieu)
+                        .ThenInclude(v => v.Kes)
+                .SelectMany(pn => pn.ChiTietPhieuNhaps, (pn, ct) => new { pn, ct })
+                .Where(x => x.ct.VatLieu.MaVatLieu == ma)
+                .SelectMany(x => x.ct.VatLieu.Kes.DefaultIfEmpty(), (x, k) => new dto.o.PhieuNhapDto
+                {
+                    Id = x.pn.Id,
+                    TenHang = x.ct.VatLieu.Ten,
+                    DonViTinh = x.ct.VatLieu.DonViTinh,
+                    SoLuong = (long)x.ct.SoLuong,
+                    DonGia = x.ct.DonGia ?? 0,
+                    NhaCungCap = x.pn.MaNhaCungCapNavigation.TenNhaCungCap,
+                    Ke = k != null ? k.MaKe : null,  // Nếu vật liệu không có kệ, vẫn ra 1 bản ghi với null
+                    NgayNhap = x.pn.NgayNhap,
+                    MaVatLieu = x.ct.VatLieu.MaVatLieu,
+                    LoaiVatLieu = x.ct.VatLieu.MaLoaiNavigation.TenLoai
+
+                }).OrderByDescending(p => p.NgayNhap).ToList();
+
+        }
+
+        public List<dto.o.PhieuNhapDto> TimPhieuTheoLoaiVatLieu(string tenLoai)
+        {
+            return context.PhieuNhaps
+
+                .Include(pn => pn.MaNhaCungCapNavigation)
+                .Include(pn => pn.ChiTietPhieuNhaps)
+                    .ThenInclude(ct => ct.VatLieu)
+                        .ThenInclude(v => v.Kes)
+                .SelectMany(pn => pn.ChiTietPhieuNhaps, (pn, ct) => new { pn, ct })
+                .Where(x => x.ct.VatLieu.MaLoaiNavigation.TenLoai == tenLoai)
+                .SelectMany(x => x.ct.VatLieu.Kes.DefaultIfEmpty(), (x, k) => new dto.o.PhieuNhapDto
+                {
+                    Id = x.pn.Id,
+                    TenHang = x.ct.VatLieu.Ten,
+                    DonViTinh = x.ct.VatLieu.DonViTinh,
+                    SoLuong = (long)x.ct.SoLuong,
+                    DonGia = x.ct.DonGia ?? 0,
+                    NhaCungCap = x.pn.MaNhaCungCapNavigation.TenNhaCungCap,
+                    Ke = k != null ? k.MaKe : null,  // Nếu vật liệu không có kệ, vẫn ra 1 bản ghi với null
+                    NgayNhap = x.pn.NgayNhap,
+                    MaVatLieu = x.ct.VatLieu.MaVatLieu,
+                    LoaiVatLieu = x.ct.VatLieu.MaLoaiNavigation.TenLoai
+
+                }).OrderByDescending(p => p.NgayNhap).ToList();
+
+        }
+        public List<dto.o.PhieuNhapDto> TimPhieuTheoTenNcc(string tenNcc)
+        {
+            return context.PhieuNhaps
+
+                .Include(pn => pn.MaNhaCungCapNavigation)
+                .Include(pn => pn.ChiTietPhieuNhaps)
+                    .ThenInclude(ct => ct.VatLieu)
+                        .ThenInclude(v => v.Kes)
+                .SelectMany(pn => pn.ChiTietPhieuNhaps, (pn, ct) => new { pn, ct })
+                .Where(x => x.ct.VatLieu.MaNhaCungCapNavigation.TenNhaCungCap == tenNcc)
+                .SelectMany(x => x.ct.VatLieu.Kes.DefaultIfEmpty(), (x, k) => new dto.o.PhieuNhapDto
+                {
+                    Id = x.pn.Id,
+                    TenHang = x.ct.VatLieu.Ten,
+                    DonViTinh = x.ct.VatLieu.DonViTinh,
+                    SoLuong = (long)x.ct.SoLuong,
+                    DonGia = x.ct.DonGia ?? 0,
+                    NhaCungCap = x.pn.MaNhaCungCapNavigation.TenNhaCungCap,
+                    Ke = k != null ? k.MaKe : null,  // Nếu vật liệu không có kệ, vẫn ra 1 bản ghi với null
+                    NgayNhap = x.pn.NgayNhap,
+                    MaVatLieu = x.ct.VatLieu.MaVatLieu,
+                    LoaiVatLieu = x.ct.VatLieu.MaLoaiNavigation.TenLoai
+
+                }).OrderByDescending(p => p.NgayNhap).ToList();
+
+        }
+        // chức năng không liên quan đến select
         public void themPhieuNhap(dto.i.TaoPhieuNhapKhoDto taoPhieuNhap)
         {
 
             try
             {
-                if(taoPhieuNhap.HasNullOrEmptyProperties())
-                {
-                    MessageBox.Show("vui lòng nhập đủ thông tìn");
-                    throw new Exception("vui lòng nhập đủ thông tìn");
-                }
+               
                 var loaiVatLieuTonTai = context.LoaiVatLieus
                 .FirstOrDefault(l => l.TenLoai == taoPhieuNhap.LoaiVatLieu)
                 ?? throw new Exception("Loại vật liệu không tồn tại");
-
+                //MessageBox.Show("laoi: " + taoPhieuNhap.LoaiVatLieu);
                 var nhaCungCapTonTai = context.NhaCungCaps
                     .FirstOrDefault(ncc => ncc.TenNhaCungCap == taoPhieuNhap.NhaCungCap)
                     ?? throw new Exception("Nhà cung cấp không tồn tại");
@@ -182,7 +333,8 @@ namespace warehouse_manager.service
                 });
                 context.SaveChanges();
 
-                
+                var vatLieuTonTai1 = context.VatLieus.First(v => v.MaVatLieu == taoPhieuNhap.MaVatLieu);
+
                 var chiTietPhieuNhap = context.ChiTietPhieuNhaps.Add(new Models.ChiTietPhieuNhap
                 {
                     SoLuong = taoPhieuNhap.SoLuong,
@@ -190,7 +342,8 @@ namespace warehouse_manager.service
                     DonViTinh = taoPhieuNhap.DonViTinh,
                     ThanhTien = taoPhieuNhap.SoLuong * taoPhieuNhap.DonGia,
                     PhieuNhapId = phieuNhap.Entity.Id,
-                    VatLieuId = context.VatLieus.First(v => v.MaVatLieu == taoPhieuNhap.MaVatLieu).Id
+                    VatLieuId = vatLieuTonTai1.Id,
+                    VatLieu = vatLieuTonTai1
                 });
                 context.SaveChanges();
 
@@ -202,16 +355,22 @@ namespace warehouse_manager.service
             }
         }
 
-        private void suaPhieuNhap(SuaPhieuNhapDto suaPhieuNhap)
+        public Boolean suaPhieuNhap(SuaPhieuNhapDto suaPhieuNhap)
         {
             try
             {
                 var phieuNhap = context.PhieuNhaps
                     .Include(pn => pn.ChiTietPhieuNhaps)
+                        .ThenInclude(ct => ct.VatLieu)
                     .First(pn => pn.Id == suaPhieuNhap.Id)
                     ?? throw new Exception("Phiếu nhập không tồn tại");
                 var chiTietPhieuNhap = phieuNhap.ChiTietPhieuNhaps.First();
                 var vatLieu = chiTietPhieuNhap!.VatLieu;
+                  
+
+                //var vatLieu = context.VatLieus
+                //    .First(v => v.Id == vatLieu1)
+                //    ?? throw new Exception("Vật liệu không tồn tại");
 
                 string content = File.Exists("user.txt") ? File.ReadAllText("user.txt") : "";
                 var nguoiDung = context.NguoiDungs.FirstOrDefault(n => n.TenDangNhap == content)
@@ -221,21 +380,17 @@ namespace warehouse_manager.service
                 phieuNhap.MaNhaCungCap = context.NhaCungCaps
                     .First(ncc => ncc.TenNhaCungCap == suaPhieuNhap.NhaCungCap).Id;
                 phieuNhap.TongTien = suaPhieuNhap.SoLuong * suaPhieuNhap.DonGia;
-
+                
                 if (suaPhieuNhap.MaVatLieu != vatLieu!.MaVatLieu)
                 {
                    
                     var vatLieuTonTai2 = context.VatLieus
-                        .First(v => v.MaVatLieu == suaPhieuNhap.MaVatLieu);
+                        .FirstOrDefault(v => v.MaVatLieu == suaPhieuNhap.MaVatLieu);
 
-                    
-                    if(vatLieuTonTai2 != null)
+
+                    if (vatLieuTonTai2 == null)
                     {
-                        vatLieuTonTai2.SoLuongTon += suaPhieuNhap.SoLuong;
-                        chiTietPhieuNhap.VatLieuId = vatLieuTonTai2.Id;
-                    }
-                    else
-                    {
+                        
                         vatLieu.DonGia = suaPhieuNhap.DonGia;
                         vatLieu.DonViTinh = suaPhieuNhap.DonViTinh;
                         vatLieu.MaVatLieu = suaPhieuNhap.MaVatLieu;
@@ -247,11 +402,16 @@ namespace warehouse_manager.service
                         vatLieu.MaLoai = context.LoaiVatLieus
                             .First(l => l.TenLoai == suaPhieuNhap.LoaiVatLieu).Id;
                     }
+                    else
+                    {
+                        vatLieuTonTai2.SoLuongTon += suaPhieuNhap.SoLuong;
+                        chiTietPhieuNhap.VatLieuId = vatLieuTonTai2.Id;
+                    }
                 }
                 else
                 {
 
-                    int chenhLech = (int)chiTietPhieuNhap.SoLuong - suaPhieuNhap.SoLuong;
+                    int chenhLech = suaPhieuNhap.SoLuong - (int)chiTietPhieuNhap.SoLuong;
                     vatLieu.SoLuongTon += chenhLech;
                 }
                 chiTietPhieuNhap.SoLuong = suaPhieuNhap.SoLuong;
@@ -262,10 +422,52 @@ namespace warehouse_manager.service
 
 
                 context.SaveChanges();
+                
+                return true;
             }
             catch (Exception ex)
             {
                 throw new Exception("Sửa phiếu nhập thất bại: " + ex.Message);
+            }
+        }
+
+        public void xoaPhieuNhap(int id)
+        {
+            try
+            {
+                
+                DialogResult result = MessageBox.Show(
+                    "Bạn có chắc muốn xóa phiếu nhập này không?", 
+                    "Xác nhận",                                  
+                    MessageBoxButtons.YesNo,                      
+                    MessageBoxIcon.Question                        
+                );
+
+                if (result == DialogResult.Yes)
+                {
+                    var phieuNhap = context.PhieuNhaps
+                     .Include(pn => pn.ChiTietPhieuNhaps)
+                         .ThenInclude(ct => ct.VatLieu)
+                     .First(pn => pn.Id == id)
+                     ?? throw new Exception("Phiếu nhập không tồn tại");
+                    var chiTietPhieuNhap = phieuNhap.ChiTietPhieuNhaps.First();
+                    var vatLieu = chiTietPhieuNhap!.VatLieu;
+                    vatLieu!.SoLuongTon -= (int)(chiTietPhieuNhap.SoLuong ?? 0);
+                    context.ChiTietPhieuNhaps.Remove(chiTietPhieuNhap);
+                    context.PhieuNhaps.Remove(phieuNhap);
+                    context.SaveChanges();
+                    MessageBox.Show("Đã xóa!");
+                }
+                else
+                {
+                    // Người dùng chọn No → bỏ qua
+                    MessageBox.Show("Hủy xóa.");
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Xóa phiếu nhập thất bại: " + ex.Message);
             }
         }
     }

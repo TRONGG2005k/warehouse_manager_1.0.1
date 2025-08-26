@@ -26,7 +26,7 @@ public partial class ChiTietPhieuNhap
 
     [Column("don_vi_tinh")]
     [StringLength(50)]
-    [Unicode(false)]
+    [Unicode(true)]
     public string? DonViTinh { get; set; }
 
     [Column("phieu_nhap_id")]

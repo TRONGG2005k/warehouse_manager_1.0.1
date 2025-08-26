@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.IdentityModel.Tokens;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,6 +25,7 @@ namespace warehouse_manager.ui.user_control
         private void TaoDonNhapKho_Load(object sender, EventArgs e)
         {
             List<String> loaiVatlieus = new LoaiVatLieuService().danhSachLoaiVatLieu();
+            comboBox1.Items.Add("");
             foreach (var item in loaiVatlieus)
             {
                 comboBox1.Items.Add(item);
@@ -31,6 +33,7 @@ namespace warehouse_manager.ui.user_control
 
             List<String> donViTinhs = new List<string>
             {
+                "",
                 "Cái",
                 "Chiếc",
                 "Bộ",
@@ -48,6 +51,8 @@ namespace warehouse_manager.ui.user_control
             {
                 comboBox2.Items.Add(item);
             }
+            comboBox1.SelectedIndex = 0;
+            comboBox2.SelectedIndex = 0;
             List<String> nhaCungCaps = new NhaCungCapService().danhSachNhaCungCap();
             foreach (var item in nhaCungCaps)
             {
@@ -63,17 +68,37 @@ namespace warehouse_manager.ui.user_control
         private void button11_Click(object sender, EventArgs e)
         {
             PhieuService phieuService = new PhieuService();
-            phieuService.themPhieuNhap(new TaoPhieuNhapKhoDto
+            try
             {
-                LoaiVatLieu = comboBox1.SelectedItem.ToString(),
-                TenVatLieu = textBox2.Text,
-                DonViTinh = comboBox2.SelectedItem.ToString(),
-                DonGia = numericUpDown1.Value,
-                NhaCungCap = comboBox3.SelectedItem.ToString(),
-                MaVatLieu = textBox2.Text,
-                SoLuong = (int)numericUpDown2.Value,
-                Make = comboBox4.SelectedItem.ToString(),
-            });
+                if (string.IsNullOrEmpty(comboBox1.SelectedItem.ToString()) ||
+                  string.IsNullOrEmpty(textBox1.Text) ||
+                  string.IsNullOrEmpty(comboBox2.SelectedItem.ToString()) ||
+                  string.IsNullOrEmpty(comboBox3.SelectedItem.ToString()) ||
+                  string.IsNullOrEmpty(textBox2.Text) ||
+                  string.IsNullOrEmpty(comboBox4.SelectedItem.ToString() )||
+                  (int)numericUpDown2.Value == 0 
+                )
+                {
+                    //MessageBox.Show("vui lòng nhập đủ thông tìn");
+                    throw new Exception("vui lòng nhập đủ thông tìn");
+                }
+                phieuService.themPhieuNhap(new TaoPhieuNhapKhoDto
+                {
+                    LoaiVatLieu = comboBox1.SelectedItem.ToString(),
+                    TenVatLieu = textBox1.Text,
+                    DonViTinh = comboBox2.SelectedItem.ToString(),
+                    DonGia = numericUpDown1.Value,
+                    NhaCungCap = comboBox3.SelectedItem.ToString(),
+                    MaVatLieu = textBox2.Text,
+                    SoLuong = (int)numericUpDown2.Value,
+                    Make = comboBox4.SelectedItem.ToString(),
+                });
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                //throw new Exception("lỗi " + ex.Message);
+            }
         }
 
         private void button8_Click(object sender, EventArgs e)

@@ -32,6 +32,8 @@ namespace warehouse_manager.ui.user_control
         {
             var service = new service.PhieuService();
             var phieuNhapDtos = service.phieuNhapDtos();
+
+
             dataGridView1.DataSource = phieuNhapDtos;
 
             dataGridView1.Columns["NgayNhap"].HeaderText = "Ngày Nhập";

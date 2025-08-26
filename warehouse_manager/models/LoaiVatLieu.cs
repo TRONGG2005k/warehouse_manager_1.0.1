@@ -15,7 +15,7 @@ public partial class LoaiVatLieu
 
     [Column("ten_loai")]
     [StringLength(255)]
-    [Unicode(false)]
+    [Unicode(true)]
     public string TenLoai { get; set; } = null!;
 
     [Column("mo_ta")]

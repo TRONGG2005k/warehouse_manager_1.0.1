@@ -139,7 +139,7 @@ public partial class WarehouseManagerContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK__vat_lieu__3213E83F5455BCC9");
 
-            entity.Property(e => e.DonViTinh).HasDefaultValue("thùng");
+            entity.Property(e => e.DonViTinh).HasDefaultValue("thùng").IsUnicode();
             entity.Property(e => e.SoLuongTon).HasDefaultValue(0);
 
             entity.HasOne(d => d.MaLoaiNavigation).WithMany(p => p.VatLieus).HasConstraintName("fk_vl_loai");

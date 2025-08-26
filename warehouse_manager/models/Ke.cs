@@ -28,7 +28,7 @@
         [Column("mo_ta", TypeName = "text")]
         public string? MoTa { get; set; }
 
-        [ForeignKey("KeId")]
+    
         [InverseProperty("Kes")]
         public virtual ICollection<VatLieu> VatLieus { get; set; } = new List<VatLieu>();
     }

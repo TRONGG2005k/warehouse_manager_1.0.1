@@ -17,14 +17,14 @@ namespace warehouse_manager.service
         {
             try
             {
-                using (var context = new WarehouseManagerContext())
-                {
+                var context = new WarehouseManagerContext();
+                
                     if (nguoiDung.TenDangNhap!.Equals("") || nguoiDung.MatKhau!.Equals(""))
                     {
                         MessageBox.Show("Vui lòng nhập đầy đủ thông tin");
                         return false;
                     }
-                    
+                     
                     var user = context.NguoiDungs
                               .FirstOrDefault(
                                   u => u.TenDangNhap == nguoiDung.TenDangNhap
@@ -47,7 +47,7 @@ namespace warehouse_manager.service
                     {
                         MessageBox.Show("Tên đăng nhập hoặc mật khẩu không đúng");
                     }
-                }
+                
             }
             catch (Exception ex)
             {

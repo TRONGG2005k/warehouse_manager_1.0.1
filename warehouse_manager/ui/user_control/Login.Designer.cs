@@ -34,6 +34,7 @@
             tableLayoutPanel2 = new TableLayoutPanel();
             label1 = new Label();
             panel2 = new Panel();
+            checkBox1 = new CheckBox();
             pictureBox2 = new PictureBox();
             pictureBox1 = new PictureBox();
             label2 = new Label();
@@ -41,6 +42,7 @@
             textBox2 = new TextBox();
             textBox1 = new TextBox();
             panel3 = new Panel();
+            button2 = new Button();
             button1 = new Button();
             panel4 = new Panel();
             tableLayoutPanel1.SuspendLayout();
@@ -64,7 +66,7 @@
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.Size = new Size(800, 450);
+            tableLayoutPanel1.Size = new Size(1093, 651);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // panel1
@@ -73,7 +75,7 @@
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(3, 3);
             panel1.Name = "panel1";
-            panel1.Size = new Size(394, 444);
+            panel1.Size = new Size(540, 645);
             panel1.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -90,7 +92,7 @@
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 30F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 34.2342339F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 35.81081F));
-            tableLayoutPanel2.Size = new Size(394, 444);
+            tableLayoutPanel2.Size = new Size(540, 645);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // label1
@@ -101,13 +103,14 @@
             label1.Location = new Point(3, 0);
             label1.Name = "label1";
             label1.Padding = new Padding(20);
-            label1.Size = new Size(388, 133);
+            label1.Size = new Size(534, 193);
             label1.TabIndex = 0;
             label1.Text = "login";
             label1.TextAlign = ContentAlignment.BottomLeft;
             // 
             // panel2
             // 
+            panel2.Controls.Add(checkBox1);
             panel2.Controls.Add(pictureBox2);
             panel2.Controls.Add(pictureBox1);
             panel2.Controls.Add(label2);
@@ -115,10 +118,21 @@
             panel2.Controls.Add(textBox2);
             panel2.Controls.Add(textBox1);
             panel2.Dock = DockStyle.Fill;
-            panel2.Location = new Point(3, 136);
+            panel2.Location = new Point(3, 196);
             panel2.Name = "panel2";
-            panel2.Size = new Size(388, 145);
+            panel2.Size = new Size(534, 214);
             panel2.TabIndex = 1;
+            // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(391, 177);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(59, 24);
+            checkBox1.TabIndex = 7;
+            checkBox1.Text = "hiện";
+            checkBox1.UseVisualStyleBackColor = true;
+            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
             // 
             // pictureBox2
             // 
@@ -179,12 +193,23 @@
             // 
             // panel3
             // 
+            panel3.Controls.Add(button2);
             panel3.Controls.Add(button1);
             panel3.Dock = DockStyle.Fill;
-            panel3.Location = new Point(3, 287);
+            panel3.Location = new Point(3, 416);
             panel3.Name = "panel3";
-            panel3.Size = new Size(388, 154);
+            panel3.Size = new Size(534, 226);
             panel3.TabIndex = 2;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(423, 43);
+            button2.Name = "button2";
+            button2.Size = new Size(94, 29);
+            button2.TabIndex = 4;
+            button2.Text = "đăng ký";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // button1
             // 
@@ -208,10 +233,11 @@
             panel4.BackgroundImage = (Image)resources.GetObject("panel4.BackgroundImage");
             panel4.BackgroundImageLayout = ImageLayout.Zoom;
             panel4.Dock = DockStyle.Fill;
-            panel4.Location = new Point(403, 3);
+            panel4.Location = new Point(549, 3);
             panel4.Name = "panel4";
-            panel4.Size = new Size(394, 444);
+            panel4.Size = new Size(541, 645);
             panel4.TabIndex = 1;
+            panel4.Paint += panel4_Paint;
             // 
             // Login
             // 
@@ -219,7 +245,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(tableLayoutPanel1);
             Name = "Login";
-            Size = new Size(800, 450);
+            Size = new Size(1093, 651);
             Load += Login_Load;
             tableLayoutPanel1.ResumeLayout(false);
             panel1.ResumeLayout(false);
@@ -249,5 +275,7 @@
         private Panel panel3;
         private Button button1;
         private Panel panel4;
+        private CheckBox checkBox1;
+        private Button button2;
     }
 }

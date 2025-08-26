@@ -29,10 +29,15 @@
         private void InitializeComponent()
         {
             panel2 = new Panel();
+            button3 = new Button();
             panel1 = new Panel();
+            button2 = new Button();
             panel3 = new Panel();
+            button4 = new Button();
             panel4 = new Panel();
+            button5 = new Button();
             panel5 = new Panel();
+            button6 = new Button();
             tableLayoutPanel7 = new TableLayoutPanel();
             button1 = new Button();
             label3 = new Label();
@@ -68,11 +73,6 @@
             label1 = new Label();
             comboBox1 = new ComboBox();
             dataGridView1 = new DataGridView();
-            button6 = new Button();
-            button5 = new Button();
-            button4 = new Button();
-            button3 = new Button();
-            button2 = new Button();
             panel2.SuspendLayout();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
@@ -103,6 +103,21 @@
             panel2.Size = new Size(95, 65);
             panel2.TabIndex = 1;
             // 
+            // button3
+            // 
+            button3.BackgroundImage = Properties.Resources.conveyorbelt_116577;
+            button3.BackgroundImageLayout = ImageLayout.Zoom;
+            button3.ForeColor = SystemColors.ControlText;
+            button3.ImageAlign = ContentAlignment.MiddleLeft;
+            button3.Location = new Point(-85, 0);
+            button3.Name = "button3";
+            button3.Size = new Size(239, 64);
+            button3.TabIndex = 2;
+            button3.Text = "Xuất kho";
+            button3.TextAlign = ContentAlignment.MiddleRight;
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
             // panel1
             // 
             panel1.Controls.Add(button2);
@@ -111,6 +126,21 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(95, 65);
             panel1.TabIndex = 0;
+            // 
+            // button2
+            // 
+            button2.BackgroundImage = Properties.Resources.conveyorbelt_118075;
+            button2.BackgroundImageLayout = ImageLayout.Zoom;
+            button2.ForeColor = SystemColors.ControlText;
+            button2.ImageAlign = ContentAlignment.MiddleLeft;
+            button2.Location = new Point(-84, 0);
+            button2.Name = "button2";
+            button2.Size = new Size(239, 64);
+            button2.TabIndex = 1;
+            button2.Text = "Thoát";
+            button2.TextAlign = ContentAlignment.MiddleRight;
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // panel3
             // 
@@ -121,6 +151,21 @@
             panel3.Size = new Size(95, 65);
             panel3.TabIndex = 2;
             // 
+            // button4
+            // 
+            button4.BackgroundImage = Properties.Resources.loupe_78956;
+            button4.BackgroundImageLayout = ImageLayout.Zoom;
+            button4.ForeColor = SystemColors.ControlText;
+            button4.ImageAlign = ContentAlignment.MiddleLeft;
+            button4.Location = new Point(-85, 0);
+            button4.Name = "button4";
+            button4.Size = new Size(239, 64);
+            button4.TabIndex = 2;
+            button4.Text = "Tìm kiếm";
+            button4.TextAlign = ContentAlignment.MiddleRight;
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
+            // 
             // panel4
             // 
             panel4.Controls.Add(button5);
@@ -130,6 +175,21 @@
             panel4.Size = new Size(95, 65);
             panel4.TabIndex = 3;
             // 
+            // button5
+            // 
+            button5.BackgroundImage = Properties.Resources.iconfinder_warehouse_3992927_112594;
+            button5.BackgroundImageLayout = ImageLayout.Zoom;
+            button5.ForeColor = SystemColors.ControlText;
+            button5.ImageAlign = ContentAlignment.MiddleLeft;
+            button5.Location = new Point(-85, 0);
+            button5.Name = "button5";
+            button5.Size = new Size(239, 64);
+            button5.TabIndex = 2;
+            button5.Text = "Hàng tồn kho";
+            button5.TextAlign = ContentAlignment.MiddleRight;
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
+            // 
             // panel5
             // 
             panel5.Controls.Add(button6);
@@ -138,6 +198,21 @@
             panel5.Name = "panel5";
             panel5.Size = new Size(95, 66);
             panel5.TabIndex = 4;
+            // 
+            // button6
+            // 
+            button6.BackgroundImage = Properties.Resources.business_table_order_report_history_2332;
+            button6.BackgroundImageLayout = ImageLayout.Zoom;
+            button6.ForeColor = SystemColors.ControlText;
+            button6.ImageAlign = ContentAlignment.MiddleLeft;
+            button6.Location = new Point(-85, 0);
+            button6.Name = "button6";
+            button6.Size = new Size(239, 64);
+            button6.TabIndex = 2;
+            button6.Text = "Báo cáo";
+            button6.TextAlign = ContentAlignment.MiddleRight;
+            button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
             // 
             // tableLayoutPanel7
             // 
@@ -421,6 +496,7 @@
             // numericUpDown2
             // 
             numericUpDown2.Location = new Point(126, 206);
+            numericUpDown2.Maximum = new decimal(new int[] { -1486618624, 232830643, 0, 0 });
             numericUpDown2.Name = "numericUpDown2";
             numericUpDown2.Size = new Size(349, 27);
             numericUpDown2.TabIndex = 13;
@@ -470,6 +546,7 @@
             // numericUpDown1
             // 
             numericUpDown1.Location = new Point(126, 106);
+            numericUpDown1.Maximum = new decimal(new int[] { 268435456, 1042612833, 542101086, 0 });
             numericUpDown1.Name = "numericUpDown1";
             numericUpDown1.Size = new Size(348, 27);
             numericUpDown1.TabIndex = 6;
@@ -534,81 +611,8 @@
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.Size = new Size(623, 289);
             dataGridView1.TabIndex = 2;
-            // 
-            // button6
-            // 
-            button6.BackgroundImage = Properties.Resources.business_table_order_report_history_2332;
-            button6.BackgroundImageLayout = ImageLayout.Zoom;
-            button6.ForeColor = SystemColors.ControlText;
-            button6.ImageAlign = ContentAlignment.MiddleLeft;
-            button6.Location = new Point(-85, 0);
-            button6.Name = "button6";
-            button6.Size = new Size(239, 64);
-            button6.TabIndex = 2;
-            button6.Text = "Báo cáo";
-            button6.TextAlign = ContentAlignment.MiddleRight;
-            button6.UseVisualStyleBackColor = true;
-            button6.Click += button6_Click;
-            // 
-            // button5
-            // 
-            button5.BackgroundImage = Properties.Resources.iconfinder_warehouse_3992927_112594;
-            button5.BackgroundImageLayout = ImageLayout.Zoom;
-            button5.ForeColor = SystemColors.ControlText;
-            button5.ImageAlign = ContentAlignment.MiddleLeft;
-            button5.Location = new Point(-85, 0);
-            button5.Name = "button5";
-            button5.Size = new Size(239, 64);
-            button5.TabIndex = 2;
-            button5.Text = "Hàng tồn kho";
-            button5.TextAlign = ContentAlignment.MiddleRight;
-            button5.UseVisualStyleBackColor = true;
-            button5.Click += button5_Click;
-            // 
-            // button4
-            // 
-            button4.BackgroundImage = Properties.Resources.loupe_78956;
-            button4.BackgroundImageLayout = ImageLayout.Zoom;
-            button4.ForeColor = SystemColors.ControlText;
-            button4.ImageAlign = ContentAlignment.MiddleLeft;
-            button4.Location = new Point(-85, 0);
-            button4.Name = "button4";
-            button4.Size = new Size(239, 64);
-            button4.TabIndex = 2;
-            button4.Text = "Tìm kiếm";
-            button4.TextAlign = ContentAlignment.MiddleRight;
-            button4.UseVisualStyleBackColor = true;
-            button4.Click += button4_Click;
-            // 
-            // button3
-            // 
-            button3.BackgroundImage = Properties.Resources.conveyorbelt_116577;
-            button3.BackgroundImageLayout = ImageLayout.Zoom;
-            button3.ForeColor = SystemColors.ControlText;
-            button3.ImageAlign = ContentAlignment.MiddleLeft;
-            button3.Location = new Point(-85, 0);
-            button3.Name = "button3";
-            button3.Size = new Size(239, 64);
-            button3.TabIndex = 2;
-            button3.Text = "Xuất kho";
-            button3.TextAlign = ContentAlignment.MiddleRight;
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
-            // 
-            // button2
-            // 
-            button2.BackgroundImage = Properties.Resources.conveyorbelt_118075;
-            button2.BackgroundImageLayout = ImageLayout.Zoom;
-            button2.ForeColor = SystemColors.ControlText;
-            button2.ImageAlign = ContentAlignment.MiddleLeft;
-            button2.Location = new Point(-84, 0);
-            button2.Name = "button2";
-            button2.Size = new Size(239, 64);
-            button2.TabIndex = 1;
-            button2.Text = "Thoát";
-            button2.TextAlign = ContentAlignment.MiddleRight;
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            dataGridView1.CellClick += dataGridView1_CellClick;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // SuaPhieuNhap
             // 
