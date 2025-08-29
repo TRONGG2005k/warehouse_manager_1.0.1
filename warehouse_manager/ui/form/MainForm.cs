@@ -54,9 +54,9 @@ namespace warehouse_manager.ui
 
             if (File.Exists(filePath))
             {
-                // Xóa nội dung file
+              
                 File.WriteAllText(filePath, string.Empty);
-                // Hoặc xóa hẳn file: File.Delete(filePath);
+                // xóa hẳn file: File.Delete(filePath);
             }
         }
     }

@@ -9,6 +9,7 @@ using warehouse_manager.Models;
 
 namespace warehouse_manager.Models
 {
+    [Table("vai_tro")]
     public class VaiTro
     {
         [Key]

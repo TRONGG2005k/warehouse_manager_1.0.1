@@ -618,18 +618,22 @@ namespace warehouse_manager.ui.user_control
             // 
             // dateTimePicker2
             // 
+            dateTimePicker2.CustomFormat = "dd/MM/yyyy HH:mm:ss";
+            dateTimePicker2.Format = DateTimePickerFormat.Custom;
             dateTimePicker2.Location = new Point(3, 35);
             dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(269, 27);
+            dateTimePicker2.Size = new Size(179, 27);
             dateTimePicker2.TabIndex = 3;
             dateTimePicker2.Value = new DateTime(2025, 8, 26, 15, 21, 45, 0);
             dateTimePicker2.Visible = false;
             // 
             // dateTimePicker1
             // 
+            dateTimePicker1.CustomFormat = "dd/MM/yyyy HH:mm:ss";
+            dateTimePicker1.Format = DateTimePickerFormat.Custom;
             dateTimePicker1.Location = new Point(3, 3);
             dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(269, 27);
+            dateTimePicker1.Size = new Size(179, 27);
             dateTimePicker1.TabIndex = 2;
             dateTimePicker1.Value = new DateTime(2025, 8, 26, 15, 21, 39, 0);
             dateTimePicker1.Visible = false;
@@ -666,6 +670,7 @@ namespace warehouse_manager.ui.user_control
             dataGridView1.TabIndex = 5;
             dataGridView1.CellClick += dataGridView1_CellClick;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            dataGridView1.CellFormatting += dataGridView1_CellFormatting;
             // 
             // XoaPhieuNhap
             // 

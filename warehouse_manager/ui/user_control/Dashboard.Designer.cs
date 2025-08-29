@@ -89,8 +89,8 @@
             // tableLayoutPanel2
             // 
             tableLayoutPanel2.ColumnCount = 2;
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 42.0168076F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 57.9831924F));
             tableLayoutPanel2.Controls.Add(dataGridView1, 0, 0);
             tableLayoutPanel2.Controls.Add(dataGridView2, 1, 0);
             tableLayoutPanel2.Dock = DockStyle.Fill;
@@ -113,8 +113,9 @@
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(351, 345);
+            dataGridView1.Size = new Size(294, 345);
             dataGridView1.TabIndex = 0;
+            dataGridView1.CellFormatting += dataGridView1_CellFormatting;
             // 
             // dataGridView2
             // 
@@ -124,12 +125,13 @@
             dataGridView2.BackgroundColor = Color.White;
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView2.Dock = DockStyle.Fill;
-            dataGridView2.Location = new Point(360, 3);
+            dataGridView2.Location = new Point(303, 3);
             dataGridView2.Name = "dataGridView2";
             dataGridView2.ReadOnly = true;
             dataGridView2.RowHeadersWidth = 51;
-            dataGridView2.Size = new Size(351, 345);
+            dataGridView2.Size = new Size(408, 345);
             dataGridView2.TabIndex = 1;
+            dataGridView2.CellFormatting += dataGridView2_CellFormatting;
             // 
             // tableLayoutPanel3
             // 
@@ -373,12 +375,12 @@
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
             // 
-            // Dashboard
+            // DanhSachDonNhapKho
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(tableLayoutPanel1);
-            Name = "Dashboard";
+            Name = "DanhSachDonNhapKho";
             Size = new Size(800, 450);
             Load += Dashboard_Load;
             tableLayoutPanel1.ResumeLayout(false);

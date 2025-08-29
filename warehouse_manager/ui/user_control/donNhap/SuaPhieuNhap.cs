@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,8 +17,10 @@ namespace warehouse_manager.ui.user_control
 {
     public partial class SuaPhieuNhap : UserControl
     {
+        private NguoiDungService nguoiDungService;
         public SuaPhieuNhap()
         {
+            nguoiDungService = new NguoiDungService();
             InitializeComponent();
         }
 
@@ -27,7 +30,7 @@ namespace warehouse_manager.ui.user_control
         }
         private void LoadData()
         {
-            var service = new PhieuService();
+            var service = new PhieuNhapService();
             var phieuNhapDtos = service.phieuNhapResponse();
             dataGridView1.DataSource = phieuNhapDtos;
             List<String> loaiVatlieus = new LoaiVatLieuService().danhSachLoaiVatLieu();
@@ -85,6 +88,22 @@ namespace warehouse_manager.ui.user_control
         {
             try
             {
+
+                if(comboBox1.Items.Contains(comboBox1.Text) == false)
+                {
+                    throw new Exception("Loại vật liệu không tồn tại");
+                }
+                else if (comboBox2.Items.Contains(comboBox2.Text) == false)
+                {
+                    throw new Exception("Loại vật liệu không tồn tại");
+                }else if (comboBox3.Items.Contains(comboBox3.Text) == false)
+                {
+                    throw new Exception("Nhà cung cấp không tồn tại");
+                } else if (comboBox4.Items.Contains(comboBox4.Text) == false)
+                {
+                    throw new Exception("Kệ không tồn tại");
+                }
+
                 if (string.IsNullOrEmpty(comboBox1.SelectedItem.ToString()) ||
                 string.IsNullOrEmpty(textBox1.Text) ||
                 string.IsNullOrEmpty(comboBox2.SelectedItem.ToString()) ||
@@ -97,7 +116,8 @@ namespace warehouse_manager.ui.user_control
                     //MessageBox.Show("vui lòng nhập đủ thông tìn");
                     throw new Exception("vui lòng nhập đủ thông tìn");
                 }
-                PhieuService phieuService = new PhieuService();
+                
+                PhieuNhapService phieuService = new PhieuNhapService();
                 var isSuccess = phieuService.suaPhieuNhap(new SuaPhieuNhapDto
                 {
                     Id = Convert.ToInt32(dataGridView1.CurrentRow.Cells["Id"].Value),
@@ -143,18 +163,27 @@ namespace warehouse_manager.ui.user_control
 
         private void button10_Click(object sender, EventArgs e)
         {
-            MainForm mainForm = (MainForm)this.Parent!.Parent!;
-            mainForm.LoadPage(new XoaPhieuNhap());
+            if(nguoiDungService.kiemTraVaiTroAdmin())
+            {
+                MainForm mainForm = (MainForm)this.Parent!.Parent!;
+                mainForm.LoadPage(new XoaPhieuNhap());
+            }
+            else
+            {
+                MessageBox.Show("Bạn không có quyền hủy đơn nhập kho");
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            MainForm mainForm = (MainForm)this.Parent!.Parent!;
+            mainForm.LoadPage(new DanhSachDonNhapKho());
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            MainForm mainForm = (MainForm)this.Parent!.Parent!;
+            mainForm.LoadPage(new DanhSachXuatKho());
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -174,7 +203,9 @@ namespace warehouse_manager.ui.user_control
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            nguoiDungService.logout();
+            MainForm mainForm = (MainForm)this.Parent!.Parent!;
+            mainForm.LoadPage(new Login());
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -208,6 +239,16 @@ namespace warehouse_manager.ui.user_control
         private void panel6_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "DonGia" && e.Value != null)
+            {
+                decimal donGia = (decimal)e.Value;
+                e.Value = donGia.ToString("N0") + " ₫";
+                e.FormattingApplied = true;
+            }
         }
     }
 }

@@ -23,7 +23,7 @@ public partial class WarehouseManagerContext : DbContext
 
     public virtual DbSet<Ke> Kes { get; set; }
 
-    public virtual DbSet<LoaiSanPham> LoaiSanPhams { get; set; }
+    //public virtual DbSet<LoaiSanPham> LoaiSanPhams { get; set; }
 
     public virtual DbSet<LoaiVatLieu> LoaiVatLieus { get; set; }
 
@@ -35,10 +35,11 @@ public partial class WarehouseManagerContext : DbContext
 
     public virtual DbSet<PhieuXuat> PhieuXuats { get; set; }
 
-    public virtual DbSet<SanPham> SanPhams { get; set; }
+    //public virtual DbSet<SanPham> SanPhams { get; set; }
 
-    public virtual DbSet<ThongSoSanPham> ThongSoSanPhams { get; set; }
+    //public virtual DbSet<ThongSoSanPham> ThongSoSanPhams { get; set; }
 
+    public virtual DbSet<CoSoSanXuat> CoSoSanXuats { get; set; }
     public virtual DbSet<VatLieu> VatLieus { get; set; }
 
     public virtual DbSet<VaiTro> VaiTros { get; set; }
@@ -68,18 +69,21 @@ public partial class WarehouseManagerContext : DbContext
 
             entity.HasOne(d => d.PhieuXuat).WithMany(p => p.ChiTietPhieuXuats).HasConstraintName("fk_ctpx_px");
 
-            entity.HasOne(d => d.SanPham).WithMany(p => p.ChiTietPhieuXuats).HasConstraintName("fk_ctpx_sp");
+            entity.HasOne(d => d.VatLieu).WithMany(p => p.ChiTietPhieuXuats).HasConstraintName("fk_ctpx_vl");
         });
 
         modelBuilder.Entity<Ke>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__ke__3213E83FFEE94E32");
         });
-
-        modelBuilder.Entity<LoaiSanPham>(entity =>
+        modelBuilder.Entity<CoSoSanXuat>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__loai_san__3213E83F1302A9C6");
+            entity.HasKey(e => e.Id).HasName("PK__co_so_sa__3213E83F1C1D8D7E");
         });
+        //modelBuilder.Entity<LoaiSanPham>(entity =>
+        //{
+        //    entity.HasKey(e => e.Id).HasName("PK__loai_san__3213E83F1302A9C6");
+        //});
 
         modelBuilder.Entity<LoaiVatLieu>(entity =>
         {
@@ -115,25 +119,28 @@ public partial class WarehouseManagerContext : DbContext
 
             entity.Property(e => e.NgayXuat).HasDefaultValueSql("(getdate())");
 
+            entity.HasOne(d => d.CoSoSanXuat).WithMany(p => p.PhieuXuats).HasConstraintName("fk_px_csx");
+
             entity.HasOne(d => d.NguoiDung).WithMany(p => p.PhieuXuats).HasConstraintName("fk_px_nd");
+            entity.Property(e => e.TrangThai).HasDefaultValue("CHO_DUYET");
         });
 
-        modelBuilder.Entity<SanPham>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__san_pham__3213E83F9A86DB77");
+        //modelBuilder.Entity<SanPham>(entity =>
+        //{
+        //    entity.HasKey(e => e.Id).HasName("PK__san_pham__3213E83F9A86DB77");
 
-            entity.Property(e => e.DonViTinh).HasDefaultValue("máy");
-            entity.Property(e => e.SoLuongTon).HasDefaultValue(0);
+        //    entity.Property(e => e.DonViTinh).HasDefaultValue("máy");
+        //    entity.Property(e => e.SoLuongTon).HasDefaultValue(0);
 
-            entity.HasOne(d => d.MaLoaiNavigation).WithMany(p => p.SanPhams).HasConstraintName("fk_sp_loai");
-        });
+        //    entity.HasOne(d => d.MaLoaiNavigation).WithMany(p => p.SanPhams).HasConstraintName("fk_sp_loai");
+        //});
 
-        modelBuilder.Entity<ThongSoSanPham>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__thong_so__3213E83FC28ADEDB");
+        //modelBuilder.Entity<ThongSoSanPham>(entity =>
+        //{
+        //    entity.HasKey(e => e.Id).HasName("PK__thong_so__3213E83FC28ADEDB");
 
-            entity.HasOne(d => d.SanPham).WithOne(p => p.ThongSoSanPham).HasConstraintName("fk_ts_sp");
-        });
+        //    entity.HasOne(d => d.SanPham).WithOne(p => p.ThongSoSanPham).HasConstraintName("fk_ts_sp");
+        //});
 
         modelBuilder.Entity<VatLieu>(entity =>
         {

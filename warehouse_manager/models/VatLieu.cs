@@ -64,4 +64,6 @@ public partial class VatLieu
 
     [InverseProperty("VatLieus")]
     public virtual ICollection<Ke> Kes { get; set; } = new List<Ke>();
+
+    public ICollection<ChiTietPhieuXuat> ChiTietPhieuXuats { get; set; } = new List<ChiTietPhieuXuat>();
 }

@@ -55,7 +55,11 @@
             button3 = new Button();
             tableLayoutPanel2 = new TableLayoutPanel();
             panel10 = new Panel();
+            tableLayoutPanel5 = new TableLayoutPanel();
             dataGridView1 = new DataGridView();
+            panel11 = new Panel();
+            button11 = new Button();
+            textBox1 = new TextBox();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
             panel9.SuspendLayout();
@@ -71,7 +75,9 @@
             panel2.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             panel10.SuspendLayout();
+            tableLayoutPanel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            panel11.SuspendLayout();
             SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -223,6 +229,7 @@
             button1.Size = new Size(64, 33);
             button1.TabIndex = 0;
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // label3
             // 
@@ -376,6 +383,7 @@
             button3.Text = "Xuất kho";
             button3.TextAlign = ContentAlignment.MiddleRight;
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // tableLayoutPanel2
             // 
@@ -392,12 +400,27 @@
             // 
             // panel10
             // 
-            panel10.Controls.Add(dataGridView1);
+            panel10.Controls.Add(tableLayoutPanel5);
             panel10.Dock = DockStyle.Fill;
             panel10.Location = new Point(3, 3);
             panel10.Name = "panel10";
             panel10.Size = new Size(1034, 577);
             panel10.TabIndex = 0;
+            // 
+            // tableLayoutPanel5
+            // 
+            tableLayoutPanel5.ColumnCount = 1;
+            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel5.Controls.Add(dataGridView1, 0, 1);
+            tableLayoutPanel5.Controls.Add(panel11, 0, 0);
+            tableLayoutPanel5.Dock = DockStyle.Fill;
+            tableLayoutPanel5.Location = new Point(0, 0);
+            tableLayoutPanel5.Name = "tableLayoutPanel5";
+            tableLayoutPanel5.RowCount = 2;
+            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 8.838821F));
+            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 91.16118F));
+            tableLayoutPanel5.Size = new Size(1034, 577);
+            tableLayoutPanel5.TabIndex = 3;
             // 
             // dataGridView1
             // 
@@ -406,12 +429,41 @@
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Dock = DockStyle.Fill;
-            dataGridView1.Location = new Point(0, 0);
+            dataGridView1.Location = new Point(3, 54);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(1034, 577);
-            dataGridView1.TabIndex = 0;
+            dataGridView1.Size = new Size(1028, 520);
+            dataGridView1.TabIndex = 1;
+            dataGridView1.CellClick += dataGridView1_CellClick;
+            // 
+            // panel11
+            // 
+            panel11.Controls.Add(button11);
+            panel11.Controls.Add(textBox1);
+            panel11.Location = new Point(3, 3);
+            panel11.Name = "panel11";
+            panel11.Size = new Size(250, 45);
+            panel11.TabIndex = 0;
+            // 
+            // button11
+            // 
+            button11.BackColor = Color.DodgerBlue;
+            button11.Location = new Point(-3, 0);
+            button11.Name = "button11";
+            button11.Size = new Size(118, 47);
+            button11.TabIndex = 1;
+            button11.Text = "In đơn";
+            button11.UseVisualStyleBackColor = false;
+            button11.Click += button11_Click;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(123, 10);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(29, 27);
+            textBox1.TabIndex = 2;
+            textBox1.Visible = false;
             // 
             // DanhSachNhapKho
             // 
@@ -437,7 +489,10 @@
             panel2.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
             panel10.ResumeLayout(false);
+            tableLayoutPanel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            panel11.ResumeLayout(false);
+            panel11.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -469,6 +524,10 @@
         private Panel panel6;
         private Button button7;
         private Panel panel10;
+        private Button button11;
+        private TextBox textBox1;
+        private TableLayoutPanel tableLayoutPanel5;
         private DataGridView dataGridView1;
+        private Panel panel11;
     }
 }

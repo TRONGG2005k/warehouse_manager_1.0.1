@@ -13,48 +13,17 @@ using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 
 namespace warehouse_manager.service
 {
-    internal class PhieuService
+    internal class PhieuNhapService
     {
         private WarehouseManagerContext context;
-        public PhieuService()
+        public PhieuNhapService()
         {
             context = new WarehouseManagerContext();
         }
 
 
         // hàm select phiếu nhập và xuất
-        public List<PhieuDto> danhSachPhieu()
-        {
-
-            var query = context.PhieuNhaps.Select(
-                p => new PhieuDto
-                {
-                    Id = p.Id,
-                    NgayLap = p.NgayNhap,
-                    TongTien = p.TongTien,
-                    NguoiLap = p.NguoiDung!.TenDangNhap!,
-                    LoaiPhieu = "Phiếu nhập ⬅️",
-                    TenHang = p.ChiTietPhieuNhaps!.FirstOrDefault()!.VatLieu!.Ten ?? "",
-                    SoLuong = p.ChiTietPhieuNhaps!.FirstOrDefault()!.SoLuong ?? 0
-                }
-            ).Union(
-                context.PhieuXuats.Select(
-                    p => new PhieuDto
-                    {
-                        Id = p.Id,
-                        NgayLap = p.NgayXuat,
-                        TongTien = p.TongTien,
-                        NguoiLap = p.NguoiDung!.TenDangNhap!,
-                        LoaiPhieu = "Phiếu xuất ➡️",
-                        TenHang = p.ChiTietPhieuXuats!.FirstOrDefault()!.SanPham!.Ten ?? "",
-                        SoLuong = p.ChiTietPhieuXuats!.FirstOrDefault()!.SoLuong ?? 0
-                    }
-                )
-            ). OrderByDescending(p => p.NgayLap); ;
-
-
-            return query.ToList();
-        }
+        
 
         public List<PhieuDto> danhSachPhieuNhap()
         {
@@ -75,23 +44,7 @@ namespace warehouse_manager.service
             return query.ToList();
         }
 
-        public List<PhieuDto> danhSachPhieuXuat()
-        {
-            var query = context.PhieuXuats.Select(
-                p => new PhieuDto
-                {
-                    Id = p.Id,
-                    NgayLap = p.NgayXuat,
-                    TongTien = p.TongTien,
-                    NguoiLap = p.NguoiDung!.TenDangNhap!,
-                    LoaiPhieu = "Phiếu xuất ➡️",
-                    TenHang = p.ChiTietPhieuXuats!.FirstOrDefault()!.SanPham!.Ten ?? "",
-                    SoLuong = p.ChiTietPhieuXuats!.FirstOrDefault()!.SoLuong ?? 0
-                }
-            ).OrderByDescending(p => p.NgayLap); ;
-
-            return query.ToList();
-        }
+        
 
         public List<dto.o.PhieuNhapDto> phieuNhapResponse()
         {
@@ -162,8 +115,9 @@ namespace warehouse_manager.service
         }
         public List<dto.o.PhieuNhapDto> TimPhieuTheoKhoangThoiGian(LocTheoNgayDto locTheoNgay)
         {
+            
             return context.PhieuNhaps
-                .Where(pn => pn.NgayNhap >= locTheoNgay.Start.Date && pn.NgayNhap <= locTheoNgay.End.AddDays(1).AddTicks(-1))
+                .Where(pn => pn.NgayNhap >= locTheoNgay.Start && pn.NgayNhap <= locTheoNgay.End)
                 .Include(pn => pn.MaNhaCungCapNavigation)
                 .Include(pn => pn.ChiTietPhieuNhaps)
                     .ThenInclude(ct => ct.VatLieu)
@@ -401,11 +355,14 @@ namespace warehouse_manager.service
                             .First(ncc => ncc.TenNhaCungCap == suaPhieuNhap.NhaCungCap).Id;
                         vatLieu.MaLoai = context.LoaiVatLieus
                             .First(l => l.TenLoai == suaPhieuNhap.LoaiVatLieu).Id;
+                        
                     }
                     else
                     {
                         vatLieuTonTai2.SoLuongTon += suaPhieuNhap.SoLuong;
+                        vatLieuTonTai2.DonViTinh = suaPhieuNhap.DonViTinh;
                         chiTietPhieuNhap.VatLieuId = vatLieuTonTai2.Id;
+
                     }
                 }
                 else
@@ -413,6 +370,7 @@ namespace warehouse_manager.service
 
                     int chenhLech = suaPhieuNhap.SoLuong - (int)chiTietPhieuNhap.SoLuong;
                     vatLieu.SoLuongTon += chenhLech;
+                    vatLieu.DonViTinh = suaPhieuNhap.DonViTinh;
                 }
                 chiTietPhieuNhap.SoLuong = suaPhieuNhap.SoLuong;
                 chiTietPhieuNhap.DonGia = suaPhieuNhap.DonGia;

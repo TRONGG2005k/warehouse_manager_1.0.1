@@ -20,13 +20,11 @@ public partial class PhieuXuat
     [Column("tong_tien", TypeName = "decimal(18, 2)")]
     public decimal? TongTien { get; set; }
 
-    [Column("noi_nhan")]
-    [StringLength(500)]
-    [Unicode(false)]
-    public string? NoiNhan { get; set; }
-
     [Column("nguoi_dung_id")]
     public long? NguoiDungId { get; set; }
+
+    [Column("co_so_san_xuat_id")]
+    public long? CoSoSanXuatId { get; set; }
 
     [InverseProperty("PhieuXuat")]
     public virtual ICollection<ChiTietPhieuXuat> ChiTietPhieuXuats { get; set; } = new List<ChiTietPhieuXuat>();
@@ -34,4 +32,15 @@ public partial class PhieuXuat
     [ForeignKey("NguoiDungId")]
     [InverseProperty("PhieuXuats")]
     public virtual NguoiDung? NguoiDung { get; set; }
+
+    [ForeignKey("CoSoSanXuatId")]
+    [InverseProperty("PhieuXuats")]
+    public CoSoSanXuat? CoSoSanXuat { get; set; }
+
+    [Column("ghi_chu")]
+    [Unicode(true)]
+    public string ? GhiChu { get; set; }
+    [Column("trang_thai")]
+    [Unicode(true)]
+    public string ? TrangThai { get; set; }
 }

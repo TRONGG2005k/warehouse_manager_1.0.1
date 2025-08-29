@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic.ApplicationServices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +15,11 @@ namespace warehouse_manager.service
 {
     internal class NguoiDungService
     {
+        private  WarehouseManagerContext context;
+        public NguoiDungService()
+        {
+            context = new WarehouseManagerContext();
+        }
         public Boolean login(NguoiDung nguoiDung)
         {
             try
@@ -54,6 +61,48 @@ namespace warehouse_manager.service
                 MessageBox.Show("action failed" + ex.Message);
             }
             return false;
+        }
+
+        public NguoiDung layThongTinNguoiDung()
+        {
+            string content = File.Exists("user.txt") ? File.ReadAllText("user.txt") : "";
+            var nguoiDung = context.NguoiDungs
+               .Include(nd => nd.VaiTros)  
+               .FirstOrDefault(nd => nd.TenDangNhap == content)
+               ?? throw new Exception("Người dùng không tồn tại");
+            return nguoiDung;
+        }
+
+        public bool kiemTraVaiTroAdmin()
+        {
+            try
+            {
+                var nguoiDung = layThongTinNguoiDung();
+                foreach (var vaiTro in nguoiDung.VaiTros)
+                {
+                    if(vaiTro.TenVaiTro == "ADMIN")
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("action failed: " + ex.Message);
+                return false;
+            }
+        }
+
+        public void logout()
+        {
+            string filePath = "user.txt";
+
+            if (File.Exists(filePath))
+            {
+                File.WriteAllText(filePath, string.Empty);
+                // xóa hẳn file: File.Delete(filePath);
+            }
         }
     }
 }

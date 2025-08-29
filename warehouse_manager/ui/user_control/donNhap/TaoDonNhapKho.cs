@@ -17,8 +17,10 @@ namespace warehouse_manager.ui.user_control
 {
     public partial class TaoDonNhapKho : UserControl
     {
+        private NguoiDungService nguoiDungService;
         public TaoDonNhapKho()
         {
+            nguoiDungService = new NguoiDungService();
             InitializeComponent();
         }
 
@@ -67,16 +69,33 @@ namespace warehouse_manager.ui.user_control
 
         private void button11_Click(object sender, EventArgs e)
         {
-            PhieuService phieuService = new PhieuService();
+            PhieuNhapService phieuService = new PhieuNhapService();
             try
             {
+
+                if (comboBox1.Items.Contains(comboBox1.Text) == false)
+                {
+                    throw new Exception("Loại vật liệu không tồn tại");
+                }
+                else if (comboBox2.Items.Contains(comboBox2.Text) == false)
+                {
+                    throw new Exception("Loại vật liệu không tồn tại");
+                }
+                else if (comboBox3.Items.Contains(comboBox3.Text) == false)
+                {
+                    throw new Exception("Nhà cung cấp không tồn tại");
+                }
+                else if (comboBox4.Items.Contains(comboBox4.Text) == false)
+                {
+                    throw new Exception("Kệ không tồn tại");
+                }
                 if (string.IsNullOrEmpty(comboBox1.SelectedItem.ToString()) ||
                   string.IsNullOrEmpty(textBox1.Text) ||
                   string.IsNullOrEmpty(comboBox2.SelectedItem.ToString()) ||
                   string.IsNullOrEmpty(comboBox3.SelectedItem.ToString()) ||
                   string.IsNullOrEmpty(textBox2.Text) ||
-                  string.IsNullOrEmpty(comboBox4.SelectedItem.ToString() )||
-                  (int)numericUpDown2.Value == 0 
+                  string.IsNullOrEmpty(comboBox4.SelectedItem.ToString()) ||
+                  (int)numericUpDown2.Value == 0
                 )
                 {
                     //MessageBox.Show("vui lòng nhập đủ thông tìn");
@@ -94,7 +113,7 @@ namespace warehouse_manager.ui.user_control
                     Make = comboBox4.SelectedItem.ToString(),
                 });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 //throw new Exception("lỗi " + ex.Message);
@@ -109,15 +128,48 @@ namespace warehouse_manager.ui.user_control
 
         private void button9_Click(object sender, EventArgs e)
         {
-            MainForm mainForm = (MainForm)this.Parent!.Parent!;
-            mainForm.LoadPage(new SuaPhieuNhap());
+            if (nguoiDungService.kiemTraVaiTroAdmin())
+            {
+                MainForm mainForm = (MainForm)this.Parent!.Parent!;
+                mainForm.LoadPage(new SuaPhieuNhap());
+            }
+            else
+            {
+                MessageBox.Show("Bạn không có quyền sửa phiếu nhập kho");
+            }
 
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
+            if (nguoiDungService.kiemTraVaiTroAdmin())
+            {
+                MainForm mainForm = (MainForm)this.Parent!.Parent!;
+                mainForm.LoadPage(new XoaPhieuNhap());
+            }
+            else
+            {
+                MessageBox.Show("Bạn không có quyền hủy phiếu nhập kho");
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
             MainForm mainForm = (MainForm)this.Parent!.Parent!;
-            mainForm.LoadPage(new XoaPhieuNhap());
+            mainForm.LoadPage(new DanhSachNhapKho());
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            MainForm mainForm = (MainForm)this.Parent!.Parent!;
+            mainForm.LoadPage(new DanhSachDonNhapKho());
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            nguoiDungService.logout();
+            MainForm mainForm = (MainForm)this.Parent!.Parent!;
+            mainForm.LoadPage(new Login());
         }
     }
 }

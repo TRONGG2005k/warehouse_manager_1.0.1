@@ -16,9 +16,10 @@ namespace warehouse_manager.ui.user_control
 {
     public partial class XoaPhieuNhap : UserControl
     {
-
+        private NguoiDungService nguoiDungService;
         public XoaPhieuNhap()
         {
+            nguoiDungService = new NguoiDungService();
             InitializeComponent();
 
         }
@@ -26,7 +27,11 @@ namespace warehouse_manager.ui.user_control
         private void XoaPhieuNhap_Load(object sender, EventArgs e)
         {
             LoadData();
-
+            comboBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBox1.AutoCompleteSource = AutoCompleteSource.ListItems;
+            comboBox2.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBox2.AutoCompleteSource = AutoCompleteSource.ListItems;
+            
         }
 
         private void LoadData()
@@ -36,7 +41,7 @@ namespace warehouse_manager.ui.user_control
             {
                 comboBox1.Items.Add(item);
             }
-            var service = new PhieuService();
+            var service = new PhieuNhapService();
             var phieuNhapDtos = service.phieuNhapResponse();
             List<String> nhaCungCaps = new NhaCungCapService().danhSachNhaCungCap();
             foreach (var item in nhaCungCaps)
@@ -87,8 +92,15 @@ namespace warehouse_manager.ui.user_control
 
         private void button9_Click(object sender, EventArgs e)
         {
-            MainForm mainForm = (MainForm)this.Parent!.Parent!;
-            mainForm.LoadPage(new SuaPhieuNhap());
+            if(nguoiDungService.kiemTraVaiTroAdmin())
+            {
+                MainForm mainForm = (MainForm)this.Parent!.Parent!;
+                mainForm.LoadPage(new SuaPhieuNhap());
+            }
+            else
+            {
+                MessageBox.Show("Bạn không có quyền xóa phiếu nhập kho");
+            }
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -98,12 +110,14 @@ namespace warehouse_manager.ui.user_control
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            MainForm mainForm = (MainForm)this.Parent!.Parent!;
+            mainForm.LoadPage(new DanhSachDonNhapKho());
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            MainForm mainForm = (MainForm)this.Parent!.Parent!;
+            mainForm.LoadPage(new DanhSachXuatKho());
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -123,7 +137,9 @@ namespace warehouse_manager.ui.user_control
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            nguoiDungService.logout();
+            MainForm mainForm = (MainForm)this.Parent!.Parent!;
+            mainForm.LoadPage(new Login());
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -166,47 +182,105 @@ namespace warehouse_manager.ui.user_control
         }
         private void button11_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Tính năng tìm theo mã đang được phát triển");
-            PhieuService phieuService = new PhieuService();
-            List<dto.o.PhieuNhapDto> list = phieuService.TimPhieuTheoMa(Convert.ToInt32(textBox1.Text));
-            dataGridView1.DataSource = list;
+            try
+            {
+                if (string.IsNullOrEmpty(textBox1.Text))
+                {
+                    throw new Exception("Vui lòng nhập mã phiếu");
+                }
+                //MessageBox.Show("Tính năng tìm theo mã đang được phát triển");
+                PhieuNhapService phieuService = new PhieuNhapService();
+                List<dto.o.PhieuNhapDto> list = phieuService.TimPhieuTheoMa(Convert.ToInt32(textBox1.Text));
+                dataGridView1.DataSource = list;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi" + ex.Message);
+                return;
+            }
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Tính năng tìm ngày đang được phát triển");
-            PhieuService phieuService = new PhieuService();
-            List<dto.o.PhieuNhapDto> list = phieuService.TimPhieuTheoKhoangThoiGian(
-                    new LocTheoNgayDto
-                    {
-                        Start = dateTimePicker1.Value,
-                        End = dateTimePicker2.Value
-                    }
-                );
+            try {                 
+                if (dateTimePicker1.Value > dateTimePicker2.Value)
+                {
+                    throw new Exception("Ngày bắt đầu phải nhỏ hơn ngày kết thúc");
+                }
+                //MessageBox.Show("Tính năng tìm ngày đang được phát triển");
+                PhieuNhapService phieuService = new PhieuNhapService();
+                List<dto.o.PhieuNhapDto> list = phieuService.TimPhieuTheoKhoangThoiGian(
+                        new LocTheoNgayDto
+                        {
+                            Start = dateTimePicker1.Value,
+                            End = dateTimePicker2.Value
+                        }
+                    );
+                dataGridView1.DataSource = list;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi" + ex.Message);
+                return;
+            }
         }
         private void button14_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Tính năng tìm theo loại vật liệu đang được phát triển");
-            PhieuService phieuService = new PhieuService();
-            List<dto.o.PhieuNhapDto> list = phieuService.TimPhieuTheoLoaiVatLieu(comboBox1.SelectedItem.ToString() ?? "");
-            dataGridView1.DataSource = list;
+            try
+            {
+                if (comboBox1.SelectedItem == null)
+                {
+                    throw new Exception("Vui lòng chọn loại vật liệu");
+
+                }
+                //MessageBox.Show("Tính năng tìm theo loại vật liệu đang được phát triển");
+                PhieuNhapService phieuService = new PhieuNhapService();
+                List<dto.o.PhieuNhapDto> list = phieuService.TimPhieuTheoLoaiVatLieu(comboBox1.SelectedItem.ToString() ?? "");
+                dataGridView1.DataSource = list;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi" + ex.Message);
+                return;
+            }
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
 
-            MessageBox.Show("Tính năng tìm theo mã liệu đang được phát triển");
-            PhieuService phieuService = new PhieuService();
-            List<dto.o.PhieuNhapDto> list = phieuService.TimPhieuTheoMaLieu(textBox2.Text);
-            dataGridView1.DataSource = list;
+            try
+            {
+                if (string.IsNullOrEmpty(textBox2.Text))
+                {
+                    throw new Exception("Vui lòng nhập mã vật liệu");
+                }
+                //MessageBox.Show("Tính năng tìm theo mã liệu đang được phát triển");
+                PhieuNhapService phieuService = new PhieuNhapService();
+                List<dto.o.PhieuNhapDto> list = phieuService.TimPhieuTheoMaLieu(textBox2.Text);
+                dataGridView1.DataSource = list;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi" + ex.Message);
+                return;
+            }
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Tính năng tìm theo nhà cung cấp đang được phát triển");
-            PhieuService phieuService = new PhieuService();
-            List<dto.o.PhieuNhapDto> list = phieuService.TimPhieuTheoTenNcc(comboBox2.SelectedItem.ToString() ?? "");
-            dataGridView1.DataSource = list;
+
+            try
+            {
+                //MessageBox.Show("Tính năng tìm theo nhà cung cấp đang được phát triển");
+                PhieuNhapService phieuService = new PhieuNhapService();
+                List<dto.o.PhieuNhapDto> list = phieuService.TimPhieuTheoTenNcc(comboBox2.SelectedItem.ToString() ?? "");
+                dataGridView1.DataSource = list;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi" + ex.Message);
+                return;
+            }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -223,7 +297,7 @@ namespace warehouse_manager.ui.user_control
                     MessageBox.Show("Vui lòng chọn phiếu nhập cần xóa");
                     return;
                 }
-                PhieuService phieuService = new PhieuService();
+                PhieuNhapService phieuService = new PhieuNhapService();
                 phieuService.xoaPhieuNhap(Convert.ToInt32(textBox3.Text));
                 LoadData();
             }
@@ -236,6 +310,21 @@ namespace warehouse_manager.ui.user_control
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             textBox3.Text = dataGridView1.Rows[e.RowIndex].Cells["Id"].Value.ToString() ?? "";
+        }
+
+        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "DonGia" && e.Value != null)
+            {
+                decimal donGia = (decimal)e.Value;
+                e.Value = donGia.ToString("N0") + " ₫";
+                e.FormattingApplied = true;
+            }
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

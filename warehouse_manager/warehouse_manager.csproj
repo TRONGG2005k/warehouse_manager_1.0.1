@@ -35,6 +35,7 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.8" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.8" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.8" />
+    <PackageReference Include="Microsoft.ReportingServices.ReportViewerControl.Winforms" Version="150.1652.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
   </ItemGroup>
 
@@ -44,10 +45,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="ui\user_control\XoaPhieuNhap.cs">
+    <Compile Update="ui\user_control\donNhap\XoaPhieuNhap.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="ui\user_control\SuaPhieuNhap.cs">
+    <Compile Update="ui\user_control\donNhap\SuaPhieuNhap.cs">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
@@ -57,10 +58,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="service\" />
   </ItemGroup>
 
 </Project>

@@ -103,6 +103,16 @@ namespace warehouse_manager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Logout_37127 {
+            get {
+                object obj = ResourceManager.GetObject("Logout_37127", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap loupe_78956 {
             get {
                 object obj = ResourceManager.GetObject("loupe_78956", resourceCulture);

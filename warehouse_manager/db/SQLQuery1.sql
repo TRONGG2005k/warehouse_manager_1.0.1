@@ -235,3 +235,72 @@ FOREIGN KEY (ke_id) REFERENCES ke(id) ON DELETE CASCADE;
 
 alter table [dbo].[vat_lieu] 
 
+DROP TABLE IF EXISTS chi_tiet_phieu_xuat;
+
+-- Tạo bảng mới: chi tiết phiếu xuất vật liệu
+CREATE TABLE chi_tiet_phieu_xuat (
+    id BIGINT PRIMARY KEY IDENTITY(1,1),
+
+    so_luong_yeu_cau BIGINT NOT NULL,       -- Số lượng xưởng yêu cầu
+    so_luong_thuc_xuat BIGINT NOT NULL,     -- Số lượng kho thực tế xuất (≤ tồn kho)
+
+    don_gia DECIMAL(18,2) NULL,             -- Giá xuất (có thể NULL nếu không quản lý theo giá)
+    thanh_tien AS (so_luong_thuc_xuat * don_gia) PERSISTED, -- Tự tính thành tiền
+
+    don_vi_tinh NVARCHAR(50) NOT NULL,      -- Lấy từ bảng vật liệu, có thể bỏ default 'thùng'
+    
+    phieu_xuat_id BIGINT NOT NULL,
+    vat_lieu_id BIGINT NOT NULL,
+
+    CONSTRAINT fk_ctpx_px FOREIGN KEY (phieu_xuat_id) 
+        REFERENCES phieu_xuat(id) ON DELETE CASCADE,
+
+    CONSTRAINT fk_ctpx_vl FOREIGN KEY (vat_lieu_id) 
+        REFERENCES vat_lieu(id)
+);
+exec sp_rename 'phieu_xuat.truy_san_xuat', 'truyen_san_xuat', 'column';
+
+CREATE TABLE CoSoSanXuat (
+    Id BIGINT PRIMARY KEY IDENTITY(1,1),
+    TenCoSo NVARCHAR(250) NOT NULL,
+    DiaChi NVARCHAR(500),
+    SoDienThoai NVARCHAR(50),
+    Email NVARCHAR(100),
+    MoTa NVARCHAR(MAX)
+);
+
+ALTER TABLE chi_tiet_phieu_xuat
+DROP CONSTRAINT fk_ctpx_px;
+
+DROP TABLE IF EXISTS phieu_xuat;
+
+CREATE TABLE phieu_xuat(
+    id BIGINT PRIMARY KEY IDENTITY(1,1),
+    ngay_xuat DATETIME NOT NULL DEFAULT GETDATE(),
+    tong_tien DECIMAL(18,2),
+    co_so_san_xuat_id BIGINT,
+    nguoi_dung_id BIGINT,
+    CONSTRAINT fk_px_nd FOREIGN KEY (nguoi_dung_id) REFERENCES nguoi_dung(id),
+    CONSTRAINT fk_px_cssx FOREIGN KEY (co_so_san_xuat_id) REFERENCES CoSoSanXuat(Id)
+);
+alter table phieu_xuat alter column ghi_chu nvarchar(max)
+ALTER TABLE chi_tiet_phieu_xuat
+ADD CONSTRAINT fk_ctpx_px
+FOREIGN KEY (phieu_xuat_id) REFERENCES phieu_xuat(id) ON DELETE CASCADE;
+
+
+ALTER TABLE phieu_xuat
+ADD trang_thai NVARCHAR(20) DEFAULT 'CHO_DUYET'
+
+alter table phieu_xuat add  ghi_chu text
+
+select * from chi_tiet_phieu_nhap
+select * from vat_lieu where ma_vat_lieu = 'CL001'
+select * from CoSoSanXuat
+select * from phieu_xuat
+insert into CoSoSanXuat (TenCoSo, DiaChi, SoDienThoai, Email, MoTa)
+values (N'Cơ sở sản xuất A', N'123 Đường A, Quận B, TP.HCM', '0123456789', 'a@gmail.com','NG'),
+ (N'Cơ sở sản xuất B', N'456 Đường B, Quận C, TP.HCM', '0987654321', 'b@gmail.com','NG')
+
+
+ delete phieu_xuat where id >= 1 and id <= 9
