@@ -64,6 +64,49 @@ namespace warehouse_manager.service
             .ToList();
 
         }
+
+        public List<PhieuXuatDto> SelectPhieuThieu()
+        {
+            return context.PhieuXuats
+             .Where(P => P.GhiChu.Contains("Thiếu"))
+            .Include(p => p.CoSoSanXuat)
+            .Include(p => p.NguoiDung)
+            .Include(p => p.ChiTietPhieuXuats)
+                .ThenInclude(ct => ct.VatLieu)
+            .Select(px => new PhieuXuatDto
+            {
+                Id = px.Id,
+                NgayLap = px.NgayXuat,
+                TongTien = px.TongTien,
+                NguoiLap = px.NguoiDung != null ? px.NguoiDung.TenDangNhap : "N/A",
+                MaTruyenSanXuat = px.CoSoSanXuat != null ? px.CoSoSanXuat.TenCoSo : "N/A",
+                SoLuongYeuCau = (long)px.ChiTietPhieuXuats.FirstOrDefault().SoLuongYeuCau,
+                SoLuongThucTe = (long)px.ChiTietPhieuXuats.FirstOrDefault().SoLuongThucXuat,
+                DonViTinh = px.ChiTietPhieuXuats.FirstOrDefault() != null
+                                ? px.ChiTietPhieuXuats.FirstOrDefault().DonViTinh
+                                : "N/A",
+                DonGia = px.ChiTietPhieuXuats.FirstOrDefault() != null
+                                ? px.ChiTietPhieuXuats.FirstOrDefault().DonGia ?? 0
+                                : 0,
+                TongGiaTri = px.ChiTietPhieuXuats.Sum(ct => ct.SoLuongThucXuat * (ct.DonGia ?? 0)),
+                TenVatLieu = px.ChiTietPhieuXuats.FirstOrDefault() != null
+                             && px.ChiTietPhieuXuats.FirstOrDefault().VatLieu != null
+                                ? px.ChiTietPhieuXuats.FirstOrDefault().VatLieu.Ten
+                                : "N/A",
+                MaVatLieu = px.ChiTietPhieuXuats.FirstOrDefault() != null
+                            && px.ChiTietPhieuXuats.FirstOrDefault().VatLieu != null
+                                ? px.ChiTietPhieuXuats.FirstOrDefault().VatLieu.MaVatLieu
+                                : "N/A",
+                TrangThai = px.TrangThai == "CHO_DUYET" ? "Chờ duyệt"
+                           : px.TrangThai == "DA_DUYET" ? "Đã duyệt"
+                           : px.TrangThai == "DA_HUY" ? "Đã hủy"
+                           : "N/A",
+                GhiChu = px.GhiChu
+            })
+            .OrderByDescending(px => px.NgayLap)
+            .ToList();
+
+        }
         public List<PhieuXuatDto> TimTheoTrangThai(string trangThai)
         {
            
@@ -395,7 +438,10 @@ namespace warehouse_manager.service
                     var vatLieu = context.VatLieus
                         .FirstOrDefault(vl => vl.Id == chiTiet.VatLieuId)
                         ?? throw new Exception("Vật liệu trong phiếu xuất không tồn tại");
-
+                    if(vatLieu.SoLuongTon == 0)
+                    {
+                        throw new Exception("Vật liệu đã hết hàng không thể duyệt, vui lòng đặt thêm hàng");
+                    }   
                     if (chiTiet.SoLuongThucXuat > vatLieu.SoLuongTon)
                     {
                         int soThieu = (int)chiTiet.SoLuongThucXuat - (int)vatLieu.SoLuongTon;
@@ -406,6 +452,7 @@ namespace warehouse_manager.service
 
                         chiTiet.SoLuongThucXuat = (long)vatLieu.SoLuongTon;
                         vatLieu.SoLuongTon = 0;
+                        vatLieu.TrangThai = "hết hàng";
                     }
                     else
                     {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using warehouse_manager.context;
+using warehouse_manager.Models;
 
 namespace warehouse_manager.service
 {
@@ -18,5 +19,10 @@ namespace warehouse_manager.service
         {
             return context.VatLieus.Select(vl => vl.MaVatLieu).ToList();
         }   
+
+        public VatLieu layVatLieuTheoMa(string mavatLieu)
+        {
+            return context.VatLieus.FirstOrDefault(vl => vl.MaVatLieu == mavatLieu);
+        }
     }
 }

@@ -43,14 +43,19 @@
             tableLayoutPanel5 = new TableLayoutPanel();
             button11 = new Button();
             panel11 = new Panel();
-            label5 = new Label();
+            tableLayoutPanel6 = new TableLayoutPanel();
+            panel12 = new Panel();
             textBox1 = new TextBox();
-            label4 = new Label();
+            label5 = new Label();
             numericUpDown1 = new NumericUpDown();
+            label4 = new Label();
+            comboBox1 = new ComboBox();
             label2 = new Label();
             comboBox2 = new ComboBox();
             label1 = new Label();
-            comboBox1 = new ComboBox();
+            tableLayoutPanel8 = new TableLayoutPanel();
+            label6 = new Label();
+            dataGridView1 = new DataGridView();
             tableLayoutPanel4 = new TableLayoutPanel();
             button1 = new Button();
             label3 = new Label();
@@ -75,7 +80,11 @@
             panel10.SuspendLayout();
             tableLayoutPanel5.SuspendLayout();
             panel11.SuspendLayout();
+            tableLayoutPanel6.SuspendLayout();
+            panel12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
+            tableLayoutPanel8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             tableLayoutPanel4.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel7.SuspendLayout();
@@ -246,63 +255,98 @@
             // 
             // panel11
             // 
-            panel11.Anchor = AnchorStyles.None;
-            panel11.Controls.Add(label5);
-            panel11.Controls.Add(textBox1);
-            panel11.Controls.Add(label4);
-            panel11.Controls.Add(numericUpDown1);
-            panel11.Controls.Add(label2);
-            panel11.Controls.Add(comboBox2);
-            panel11.Controls.Add(label1);
-            panel11.Controls.Add(comboBox1);
-            panel11.Location = new Point(153, 29);
+            panel11.Controls.Add(tableLayoutPanel6);
+            panel11.Dock = DockStyle.Fill;
+            panel11.Location = new Point(3, 3);
             panel11.Name = "panel11";
-            panel11.Size = new Size(686, 481);
+            panel11.Size = new Size(986, 534);
             panel11.TabIndex = 1;
             // 
-            // label5
+            // tableLayoutPanel6
             // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 163);
-            label5.Location = new Point(15, 170);
-            label5.Name = "label5";
-            label5.Size = new Size(69, 23);
-            label5.TabIndex = 7;
-            label5.Text = "Ghi chú";
+            tableLayoutPanel6.ColumnCount = 2;
+            tableLayoutPanel6.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 488F));
+            tableLayoutPanel6.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel6.Controls.Add(panel12, 0, 0);
+            tableLayoutPanel6.Controls.Add(tableLayoutPanel8, 1, 0);
+            tableLayoutPanel6.Dock = DockStyle.Fill;
+            tableLayoutPanel6.Location = new Point(0, 0);
+            tableLayoutPanel6.Name = "tableLayoutPanel6";
+            tableLayoutPanel6.RowCount = 1;
+            tableLayoutPanel6.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel6.Size = new Size(986, 534);
+            tableLayoutPanel6.TabIndex = 8;
+            // 
+            // panel12
+            // 
+            panel12.Controls.Add(textBox1);
+            panel12.Controls.Add(label5);
+            panel12.Controls.Add(numericUpDown1);
+            panel12.Controls.Add(label4);
+            panel12.Controls.Add(comboBox1);
+            panel12.Controls.Add(label2);
+            panel12.Controls.Add(comboBox2);
+            panel12.Controls.Add(label1);
+            panel12.Dock = DockStyle.Fill;
+            panel12.Location = new Point(3, 3);
+            panel12.Name = "panel12";
+            panel12.Size = new Size(482, 528);
+            panel12.TabIndex = 0;
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(243, 170);
+            textBox1.Location = new Point(121, 120);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
             textBox1.ScrollBars = ScrollBars.Vertical;
             textBox1.Size = new Size(345, 233);
             textBox1.TabIndex = 6;
             // 
-            // label4
+            // label5
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 10.2F);
-            label4.Location = new Point(15, 136);
-            label4.Name = "label4";
-            label4.Size = new Size(78, 23);
-            label4.TabIndex = 5;
-            label4.Text = "Số lượng";
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 163);
+            label5.Location = new Point(3, 122);
+            label5.Name = "label5";
+            label5.Size = new Size(69, 23);
+            label5.TabIndex = 7;
+            label5.Text = "Ghi chú";
             // 
             // numericUpDown1
             // 
             numericUpDown1.Font = new Font("Segoe UI", 10.2F);
-            numericUpDown1.Location = new Point(243, 134);
+            numericUpDown1.Location = new Point(121, 82);
             numericUpDown1.Maximum = new decimal(new int[] { 1569325056, 23283064, 0, 0 });
             numericUpDown1.Name = "numericUpDown1";
             numericUpDown1.Size = new Size(345, 30);
             numericUpDown1.TabIndex = 4;
             // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 10.2F);
+            label4.Location = new Point(3, 88);
+            label4.Name = "label4";
+            label4.Size = new Size(78, 23);
+            label4.TabIndex = 5;
+            label4.Text = "Số lượng";
+            // 
+            // comboBox1
+            // 
+            comboBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBox1.AutoCompleteSource = AutoCompleteSource.ListItems;
+            comboBox1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 163);
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(121, 10);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(345, 31);
+            comboBox1.TabIndex = 0;
+            // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 10.2F);
-            label2.Location = new Point(15, 100);
+            label2.Location = new Point(3, 52);
             label2.Name = "label2";
             label2.Size = new Size(94, 23);
             label2.TabIndex = 3;
@@ -314,7 +358,7 @@
             comboBox2.AutoCompleteSource = AutoCompleteSource.ListItems;
             comboBox2.Font = new Font("Segoe UI", 10.2F);
             comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(243, 97);
+            comboBox2.Location = new Point(121, 47);
             comboBox2.Name = "comboBox2";
             comboBox2.Size = new Size(345, 31);
             comboBox2.TabIndex = 2;
@@ -323,22 +367,50 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 163);
-            label1.Location = new Point(15, 66);
+            label1.Location = new Point(3, 18);
             label1.Name = "label1";
             label1.Size = new Size(159, 23);
             label1.TabIndex = 1;
             label1.Text = "Tên truyền sản xuất";
             // 
-            // comboBox1
+            // tableLayoutPanel8
             // 
-            comboBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            comboBox1.AutoCompleteSource = AutoCompleteSource.ListItems;
-            comboBox1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 163);
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(243, 60);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(345, 31);
-            comboBox1.TabIndex = 0;
+            tableLayoutPanel8.ColumnCount = 1;
+            tableLayoutPanel8.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel8.Controls.Add(label6, 0, 0);
+            tableLayoutPanel8.Controls.Add(dataGridView1, 0, 1);
+            tableLayoutPanel8.Dock = DockStyle.Fill;
+            tableLayoutPanel8.Location = new Point(491, 3);
+            tableLayoutPanel8.Name = "tableLayoutPanel8";
+            tableLayoutPanel8.RowCount = 2;
+            tableLayoutPanel8.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
+            tableLayoutPanel8.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel8.Size = new Size(492, 528);
+            tableLayoutPanel8.TabIndex = 1;
+            // 
+            // label6
+            // 
+            label6.Anchor = AnchorStyles.None;
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 163);
+            label6.Location = new Point(172, 12);
+            label6.Name = "label6";
+            label6.Size = new Size(147, 25);
+            label6.TabIndex = 0;
+            label6.Text = "Các phiếu cần bù";
+            label6.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Dock = DockStyle.Fill;
+            dataGridView1.Location = new Point(3, 53);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.Size = new Size(486, 472);
+            dataGridView1.TabIndex = 1;
+            dataGridView1.CellClick += dataGridView1_CellClick;
+            dataGridView1.CellFormatting += dataGridView1_CellFormatting;
             // 
             // tableLayoutPanel4
             // 
@@ -552,8 +624,13 @@
             panel10.ResumeLayout(false);
             tableLayoutPanel5.ResumeLayout(false);
             panel11.ResumeLayout(false);
-            panel11.PerformLayout();
+            tableLayoutPanel6.ResumeLayout(false);
+            panel12.ResumeLayout(false);
+            panel12.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
+            tableLayoutPanel8.ResumeLayout(false);
+            tableLayoutPanel8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             tableLayoutPanel4.ResumeLayout(false);
             tableLayoutPanel4.PerformLayout();
             tableLayoutPanel1.ResumeLayout(false);
@@ -605,5 +682,10 @@
         private NumericUpDown numericUpDown1;
         private Label label5;
         private TextBox textBox1;
+        private TableLayoutPanel tableLayoutPanel6;
+        private Panel panel12;
+        private TableLayoutPanel tableLayoutPanel8;
+        private Label label6;
+        private DataGridView dataGridView1;
     }
 }

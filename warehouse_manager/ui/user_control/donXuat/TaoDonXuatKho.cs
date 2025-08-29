@@ -44,7 +44,7 @@ namespace warehouse_manager.ui.user_control
 
                 var context = new ValidationContext(phieuXuat);
 
-           
+
                 Validator.ValidateObject(phieuXuat, context, validateAllProperties: true);
                 if (service.YeuCauthemPhieuXuat(phieuXuat))
                 {
@@ -65,7 +65,9 @@ namespace warehouse_manager.ui.user_control
         private void TaoDonXuatKho_Load(object sender, EventArgs e)
         {
             LoadData();
-           
+            var service = new service.PhieuXuatService();
+            var phieuXuatDtos = service.SelectPhieuThieu();
+            dataGridView1.DataSource = phieuXuatDtos;  
         }
         private void LoadData()
         {
@@ -130,6 +132,43 @@ namespace warehouse_manager.ui.user_control
         {
             MainForm mainForm = (MainForm)this.Parent!.Parent!;
             mainForm.LoadPage(new DanhSachNhapKho());
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if ((e.RowIndex >= 0))
+                {
+                    long maPhieu = (long)dataGridView1.Rows[e.RowIndex].Cells["Id"].Value;
+                    textBox1.Text = $"|Bù cho phiếu {maPhieu}";
+
+                    comboBox1.SelectedItem = dataGridView1.Rows[e.RowIndex].Cells["MaTruyenSanXuat"].Value.ToString();
+
+                    comboBox2.SelectedItem = dataGridView1.Rows[e.RowIndex].Cells["MaVatLieu"].Value.ToString();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "DonGia" && e.Value != null)
+            {
+                decimal donGia = (decimal)e.Value;
+                e.Value = donGia.ToString("N0") + " ₫";
+                e.FormattingApplied = true;
+            }
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "TongGiaTri" && e.Value != null)
+            {
+                decimal donGia = (decimal)e.Value;
+                e.Value = donGia.ToString("N0") + " ₫";
+                e.FormattingApplied = true;
+            }
         }
     }
 }

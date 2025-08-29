@@ -39,7 +39,6 @@
             radioButton2 = new RadioButton();
             radioButton1 = new RadioButton();
             button13 = new Button();
-            button12 = new Button();
             button11 = new Button();
             dataGridView1 = new DataGridView();
             button5 = new Button();
@@ -94,8 +93,8 @@
             tableLayoutPanel2.Location = new Point(179, 96);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 2;
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 81F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 503F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 121F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 463F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel2.Size = new Size(988, 613);
             tableLayoutPanel2.TabIndex = 4;
@@ -111,11 +110,10 @@
             panel10.Controls.Add(radioButton2);
             panel10.Controls.Add(radioButton1);
             panel10.Controls.Add(button13);
-            panel10.Controls.Add(button12);
             panel10.Controls.Add(button11);
             panel10.Location = new Point(3, 3);
             panel10.Name = "panel10";
-            panel10.Size = new Size(982, 75);
+            panel10.Size = new Size(982, 115);
             panel10.TabIndex = 0;
             panel10.Paint += panel10_Paint;
             // 
@@ -206,24 +204,12 @@
             button13.Visible = false;
             button13.Click += button13_Click;
             // 
-            // button12
-            // 
-            button12.Anchor = AnchorStyles.None;
-            button12.BackColor = Color.FromArgb(128, 255, 128);
-            button12.ForeColor = Color.Black;
-            button12.Location = new Point(855, 10);
-            button12.Name = "button12";
-            button12.Size = new Size(124, 62);
-            button12.TabIndex = 3;
-            button12.Text = "Huỷ đơn";
-            button12.UseVisualStyleBackColor = false;
-            // 
             // button11
             // 
             button11.Anchor = AnchorStyles.None;
             button11.BackColor = Color.FromArgb(128, 255, 128);
             button11.ForeColor = Color.Black;
-            button11.Location = new Point(725, 10);
+            button11.Location = new Point(725, 30);
             button11.Name = "button11";
             button11.Size = new Size(124, 62);
             button11.TabIndex = 2;
@@ -238,11 +224,11 @@
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Dock = DockStyle.Fill;
-            dataGridView1.Location = new Point(3, 84);
+            dataGridView1.Location = new Point(3, 124);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(982, 526);
+            dataGridView1.Size = new Size(982, 486);
             dataGridView1.TabIndex = 3;
             dataGridView1.CellClick += dataGridView1_CellClick_1;
             dataGridView1.CellFormatting += dataGridView1_CellFormatting_1;
@@ -584,7 +570,6 @@
 
         private TableLayoutPanel tableLayoutPanel2;
         private Panel panel10;
-        private Button button12;
         private Button button11;
         private Button button5;
         private Panel panel4;
