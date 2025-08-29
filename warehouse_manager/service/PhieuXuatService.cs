@@ -68,7 +68,7 @@ namespace warehouse_manager.service
         public List<PhieuXuatDto> SelectPhieuThieu()
         {
             return context.PhieuXuats
-             .Where(P => P.GhiChu.Contains("Thiếu"))
+             .Where(P => P.GhiChu.Contains("Thiếu") && P.TrangThai != "DA_HUY")
             .Include(p => p.CoSoSanXuat)
             .Include(p => p.NguoiDung)
             .Include(p => p.ChiTietPhieuXuats)
