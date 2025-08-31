@@ -45,8 +45,6 @@
             tableLayoutPanel3 = new TableLayoutPanel();
             panel6 = new Panel();
             button7 = new Button();
-            panel7 = new Panel();
-            button8 = new Button();
             panel8 = new Panel();
             button9 = new Button();
             tableLayoutPanel4 = new TableLayoutPanel();
@@ -67,7 +65,6 @@
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
             panel6.SuspendLayout();
-            panel7.SuspendLayout();
             panel8.SuspendLayout();
             tableLayoutPanel4.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
@@ -245,13 +242,12 @@
             // 
             // tableLayoutPanel3
             // 
-            tableLayoutPanel3.ColumnCount = 3;
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel3.ColumnCount = 2;
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
             tableLayoutPanel3.Controls.Add(panel6, 0, 0);
-            tableLayoutPanel3.Controls.Add(panel7, 1, 0);
-            tableLayoutPanel3.Controls.Add(panel8, 2, 0);
+            tableLayoutPanel3.Controls.Add(panel8, 1, 0);
             tableLayoutPanel3.Dock = DockStyle.Fill;
             tableLayoutPanel3.Location = new Point(179, 3);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -268,7 +264,7 @@
             panel6.Location = new Point(3, 3);
             panel6.Name = "panel6";
             panel6.Padding = new Padding(20);
-            panel6.Size = new Size(321, 75);
+            panel6.Size = new Size(484, 75);
             panel6.TabIndex = 0;
             // 
             // button7
@@ -277,40 +273,19 @@
             button7.Dock = DockStyle.Fill;
             button7.Location = new Point(20, 20);
             button7.Name = "button7";
-            button7.Size = new Size(281, 35);
+            button7.Size = new Size(444, 35);
             button7.TabIndex = 2;
             button7.Text = "Báo cáo nhập xuất tồn";
             button7.UseVisualStyleBackColor = false;
-            // 
-            // panel7
-            // 
-            panel7.Controls.Add(button8);
-            panel7.Dock = DockStyle.Fill;
-            panel7.Location = new Point(330, 3);
-            panel7.Name = "panel7";
-            panel7.Padding = new Padding(20);
-            panel7.Size = new Size(321, 75);
-            panel7.TabIndex = 1;
-            // 
-            // button8
-            // 
-            button8.BackColor = Color.Lime;
-            button8.Dock = DockStyle.Fill;
-            button8.Location = new Point(20, 20);
-            button8.Name = "button8";
-            button8.Size = new Size(281, 35);
-            button8.TabIndex = 1;
-            button8.Text = "Tổng hợp phiếu nhập và phiếu xuất";
-            button8.UseVisualStyleBackColor = false;
             // 
             // panel8
             // 
             panel8.Controls.Add(button9);
             panel8.Dock = DockStyle.Fill;
-            panel8.Location = new Point(657, 3);
+            panel8.Location = new Point(493, 3);
             panel8.Name = "panel8";
             panel8.Padding = new Padding(20);
-            panel8.Size = new Size(321, 75);
+            panel8.Size = new Size(485, 75);
             panel8.TabIndex = 2;
             // 
             // button9
@@ -319,10 +294,11 @@
             button9.Dock = DockStyle.Fill;
             button9.Location = new Point(20, 20);
             button9.Name = "button9";
-            button9.Size = new Size(281, 35);
+            button9.Size = new Size(445, 35);
             button9.TabIndex = 1;
             button9.Text = "Báo cáo kiểm kê";
             button9.UseVisualStyleBackColor = false;
+            button9.Click += button9_Click;
             // 
             // tableLayoutPanel4
             // 
@@ -377,9 +353,9 @@
             // 
             // button11
             // 
-            button11.Location = new Point(390, 100);
+            button11.Location = new Point(373, 100);
             button11.Name = "button11";
-            button11.Size = new Size(94, 29);
+            button11.Size = new Size(111, 29);
             button11.TabIndex = 3;
             button11.Text = "Xuất báo cáo";
             button11.UseVisualStyleBackColor = true;
@@ -439,7 +415,6 @@
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel3.ResumeLayout(false);
             panel6.ResumeLayout(false);
-            panel7.ResumeLayout(false);
             panel8.ResumeLayout(false);
             tableLayoutPanel4.ResumeLayout(false);
             tableLayoutPanel4.PerformLayout();
@@ -465,11 +440,9 @@
         private TableLayoutPanel tableLayoutPanel1;
         private TableLayoutPanel tableLayoutPanel3;
         private Panel panel6;
-        private Panel panel7;
         private Panel panel8;
         private TableLayoutPanel tableLayoutPanel4;
         private Button button1;
-        private Button button8;
         private Button button9;
         private Button button7;
         private TableLayoutPanel tableLayoutPanel2;
