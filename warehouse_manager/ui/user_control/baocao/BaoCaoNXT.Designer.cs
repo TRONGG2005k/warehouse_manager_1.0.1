@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BaoCaoNXT));
-            panel10 = new Panel();
-            tableLayoutPanel2 = new TableLayoutPanel();
             button3 = new Button();
             button2 = new Button();
             button4 = new Button();
@@ -53,7 +51,13 @@
             button9 = new Button();
             tableLayoutPanel4 = new TableLayoutPanel();
             button1 = new Button();
-            tableLayoutPanel2.SuspendLayout();
+            tableLayoutPanel2 = new TableLayoutPanel();
+            panel9 = new Panel();
+            button11 = new Button();
+            button10 = new Button();
+            dateTimePicker2 = new DateTimePicker();
+            dateTimePicker1 = new DateTimePicker();
+            dataGridView1 = new DataGridView();
             tableLayoutPanel7.SuspendLayout();
             panel5.SuspendLayout();
             panel4.SuspendLayout();
@@ -66,28 +70,10 @@
             panel7.SuspendLayout();
             panel8.SuspendLayout();
             tableLayoutPanel4.SuspendLayout();
+            tableLayoutPanel2.SuspendLayout();
+            panel9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
-            // 
-            // panel10
-            // 
-            panel10.Dock = DockStyle.Fill;
-            panel10.Location = new Point(3, 3);
-            panel10.Name = "panel10";
-            panel10.Size = new Size(975, 570);
-            panel10.TabIndex = 0;
-            // 
-            // tableLayoutPanel2
-            // 
-            tableLayoutPanel2.ColumnCount = 1;
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Controls.Add(panel10, 0, 0);
-            tableLayoutPanel2.Dock = DockStyle.Fill;
-            tableLayoutPanel2.Location = new Point(179, 90);
-            tableLayoutPanel2.Name = "tableLayoutPanel2";
-            tableLayoutPanel2.RowCount = 1;
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 86.69833F));
-            tableLayoutPanel2.Size = new Size(981, 576);
-            tableLayoutPanel2.TabIndex = 4;
             // 
             // button3
             // 
@@ -362,6 +348,81 @@
             button1.TabIndex = 0;
             button1.UseVisualStyleBackColor = true;
             // 
+            // tableLayoutPanel2
+            // 
+            tableLayoutPanel2.ColumnCount = 1;
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel2.Controls.Add(panel9, 0, 0);
+            tableLayoutPanel2.Controls.Add(dataGridView1, 0, 1);
+            tableLayoutPanel2.Dock = DockStyle.Fill;
+            tableLayoutPanel2.Location = new Point(179, 90);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.RowCount = 2;
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 157F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel2.Size = new Size(981, 576);
+            tableLayoutPanel2.TabIndex = 4;
+            // 
+            // panel9
+            // 
+            panel9.Anchor = AnchorStyles.None;
+            panel9.Controls.Add(button11);
+            panel9.Controls.Add(button10);
+            panel9.Controls.Add(dateTimePicker2);
+            panel9.Controls.Add(dateTimePicker1);
+            panel9.Location = new Point(54, 12);
+            panel9.Name = "panel9";
+            panel9.Size = new Size(873, 132);
+            panel9.TabIndex = 0;
+            // 
+            // button11
+            // 
+            button11.Location = new Point(390, 100);
+            button11.Name = "button11";
+            button11.Size = new Size(94, 29);
+            button11.TabIndex = 3;
+            button11.Text = "Xuất báo cáo";
+            button11.UseVisualStyleBackColor = true;
+            button11.Click += button11_Click;
+            // 
+            // button10
+            // 
+            button10.Location = new Point(302, 22);
+            button10.Name = "button10";
+            button10.Size = new Size(94, 29);
+            button10.TabIndex = 2;
+            button10.Text = "Duyệt";
+            button10.UseVisualStyleBackColor = true;
+            button10.Click += button10_Click;
+            // 
+            // dateTimePicker2
+            // 
+            dateTimePicker2.CustomFormat = "dd/MM/yyyy HH:mm:ss";
+            dateTimePicker2.Format = DateTimePickerFormat.Custom;
+            dateTimePicker2.Location = new Point(20, 64);
+            dateTimePicker2.Name = "dateTimePicker2";
+            dateTimePicker2.Size = new Size(250, 27);
+            dateTimePicker2.TabIndex = 1;
+            // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.CustomFormat = "dd/MM/yyyy HH:mm:ss";
+            dateTimePicker1.Format = DateTimePickerFormat.Custom;
+            dateTimePicker1.Location = new Point(20, 22);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(250, 27);
+            dateTimePicker1.TabIndex = 0;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Dock = DockStyle.Fill;
+            dataGridView1.Location = new Point(3, 160);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.Size = new Size(975, 413);
+            dataGridView1.TabIndex = 1;
+            // 
             // BaoCaoNXT
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -369,7 +430,6 @@
             Controls.Add(tableLayoutPanel1);
             Name = "BaoCaoNXT";
             Size = new Size(1163, 669);
-            tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel7.ResumeLayout(false);
             panel5.ResumeLayout(false);
             panel4.ResumeLayout(false);
@@ -383,13 +443,13 @@
             panel8.ResumeLayout(false);
             tableLayoutPanel4.ResumeLayout(false);
             tableLayoutPanel4.PerformLayout();
+            tableLayoutPanel2.ResumeLayout(false);
+            panel9.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
-
-        private Panel panel10;
-        private TableLayoutPanel tableLayoutPanel2;
         private Button button3;
         private Button button2;
         private Button button4;
@@ -412,5 +472,12 @@
         private Button button8;
         private Button button9;
         private Button button7;
+        private TableLayoutPanel tableLayoutPanel2;
+        private Panel panel9;
+        private Button button11;
+        private Button button10;
+        private DateTimePicker dateTimePicker2;
+        private DateTimePicker dateTimePicker1;
+        private DataGridView dataGridView1;
     }
 }
