@@ -280,6 +280,7 @@
             button6.Text = "Báo cáo";
             button6.TextAlign = ContentAlignment.MiddleRight;
             button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
             // 
             // panel4
             // 
@@ -303,6 +304,7 @@
             button5.Text = "Hàng tồn kho";
             button5.TextAlign = ContentAlignment.MiddleRight;
             button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
             // 
             // panel3
             // 

@@ -66,4 +66,5 @@ public partial class VatLieu
     public virtual ICollection<Ke> Kes { get; set; } = new List<Ke>();
 
     public ICollection<ChiTietPhieuXuat> ChiTietPhieuXuats { get; set; } = new List<ChiTietPhieuXuat>();
+    public ICollection<ChiTietPhieuKiemKe> ChiTietPhieuKiemKes { get; set; } = new List<ChiTietPhieuKiemKe>();
 }

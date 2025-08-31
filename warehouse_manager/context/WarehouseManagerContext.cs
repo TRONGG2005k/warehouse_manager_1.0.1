@@ -39,6 +39,8 @@ public partial class WarehouseManagerContext : DbContext
 
     //public virtual DbSet<ThongSoSanPham> ThongSoSanPhams { get; set; }
 
+    public virtual DbSet<PhieuKiemKe> PhieuKiemKes { get; set; }
+    public virtual DbSet<ChiTietPhieuKiemKe> ChiTietPhieuKiemKes { get; set; }
     public virtual DbSet<CoSoSanXuat> CoSoSanXuats { get; set; }
     public virtual DbSet<VatLieu> VatLieus { get; set; }
 
@@ -141,7 +143,18 @@ public partial class WarehouseManagerContext : DbContext
 
         //    entity.HasOne(d => d.SanPham).WithOne(p => p.ThongSoSanPham).HasConstraintName("fk_ts_sp");
         //});
-
+        modelBuilder.Entity<PhieuKiemKe>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__phieu_ki__3213E83F4D8F1C2E");
+            entity.Property(e => e.MaPhieu).IsUnicode(false);
+            entity.Property(e => e.NgayKiemKe).HasDefaultValueSql("(getdate())");
+        });
+        modelBuilder.Entity<ChiTietPhieuKiemKe>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__chi_tiet__3213E83F1D8E3C2E");
+            entity.HasOne(d => d.PhieuKiemKe).WithMany(p => p.ChiTietPhieuKiemKes).HasConstraintName("fk_ctpkk_pkk");
+            entity.HasOne(d => d.VatLieu).WithMany(p => p.ChiTietPhieuKiemKes).HasConstraintName("fk_ctpkk_vl");
+        });
         modelBuilder.Entity<VatLieu>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__vat_lieu__3213E83F5455BCC9");
@@ -152,7 +165,7 @@ public partial class WarehouseManagerContext : DbContext
             entity.HasOne(d => d.MaLoaiNavigation).WithMany(p => p.VatLieus).HasConstraintName("fk_vl_loai");
 
             entity.HasOne(d => d.MaNhaCungCapNavigation).WithMany(p => p.VatLieus).HasConstraintName("fk_vl_ncc");
-
+            
             entity.HasMany(d => d.Kes).WithMany(p => p.VatLieus)
                 .UsingEntity<Dictionary<string, object>>(
                     "KeVatLieu",
