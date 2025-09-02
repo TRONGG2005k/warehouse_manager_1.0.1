@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using warehouse_manager.dto.i;
 using warehouse_manager.service;
+using warehouse_manager.ui.user_control.tonKho;
 
 namespace warehouse_manager.ui.user_control
 {
@@ -67,7 +68,7 @@ namespace warehouse_manager.ui.user_control
             LoadData();
             var service = new service.PhieuXuatService();
             var phieuXuatDtos = service.SelectPhieuThieu();
-            dataGridView1.DataSource = phieuXuatDtos;  
+            dataGridView1.DataSource = phieuXuatDtos;
         }
         private void LoadData()
         {
@@ -169,6 +170,18 @@ namespace warehouse_manager.ui.user_control
                 e.Value = donGia.ToString("N0") + " ₫";
                 e.FormattingApplied = true;
             }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            MainForm mainForm = (MainForm)this.Parent.Parent;
+            mainForm.LoadPage(new KiemKe());
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            MainForm mainForm = (MainForm)this.Parent.Parent;
+            mainForm.LoadPage(new BaoCaoNXT());
         }
     }
 }

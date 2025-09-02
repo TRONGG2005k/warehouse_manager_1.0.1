@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using warehouse_manager.context;
 using warehouse_manager.dto.o;
 using warehouse_manager.service;
+using warehouse_manager.ui.user_control.tonKho;
 
 namespace warehouse_manager.ui.user_control.baocao
 {
@@ -64,6 +65,36 @@ namespace warehouse_manager.ui.user_control.baocao
             {
                 MessageBox.Show("Vui lòng chọn phiếu kiểm kê trước khi xem chi tiết.");
             }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            MainForm mainForm = (MainForm)this.Parent.Parent;
+            mainForm.LoadPage(new DanhSachDonNhapKho());
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            MainForm mainForm = (MainForm)this.Parent.Parent;
+            mainForm.LoadPage(new KiemKe());
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            MainForm mainForm = (MainForm)this.Parent.Parent;
+            mainForm.LoadPage(new DanhSachXuatKho());
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            MainForm mainForm = (MainForm)this.Parent.Parent;
+            mainForm.LoadPage(new DanhSachNhapKho());
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            MainForm mainForm = (MainForm)this.Parent.Parent;
+            mainForm.LoadPage(new BaoCaoNXT());
         }
     }
 }

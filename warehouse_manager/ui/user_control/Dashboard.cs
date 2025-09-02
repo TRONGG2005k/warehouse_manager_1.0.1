@@ -92,5 +92,10 @@ namespace warehouse_manager.ui.user_control
             MainForm mainForm = (MainForm)this.Parent!.Parent!;
             mainForm.LoadPage(new KiemKe());
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

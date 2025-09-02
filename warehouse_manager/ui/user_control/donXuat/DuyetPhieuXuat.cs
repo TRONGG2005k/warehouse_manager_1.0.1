@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using warehouse_manager.ui.user_control.tonKho;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace warehouse_manager.ui.user_control
@@ -235,6 +236,18 @@ namespace warehouse_manager.ui.user_control
                 e.Value = donGia.ToString("N0") + " ₫";
                 e.FormattingApplied = true;
             }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            MainForm mainForm = (MainForm)this.Parent.Parent;
+            mainForm.LoadPage(new KiemKe());
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            MainForm mainForm = (MainForm)this.Parent.Parent;
+            mainForm.LoadPage(new BaoCaoNXT());
         }
     }
 }

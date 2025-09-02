@@ -33,6 +33,9 @@
             tableLayoutPanel5 = new TableLayoutPanel();
             dataGridView1 = new DataGridView();
             panel11 = new Panel();
+            button12 = new Button();
+            label1 = new Label();
+            comboBox1 = new ComboBox();
             textBox1 = new TextBox();
             button11 = new Button();
             button3 = new Button();
@@ -60,9 +63,6 @@
             tableLayoutPanel3 = new TableLayoutPanel();
             tableLayoutPanel1 = new TableLayoutPanel();
             tableLayoutPanel2 = new TableLayoutPanel();
-            comboBox1 = new ComboBox();
-            label1 = new Label();
-            button12 = new Button();
             panel10.SuspendLayout();
             tableLayoutPanel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -134,6 +134,35 @@
             panel11.Name = "panel11";
             panel11.Size = new Size(1019, 73);
             panel11.TabIndex = 0;
+            // 
+            // button12
+            // 
+            button12.Location = new Point(531, 30);
+            button12.Name = "button12";
+            button12.Size = new Size(94, 29);
+            button12.TabIndex = 4;
+            button12.Text = "lọc";
+            button12.UseVisualStyleBackColor = true;
+            button12.Click += button12_Click;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(202, 30);
+            label1.Name = "label1";
+            label1.Size = new Size(134, 20);
+            label1.TabIndex = 3;
+            label1.Text = "Lọc theo trạng thái";
+            // 
+            // comboBox1
+            // 
+            comboBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBox1.AutoCompleteSource = AutoCompleteSource.ListItems;
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(354, 30);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(151, 28);
+            comboBox1.TabIndex = 2;
             // 
             // textBox1
             // 
@@ -238,6 +267,7 @@
             button5.Text = "Hàng tồn kho";
             button5.TextAlign = ContentAlignment.MiddleRight;
             button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
             // 
             // panel4
             // 
@@ -261,6 +291,7 @@
             button6.Text = "Báo cáo";
             button6.TextAlign = ContentAlignment.MiddleRight;
             button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
             // 
             // panel5
             // 
@@ -469,35 +500,6 @@
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 86.69833F));
             tableLayoutPanel2.Size = new Size(1031, 624);
             tableLayoutPanel2.TabIndex = 4;
-            // 
-            // comboBox1
-            // 
-            comboBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            comboBox1.AutoCompleteSource = AutoCompleteSource.ListItems;
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(354, 30);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(151, 28);
-            comboBox1.TabIndex = 2;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(202, 30);
-            label1.Name = "label1";
-            label1.Size = new Size(134, 20);
-            label1.TabIndex = 3;
-            label1.Text = "Lọc theo trạng thái";
-            // 
-            // button12
-            // 
-            button12.Location = new Point(531, 30);
-            button12.Name = "button12";
-            button12.Size = new Size(94, 29);
-            button12.TabIndex = 4;
-            button12.Text = "lọc";
-            button12.UseVisualStyleBackColor = true;
-            button12.Click += button12_Click;
             // 
             // DanhSachXuatKho
             // 

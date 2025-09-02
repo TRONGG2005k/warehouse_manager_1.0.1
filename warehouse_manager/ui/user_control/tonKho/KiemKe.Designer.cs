@@ -180,6 +180,7 @@ namespace warehouse_manager.ui.user_control.tonKho
             button6.Text = "Báo cáo";
             button6.TextAlign = ContentAlignment.MiddleRight;
             button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
             // 
             // panel4
             // 
@@ -200,9 +201,10 @@ namespace warehouse_manager.ui.user_control.tonKho
             button5.Name = "button5";
             button5.Size = new Size(239, 64);
             button5.TabIndex = 2;
-            button5.Text = "Hàng tồn kho";
+            button5.Text = "Thoát";
             button5.TextAlign = ContentAlignment.MiddleRight;
             button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
             // 
             // panel3
             // 
@@ -313,9 +315,10 @@ namespace warehouse_manager.ui.user_control.tonKho
             button2.Name = "button2";
             button2.Size = new Size(239, 64);
             button2.TabIndex = 1;
-            button2.Text = "Thoát";
+            button2.Text = "Nhập kho";
             button2.TextAlign = ContentAlignment.MiddleRight;
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // panel2
             // 
@@ -339,6 +342,7 @@ namespace warehouse_manager.ui.user_control.tonKho
             button3.Text = "Xuất kho";
             button3.TextAlign = ContentAlignment.MiddleRight;
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // tableLayoutPanel2
             // 

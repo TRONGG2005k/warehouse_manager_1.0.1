@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using warehouse_manager.dto.i;
 using warehouse_manager.Models;
 using warehouse_manager.service;
+using warehouse_manager.ui.user_control.tonKho;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace warehouse_manager.ui.user_control
@@ -193,12 +194,14 @@ namespace warehouse_manager.ui.user_control
 
         private void button5_Click(object sender, EventArgs e)
         {
-
+            MainForm mainForm = (MainForm)this.Parent.Parent;
+            mainForm.LoadPage(new KiemKe());
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-
+            MainForm mainForm = (MainForm)this.Parent.Parent;
+            mainForm.LoadPage(new BaoCaoNXT());
         }
 
         private void button1_Click(object sender, EventArgs e)

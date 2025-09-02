@@ -12,6 +12,7 @@ using warehouse_manager.dto.i;
 using warehouse_manager.dto.o;
 using warehouse_manager.Models;
 using warehouse_manager.service;
+using warehouse_manager.ui.user_control.tonKho;
 
 namespace warehouse_manager.ui.user_control
 {
@@ -170,6 +171,18 @@ namespace warehouse_manager.ui.user_control
             nguoiDungService.logout();
             MainForm mainForm = (MainForm)this.Parent!.Parent!;
             mainForm.LoadPage(new Login());
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            MainForm mainForm = (MainForm)this.Parent.Parent;
+            mainForm.LoadPage(new KiemKe());
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            MainForm mainForm = (MainForm)this.Parent.Parent;
+            mainForm.LoadPage(new BaoCaoNXT());
         }
     }
 }

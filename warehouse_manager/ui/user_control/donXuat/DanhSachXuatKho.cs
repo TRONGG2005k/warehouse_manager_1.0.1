@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using warehouse_manager.service;
 using warehouse_manager.ui;
+using warehouse_manager.ui.user_control.tonKho;
 
 namespace warehouse_manager.ui.user_control
 {
@@ -244,7 +245,7 @@ namespace warehouse_manager.ui.user_control
         {
             try
             {
-                if(comboBox1.SelectedItem == null)
+                if (comboBox1.SelectedItem == null)
                 {
                     throw new Exception("Vui lòng chọn trạng thái để lọc");
                 }
@@ -256,10 +257,22 @@ namespace warehouse_manager.ui.user_control
                 var ps = service.TimTheoTrangThai(comboBox1.SelectedItem.ToString());
                 dataGridView1.DataSource = ps;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            MainForm mainForm = (MainForm)this.Parent.Parent;
+            mainForm.LoadPage(new KiemKe());
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            MainForm mainForm = (MainForm)this.Parent.Parent;
+            mainForm.LoadPage(new BaoCaoNXT());
         }
     }
 }

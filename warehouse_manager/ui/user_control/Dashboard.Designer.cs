@@ -328,6 +328,7 @@
             button4.Text = "Tìm kiếm";
             button4.TextAlign = ContentAlignment.MiddleRight;
             button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // panel1
             // 

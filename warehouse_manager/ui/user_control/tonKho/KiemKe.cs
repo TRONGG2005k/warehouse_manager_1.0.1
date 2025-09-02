@@ -30,7 +30,7 @@ namespace warehouse_manager.ui.user_control.tonKho
         private void KiemKe_Load(object sender, EventArgs e)
         {
             comboBox1.Items.AddRange(vatLieuService.danhSachVatLieu().ToArray());
-           
+
         }
 
         private void LoadSoLuongTon()
@@ -61,7 +61,7 @@ namespace warehouse_manager.ui.user_control.tonKho
 
                 var vatLieu = vatLieuService.layVatLieuTheoMa(comboBox1.SelectedItem.ToString());
 
-               
+
                 if (danhSachChiTietPhieuKK.Any(c => c.VatLieuId == vatLieu.Id))
                 {
                     MessageBox.Show("Vật liệu này đã có trong danh sách!");
@@ -108,7 +108,7 @@ namespace warehouse_manager.ui.user_control.tonKho
             {
                 printDocument.Print();
             }
-            
+
             MessageBox.Show("Kiểm kê thành công!");
         }
 
@@ -206,5 +206,28 @@ namespace warehouse_manager.ui.user_control.tonKho
 
         }
 
+        private void button5_Click(object sender, EventArgs e)
+        {
+            MainForm mainForm = (MainForm)this.Parent.Parent;
+            mainForm.LoadPage(new DanhSachDonNhapKho());
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            MainForm mainForm = (MainForm)this.Parent.Parent;
+            mainForm.LoadPage(new DanhSachNhapKho());
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            MainForm mainForm = (MainForm)this.Parent.Parent;
+            mainForm.LoadPage(new DanhSachXuatKho());
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            MainForm mainForm = (MainForm)this.Parent.Parent;
+            mainForm.LoadPage(new BaoCaoNXT());
+        }
     }
 }

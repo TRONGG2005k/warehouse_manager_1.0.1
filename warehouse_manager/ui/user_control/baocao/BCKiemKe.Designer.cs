@@ -228,6 +228,7 @@
             button7.TabIndex = 2;
             button7.Text = "Báo cáo nhập xuất tồn";
             button7.UseVisualStyleBackColor = false;
+            button7.Click += button7_Click;
             // 
             // tableLayoutPanel3
             // 
@@ -315,9 +316,10 @@
             button6.Name = "button6";
             button6.Size = new Size(239, 64);
             button6.TabIndex = 2;
-            button6.Text = "Báo cáo";
+            button6.Text = "Thoát";
             button6.TextAlign = ContentAlignment.MiddleRight;
             button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
             // 
             // panel4
             // 
@@ -341,6 +343,7 @@
             button5.Text = "Hàng tồn kho";
             button5.TextAlign = ContentAlignment.MiddleRight;
             button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
             // 
             // panel3
             // 
@@ -384,9 +387,10 @@
             button2.Name = "button2";
             button2.Size = new Size(239, 64);
             button2.TabIndex = 1;
-            button2.Text = "Thoát";
+            button2.Text = "Nhập kho";
             button2.TextAlign = ContentAlignment.MiddleRight;
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // panel2
             // 
@@ -410,6 +414,7 @@
             button3.Text = "Xuất kho";
             button3.TextAlign = ContentAlignment.MiddleRight;
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // BCKiemKe
             // 
