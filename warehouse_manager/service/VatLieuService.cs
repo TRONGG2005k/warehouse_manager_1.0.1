@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,13 @@ namespace warehouse_manager.service
         public VatLieu layVatLieuTheoMa(string mavatLieu)
         {
             return context.VatLieus.FirstOrDefault(vl => vl.MaVatLieu == mavatLieu);
+        }
+
+        public List<VatLieu> layVatLieuTheoMa()
+        {
+            return context.VatLieus
+                .Include(vl => vl.Kes)
+                .ToList();
         }
     }
 }

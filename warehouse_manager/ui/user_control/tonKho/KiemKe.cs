@@ -229,5 +229,11 @@ namespace warehouse_manager.ui.user_control.tonKho
             MainForm mainForm = (MainForm)this.Parent.Parent;
             mainForm.LoadPage(new BaoCaoNXT());
         }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            MainForm mainForm = (MainForm)this.Parent.Parent;
+            mainForm.LoadPage(new TimKiem()); 
+        }
     }
 }

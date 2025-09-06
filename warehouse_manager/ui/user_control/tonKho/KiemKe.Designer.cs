@@ -110,6 +110,7 @@ namespace warehouse_manager.ui.user_control.tonKho
             button8.TabIndex = 1;
             button8.Text = "Tìm kiếm";
             button8.UseVisualStyleBackColor = false;
+            button8.Click += button8_Click;
             // 
             // panel7
             // 

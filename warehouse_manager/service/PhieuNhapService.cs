@@ -316,7 +316,7 @@ namespace warehouse_manager.service
                 var phieuNhap = context.PhieuNhaps
                     .Include(pn => pn.ChiTietPhieuNhaps)
                         .ThenInclude(ct => ct.VatLieu)
-                    .First(pn => pn.Id == suaPhieuNhap.Id)
+                    .FirstOrDefault(pn => pn.Id == suaPhieuNhap.Id)
                     ?? throw new Exception("Phiếu nhập không tồn tại");
                 var chiTietPhieuNhap = phieuNhap.ChiTietPhieuNhaps.First();
                 var vatLieu = chiTietPhieuNhap!.VatLieu;
@@ -362,7 +362,10 @@ namespace warehouse_manager.service
                         vatLieuTonTai2.SoLuongTon += suaPhieuNhap.SoLuong;
                         vatLieuTonTai2.DonViTinh = suaPhieuNhap.DonViTinh;
                         chiTietPhieuNhap.VatLieuId = vatLieuTonTai2.Id;
-
+                        if(vatLieuTonTai2.SoLuongTon > 0)
+                        {
+                            vatLieuTonTai2.TrangThai = "còn hàng";
+                        }
                     }
                 }
                 else
