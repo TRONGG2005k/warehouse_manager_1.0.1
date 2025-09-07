@@ -31,18 +31,6 @@ namespace warehouse_manager.ui
             System.Console.WriteLine("Load page" + page.Name);
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
 

@@ -12,6 +12,8 @@ using warehouse_manager.configuration;
 using warehouse_manager.context;
 using warehouse_manager.Models;
 using warehouse_manager.service;
+using warehouse_manager.ui.form;
+using warehouse_manager.ui.uiController;
 using warehouse_manager.ui.user_control;
 
 namespace warehouse_manager.ui
@@ -41,8 +43,8 @@ namespace warehouse_manager.ui
 
             if (resultLogin)
             {
-                MainForm mainForm = (MainForm)this.Parent!.Parent!;
-                mainForm.LoadPage(new DanhSachDonNhapKho());
+                MainForm1 mainForm = (MainForm1)this.Parent!.Parent!;
+                mainForm.LoadPage(new HomePage());
             }
         }
 
@@ -60,8 +62,8 @@ namespace warehouse_manager.ui
 
         private void button2_Click(object sender, EventArgs e)
         {
-            MainForm mainForm = (MainForm)this.Parent!.Parent!;
-            mainForm.LoadPage(new DangKy());
+            //MainForm mainForm = (MainForm)this.Parent!.Parent!;
+            //mainForm.LoadPage(new DangKy());
         }
 
         private void panel4_Paint(object sender, PaintEventArgs e)

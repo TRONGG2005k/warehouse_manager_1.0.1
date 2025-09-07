@@ -18,7 +18,7 @@ namespace warehouse_manager.dto.i
         public string MaNguoiLap{ get; set; } = string.Empty;
 
         [Display(Name = "Tên Nhà Cung Cấp")]
-        public string TenNhaCungCap { get; set; } = string.Empty;
+        public string NhaCungCap { get; set; } = string.Empty;
 
         // Danh sách chi tiết
         [Display(Name = "Mã Vật Liệu")]
@@ -32,8 +32,13 @@ namespace warehouse_manager.dto.i
 
         [Display(Name = "Đơn Vị Tính")]
         public string DonViTinh { get; set; } = string.Empty;
+        [Display(Name = "Loại vật liệu")]
+        public string LoaiVatLieu { get; set; } = string.Empty ;
 
+        public string TenHang { get; set; } = string.Empty;
         [Display(Name = "Thành Tiền")]
         public decimal ThanhTien => SoLuong * DonGia;
+
+        public string Ke { get; set; } = string.Empty;
     }
 }

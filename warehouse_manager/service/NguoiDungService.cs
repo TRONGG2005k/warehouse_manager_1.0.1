@@ -104,5 +104,18 @@ namespace warehouse_manager.service
                 // xóa hẳn file: File.Delete(filePath);
             }
         }
+
+        public bool KiemTraDangNhap()
+        {
+            if (!File.Exists("user.txt"))
+                return false;
+
+            string content = File.ReadAllText("user.txt");
+            if (string.IsNullOrWhiteSpace(content))
+                return false;
+
+            return true;
+        }
+
     }
 }

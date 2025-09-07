@@ -1,0 +1,76 @@
+﻿using DocumentFormat.OpenXml.Spreadsheet;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using warehouse_manager.Models;
+using warehouse_manager.service;
+using warehouse_manager.ui.user_control;
+namespace warehouse_manager.ui.form
+{
+    public partial class MainForm1 : Form
+    {
+        private NguoiDungService nguoiDungService;
+        public MainForm1()
+        {
+            nguoiDungService = new NguoiDungService();
+            InitializeComponent();
+            LoadPage(new Login());
+        }
+        public void LoadPage(UserControl page)
+        {
+            panel1.Controls.Clear();
+            page.Dock = DockStyle.Fill; // Trang chiếm hết panel
+            panel1.Controls.Add(page);
+            System.Console.WriteLine("Load page" + page.Name);
+        }
+
+        private void MainForm1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MainForm1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            string filePath = "user.txt";
+
+            if (File.Exists(filePath))
+            {
+
+                File.WriteAllText(filePath, string.Empty);
+                // xóa hẳn file: File.Delete(filePath);
+            }
+        }
+
+        private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            nguoiDungService.logout();
+            LoadPage(new Login());
+            Console.WriteLine("Logout clicked!");
+        }
+
+        private void phiếuNhậpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (nguoiDungService.KiemTraDangNhap())
+            {
+                LoadPage(new uiController.phieuNhap.PhieuNhap());
+            }
+            else
+            {
+                MessageBox.Show("Bạn chưa đăng nhập" +
+                    "");
+            }
+        }
+
+        private void phiếuXuấtToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            nguoiDungService.logout();
+            LoadPage(new DangKy());
+        }
+    }
+}

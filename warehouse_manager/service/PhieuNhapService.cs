@@ -1,15 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DocumentFormat.OpenXml.Office2010.Excel;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using warehouse_manager.context;
-using warehouse_manager.dto.o;
 using warehouse_manager.dto.i;
+using warehouse_manager.dto.o;
 using warehouse_manager.Models;
 using warehouse_manager.ui.user_control;
-using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 
 namespace warehouse_manager.service
 {
@@ -67,26 +68,32 @@ namespace warehouse_manager.service
             ).OrderByDescending(p => p.NgayNhap).ToList();
 
         }
-        public List<dto.i.PhieuNhapDto> phieuNhapDtos()
+        public List<dto.o.PhieuNhapDto> phieuNhapDtos()
         {
             return context.PhieuNhaps
                 .Include(pn => pn.MaNhaCungCapNavigation)
                 .Include(pn => pn.ChiTietPhieuNhaps)
                     .ThenInclude(ct => ct.VatLieu)
-                .SelectMany(pn => pn.ChiTietPhieuNhaps.Select(ct => new dto.i.PhieuNhapDto
+                        .ThenInclude(v => v.Kes)
+                .SelectMany(pn => pn.ChiTietPhieuNhaps, (pn, ct) => new dto.o.PhieuNhapDto
                 {
                     Id = pn.Id,
-                    NgayNhap = pn.NgayNhap,
-                    MaNguoiLap = pn.NguoiDung!.TenDangNhap!,
-                    TenNhaCungCap = pn.MaNhaCungCapNavigation!.TenNhaCungCap!,
-                    MaVatLieu = ct.VatLieu!.MaVatLieu!,
-                    SoLuong = ct.SoLuong ?? 0,
+                    TenHang = ct.VatLieu.Ten,
+                    DonViTinh = ct.VatLieu.DonViTinh,
+                    SoLuong = (long)ct.SoLuong,
                     DonGia = ct.DonGia ?? 0,
-                    DonViTinh = ct.DonViTinh ?? "",
-
-                })).OrderByDescending(p=> p.NgayNhap).ToList();
-
+                    NhaCungCap = pn.MaNhaCungCapNavigation.TenNhaCungCap,
+                    Ke = ct.VatLieu.Kes.FirstOrDefault() != null
+                         ? ct.VatLieu.Kes.FirstOrDefault().MaKe
+                         : null,
+                    NgayNhap = pn.NgayNhap,
+                    MaVatLieu = ct.VatLieu.MaVatLieu,
+                    LoaiVatLieu = ct.VatLieu.MaLoaiNavigation.TenLoai
+                })
+                .OrderByDescending(p => p.NgayNhap)
+                .ToList();
         }
+
 
         public List<dto.o.PhieuNhapDto> TimPhieuTheoMa(int id)
         {
@@ -243,7 +250,7 @@ namespace warehouse_manager.service
 
                 if (vatLieuTonTai == null)
                 {
-                    var vatLieu = context.VatLieus.Add(new Models.VatLieu
+                    var vatLieu = new Models.VatLieu
                     {
                         MaVatLieu = taoPhieuNhap.MaVatLieu,
                         Ten = taoPhieuNhap.TenVatLieu,
@@ -253,9 +260,11 @@ namespace warehouse_manager.service
                         DonViTinh = taoPhieuNhap.DonViTinh,
                         TrangThai = "Còn hàng",
                         MaNhaCungCap = nhaCungCapTonTai.Id
+                    };
 
-                    });
-
+                    // Gán kệ ngay tại đây
+                    vatLieu.Kes.Add(keTonTai);
+                    context.VatLieus.Add(vatLieu);
                     context.SaveChanges();
 
                     var vatLieu1 = context.VatLieus.First(v => v.MaVatLieu == taoPhieuNhap.MaVatLieu);
@@ -320,8 +329,9 @@ namespace warehouse_manager.service
                     ?? throw new Exception("Phiếu nhập không tồn tại");
                 var chiTietPhieuNhap = phieuNhap.ChiTietPhieuNhaps.First();
                 var vatLieu = chiTietPhieuNhap!.VatLieu;
-                  
 
+                //var ke = context.Kes.FirstOrDefault(k => k.MaKe == suaPhieuNhap.Ke)
+                //?? throw new Exception("Kệ không tồn tại");
                 //var vatLieu = context.VatLieus
                 //    .First(v => v.Id == vatLieu1)
                 //    ?? throw new Exception("Vật liệu không tồn tại");
@@ -355,12 +365,14 @@ namespace warehouse_manager.service
                             .First(ncc => ncc.TenNhaCungCap == suaPhieuNhap.NhaCungCap).Id;
                         vatLieu.MaLoai = context.LoaiVatLieus
                             .First(l => l.TenLoai == suaPhieuNhap.LoaiVatLieu).Id;
+                       
                         
                     }
                     else
                     {
                         vatLieuTonTai2.SoLuongTon += suaPhieuNhap.SoLuong;
                         vatLieuTonTai2.DonViTinh = suaPhieuNhap.DonViTinh;
+                        
                         chiTietPhieuNhap.VatLieuId = vatLieuTonTai2.Id;
                         if(vatLieuTonTai2.SoLuongTon > 0)
                         {
@@ -374,6 +386,7 @@ namespace warehouse_manager.service
                     int chenhLech = suaPhieuNhap.SoLuong - (int)chiTietPhieuNhap.SoLuong;
                     vatLieu.SoLuongTon += chenhLech;
                     vatLieu.DonViTinh = suaPhieuNhap.DonViTinh;
+                    
                 }
                 chiTietPhieuNhap.SoLuong = suaPhieuNhap.SoLuong;
                 chiTietPhieuNhap.DonGia = suaPhieuNhap.DonGia;
@@ -388,7 +401,7 @@ namespace warehouse_manager.service
             }
             catch (Exception ex)
             {
-                throw new Exception("Sửa phiếu nhập thất bại: " + ex.Message);
+                throw new Exception("Sửa phiếu nhập thất bại: " + ex.Message+ " inner" + ex.InnerException);
             }
         }
 
