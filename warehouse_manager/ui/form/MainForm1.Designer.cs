@@ -73,8 +73,9 @@
             // xuấtFilePdfToolStripMenuItem
             // 
             xuấtFilePdfToolStripMenuItem.Name = "xuấtFilePdfToolStripMenuItem";
-            xuấtFilePdfToolStripMenuItem.Size = new Size(174, 26);
+            xuấtFilePdfToolStripMenuItem.Size = new Size(224, 26);
             xuấtFilePdfToolStripMenuItem.Text = "Xuất file pdf";
+            xuấtFilePdfToolStripMenuItem.Click += xuấtFilePdfToolStripMenuItem_Click;
             // 
             // phiếuXuấtToolStripMenuItem
             // 
@@ -87,22 +88,23 @@
             // tạoPhiếuToolStripMenuItem
             // 
             tạoPhiếuToolStripMenuItem.Name = "tạoPhiếuToolStripMenuItem";
-            tạoPhiếuToolStripMenuItem.Size = new Size(174, 26);
+            tạoPhiếuToolStripMenuItem.Size = new Size(224, 26);
             tạoPhiếuToolStripMenuItem.Text = "Tạo phiếu";
             tạoPhiếuToolStripMenuItem.Click += tạoPhiếuToolStripMenuItem_Click;
             // 
             // duyệtPhiếuToolStripMenuItem
             // 
             duyệtPhiếuToolStripMenuItem.Name = "duyệtPhiếuToolStripMenuItem";
-            duyệtPhiếuToolStripMenuItem.Size = new Size(174, 26);
+            duyệtPhiếuToolStripMenuItem.Size = new Size(224, 26);
             duyệtPhiếuToolStripMenuItem.Text = "Duyệt phiếu";
             duyệtPhiếuToolStripMenuItem.Click += duyệtPhiếuToolStripMenuItem_Click;
             // 
             // xuấtFilePdfToolStripMenuItem1
             // 
             xuấtFilePdfToolStripMenuItem1.Name = "xuấtFilePdfToolStripMenuItem1";
-            xuấtFilePdfToolStripMenuItem1.Size = new Size(174, 26);
+            xuấtFilePdfToolStripMenuItem1.Size = new Size(224, 26);
             xuấtFilePdfToolStripMenuItem1.Text = "Xuất file pdf";
+            xuấtFilePdfToolStripMenuItem1.Click += xuấtFilePdfToolStripMenuItem1_Click;
             // 
             // kiểmKêToolStripMenuItem
             // 

@@ -12,6 +12,8 @@ using warehouse_manager.dto.o;
 using warehouse_manager.Models;
 using warehouse_manager.service;
 using warehouse_manager.ui.uiController.kiemke;
+using warehouse_manager.ui.uiController.phieuNhap;
+using warehouse_manager.ui.uiController.phieuxuat;
 using warehouse_manager.ui.user_control.baocao;
 namespace warehouse_manager.ui.form
 {
@@ -146,6 +148,33 @@ namespace warehouse_manager.ui.form
             if (nguoiDungService.KiemTraDangNhap())
             {
                 LoadPage(new uiController.baocao.BCKK());
+            }
+            else
+            {
+                MessageBox.Show("Bạn chưa đăng nhập" +
+                    "");
+            }
+        }
+
+        private void xuấtFilePdfToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (nguoiDungService.KiemTraDangNhap())
+            {
+                LoadPage(new XuatPhieuXuatPDF());
+            }
+            else
+            {
+                MessageBox.Show("Bạn chưa đăng nhập" +
+                    "");
+            }
+        }
+
+        private void xuấtFilePdfToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           
+            if (nguoiDungService.KiemTraDangNhap())
+            {
+                LoadPage(new XuatPhieuNhapPDF());
             }
             else
             {
