@@ -8,9 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using warehouse_manager.dto.o;
 using warehouse_manager.Models;
 using warehouse_manager.service;
-using warehouse_manager.ui.user_control;
+using warehouse_manager.ui.uiController.kiemke;
+using warehouse_manager.ui.user_control.baocao;
 namespace warehouse_manager.ui.form
 {
     public partial class MainForm1 : Form
@@ -110,6 +112,45 @@ namespace warehouse_manager.ui.form
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void kiểmKêToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (nguoiDungService.KiemTraDangNhap())
+            {
+                LoadPage(new KiemKe());
+            }
+            else
+            {
+                MessageBox.Show("Bạn chưa đăng nhập" +
+                    "");
+            }
+        }
+
+        private void báoCáoNhậpXuấtTồnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (nguoiDungService.KiemTraDangNhap())
+            {
+                LoadPage(new uiController.baocao.BCNXT());
+            }
+            else
+            {
+                MessageBox.Show("Bạn chưa đăng nhập" +
+                    "");
+            }
+        }
+
+        private void báoCáoKiểmKêToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (nguoiDungService.KiemTraDangNhap())
+            {
+                LoadPage(new uiController.baocao.BCKK());
+            }
+            else
+            {
+                MessageBox.Show("Bạn chưa đăng nhập" +
+                    "");
             }
         }
     }

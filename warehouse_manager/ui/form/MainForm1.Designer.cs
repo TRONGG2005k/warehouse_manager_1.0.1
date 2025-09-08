@@ -31,9 +31,15 @@
             menuStrip1 = new MenuStrip();
             logoutToolStripMenuItem = new ToolStripMenuItem();
             phiếuNhậpToolStripMenuItem = new ToolStripMenuItem();
+            xuấtFilePdfToolStripMenuItem = new ToolStripMenuItem();
             phiếuXuấtToolStripMenuItem = new ToolStripMenuItem();
             tạoPhiếuToolStripMenuItem = new ToolStripMenuItem();
             duyệtPhiếuToolStripMenuItem = new ToolStripMenuItem();
+            xuấtFilePdfToolStripMenuItem1 = new ToolStripMenuItem();
+            kiểmKêToolStripMenuItem = new ToolStripMenuItem();
+            báoCáoToolStripMenuItem = new ToolStripMenuItem();
+            báoCáoNhậpXuấtTồnToolStripMenuItem = new ToolStripMenuItem();
+            báoCáoKiểmKêToolStripMenuItem = new ToolStripMenuItem();
             panel1 = new Panel();
             menuStrip1.SuspendLayout();
             SuspendLayout();
@@ -42,7 +48,7 @@
             // 
             menuStrip1.BackColor = SystemColors.Control;
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { logoutToolStripMenuItem, phiếuNhậpToolStripMenuItem, phiếuXuấtToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { logoutToolStripMenuItem, phiếuNhậpToolStripMenuItem, phiếuXuấtToolStripMenuItem, kiểmKêToolStripMenuItem, báoCáoToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(1156, 28);
@@ -58,14 +64,21 @@
             // 
             // phiếuNhậpToolStripMenuItem
             // 
+            phiếuNhậpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { xuấtFilePdfToolStripMenuItem });
             phiếuNhậpToolStripMenuItem.Name = "phiếuNhậpToolStripMenuItem";
             phiếuNhậpToolStripMenuItem.Size = new Size(96, 24);
             phiếuNhậpToolStripMenuItem.Text = "Phiếu nhập";
             phiếuNhậpToolStripMenuItem.Click += phiếuNhậpToolStripMenuItem_Click;
             // 
+            // xuấtFilePdfToolStripMenuItem
+            // 
+            xuấtFilePdfToolStripMenuItem.Name = "xuấtFilePdfToolStripMenuItem";
+            xuấtFilePdfToolStripMenuItem.Size = new Size(174, 26);
+            xuấtFilePdfToolStripMenuItem.Text = "Xuất file pdf";
+            // 
             // phiếuXuấtToolStripMenuItem
             // 
-            phiếuXuấtToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { tạoPhiếuToolStripMenuItem, duyệtPhiếuToolStripMenuItem });
+            phiếuXuấtToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { tạoPhiếuToolStripMenuItem, duyệtPhiếuToolStripMenuItem, xuấtFilePdfToolStripMenuItem1 });
             phiếuXuấtToolStripMenuItem.Name = "phiếuXuấtToolStripMenuItem";
             phiếuXuấtToolStripMenuItem.Size = new Size(91, 24);
             phiếuXuấtToolStripMenuItem.Text = "Phiếu xuất";
@@ -74,16 +87,50 @@
             // tạoPhiếuToolStripMenuItem
             // 
             tạoPhiếuToolStripMenuItem.Name = "tạoPhiếuToolStripMenuItem";
-            tạoPhiếuToolStripMenuItem.Size = new Size(224, 26);
+            tạoPhiếuToolStripMenuItem.Size = new Size(174, 26);
             tạoPhiếuToolStripMenuItem.Text = "Tạo phiếu";
             tạoPhiếuToolStripMenuItem.Click += tạoPhiếuToolStripMenuItem_Click;
             // 
             // duyệtPhiếuToolStripMenuItem
             // 
             duyệtPhiếuToolStripMenuItem.Name = "duyệtPhiếuToolStripMenuItem";
-            duyệtPhiếuToolStripMenuItem.Size = new Size(224, 26);
+            duyệtPhiếuToolStripMenuItem.Size = new Size(174, 26);
             duyệtPhiếuToolStripMenuItem.Text = "Duyệt phiếu";
             duyệtPhiếuToolStripMenuItem.Click += duyệtPhiếuToolStripMenuItem_Click;
+            // 
+            // xuấtFilePdfToolStripMenuItem1
+            // 
+            xuấtFilePdfToolStripMenuItem1.Name = "xuấtFilePdfToolStripMenuItem1";
+            xuấtFilePdfToolStripMenuItem1.Size = new Size(174, 26);
+            xuấtFilePdfToolStripMenuItem1.Text = "Xuất file pdf";
+            // 
+            // kiểmKêToolStripMenuItem
+            // 
+            kiểmKêToolStripMenuItem.Name = "kiểmKêToolStripMenuItem";
+            kiểmKêToolStripMenuItem.Size = new Size(76, 24);
+            kiểmKêToolStripMenuItem.Text = "Kiểm kê";
+            kiểmKêToolStripMenuItem.Click += kiểmKêToolStripMenuItem_Click;
+            // 
+            // báoCáoToolStripMenuItem
+            // 
+            báoCáoToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { báoCáoNhậpXuấtTồnToolStripMenuItem, báoCáoKiểmKêToolStripMenuItem });
+            báoCáoToolStripMenuItem.Name = "báoCáoToolStripMenuItem";
+            báoCáoToolStripMenuItem.Size = new Size(77, 24);
+            báoCáoToolStripMenuItem.Text = "Báo cáo";
+            // 
+            // báoCáoNhậpXuấtTồnToolStripMenuItem
+            // 
+            báoCáoNhậpXuấtTồnToolStripMenuItem.Name = "báoCáoNhậpXuấtTồnToolStripMenuItem";
+            báoCáoNhậpXuấtTồnToolStripMenuItem.Size = new Size(241, 26);
+            báoCáoNhậpXuấtTồnToolStripMenuItem.Text = "Báo cáo nhập xuất tồn";
+            báoCáoNhậpXuấtTồnToolStripMenuItem.Click += báoCáoNhậpXuấtTồnToolStripMenuItem_Click;
+            // 
+            // báoCáoKiểmKêToolStripMenuItem
+            // 
+            báoCáoKiểmKêToolStripMenuItem.Name = "báoCáoKiểmKêToolStripMenuItem";
+            báoCáoKiểmKêToolStripMenuItem.Size = new Size(241, 26);
+            báoCáoKiểmKêToolStripMenuItem.Text = "Báo cáo kiểm kê";
+            báoCáoKiểmKêToolStripMenuItem.Click += báoCáoKiểmKêToolStripMenuItem_Click;
             // 
             // panel1
             // 
@@ -122,5 +169,11 @@
         private Panel panel1;
         private ToolStripMenuItem tạoPhiếuToolStripMenuItem;
         private ToolStripMenuItem duyệtPhiếuToolStripMenuItem;
+        private ToolStripMenuItem xuấtFilePdfToolStripMenuItem;
+        private ToolStripMenuItem xuấtFilePdfToolStripMenuItem1;
+        private ToolStripMenuItem kiểmKêToolStripMenuItem;
+        private ToolStripMenuItem báoCáoToolStripMenuItem;
+        private ToolStripMenuItem báoCáoNhậpXuấtTồnToolStripMenuItem;
+        private ToolStripMenuItem báoCáoKiểmKêToolStripMenuItem;
     }
 }
