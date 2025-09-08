@@ -15,7 +15,7 @@ namespace warehouse_manager.dto.o
         public long SoLuong { get; set; }
         public decimal DonGia { get; set; }
         public string NhaCungCap { get; set; }
-        public string Ke { get; set; }
+        //public string Ke { get; set; }
         public DateTime NgayNhap { get; set; }
         public string MaVatLieu { get; set; }
     }

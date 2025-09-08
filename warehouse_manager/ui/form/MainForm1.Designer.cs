@@ -32,6 +32,8 @@
             logoutToolStripMenuItem = new ToolStripMenuItem();
             phiếuNhậpToolStripMenuItem = new ToolStripMenuItem();
             phiếuXuấtToolStripMenuItem = new ToolStripMenuItem();
+            tạoPhiếuToolStripMenuItem = new ToolStripMenuItem();
+            duyệtPhiếuToolStripMenuItem = new ToolStripMenuItem();
             panel1 = new Panel();
             menuStrip1.SuspendLayout();
             SuspendLayout();
@@ -63,10 +65,25 @@
             // 
             // phiếuXuấtToolStripMenuItem
             // 
+            phiếuXuấtToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { tạoPhiếuToolStripMenuItem, duyệtPhiếuToolStripMenuItem });
             phiếuXuấtToolStripMenuItem.Name = "phiếuXuấtToolStripMenuItem";
             phiếuXuấtToolStripMenuItem.Size = new Size(91, 24);
             phiếuXuấtToolStripMenuItem.Text = "Phiếu xuất";
             phiếuXuấtToolStripMenuItem.Click += phiếuXuấtToolStripMenuItem_Click;
+            // 
+            // tạoPhiếuToolStripMenuItem
+            // 
+            tạoPhiếuToolStripMenuItem.Name = "tạoPhiếuToolStripMenuItem";
+            tạoPhiếuToolStripMenuItem.Size = new Size(224, 26);
+            tạoPhiếuToolStripMenuItem.Text = "Tạo phiếu";
+            tạoPhiếuToolStripMenuItem.Click += tạoPhiếuToolStripMenuItem_Click;
+            // 
+            // duyệtPhiếuToolStripMenuItem
+            // 
+            duyệtPhiếuToolStripMenuItem.Name = "duyệtPhiếuToolStripMenuItem";
+            duyệtPhiếuToolStripMenuItem.Size = new Size(224, 26);
+            duyệtPhiếuToolStripMenuItem.Text = "Duyệt phiếu";
+            duyệtPhiếuToolStripMenuItem.Click += duyệtPhiếuToolStripMenuItem_Click;
             // 
             // panel1
             // 
@@ -103,5 +120,7 @@
         private ToolStripMenuItem phiếuNhậpToolStripMenuItem;
         private ToolStripMenuItem phiếuXuấtToolStripMenuItem;
         private Panel panel1;
+        private ToolStripMenuItem tạoPhiếuToolStripMenuItem;
+        private ToolStripMenuItem duyệtPhiếuToolStripMenuItem;
     }
 }

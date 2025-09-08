@@ -69,8 +69,48 @@ namespace warehouse_manager.ui.form
 
         private void phiếuXuấtToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            nguoiDungService.logout();
-            LoadPage(new DangKy());
+
+        }
+
+        private void tạoPhiếuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (nguoiDungService.KiemTraDangNhap())
+            {
+                LoadPage(new uiController.phieuxuat.PhieuXuat());
+            }
+            else
+            {
+                MessageBox.Show("Bạn chưa đăng nhập" +
+                    "");
+            }
+        }
+
+        private void duyệtPhiếuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (nguoiDungService.KiemTraDangNhap())
+                {
+                    if (nguoiDungService.kiemTraVaiTroAdmin())
+                    {
+                        LoadPage(new uiController.phieuxuat.DuyetPhieu());
+
+                    }
+                    else
+                    {
+                        throw new Exception("bạn không có quyền dùng chức năng này");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Bạn chưa đăng nhập" +
+                        "");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

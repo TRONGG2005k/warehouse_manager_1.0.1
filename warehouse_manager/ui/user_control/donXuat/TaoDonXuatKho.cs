@@ -183,5 +183,10 @@ namespace warehouse_manager.ui.user_control
             MainForm mainForm = (MainForm)this.Parent.Parent;
             mainForm.LoadPage(new BaoCaoNXT());
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

@@ -129,7 +129,6 @@ namespace warehouse_manager.ui.user_control
                     NhaCungCap = comboBox3.SelectedItem.ToString(),
                     MaVatLieu = textBox2.Text,
                     SoLuong = Convert.ToInt32(numericUpDown2.Value),
-                    Ke = comboBox4.SelectedItem.ToString()
                 });
                 if (isSuccess)
                 {

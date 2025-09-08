@@ -34,15 +34,14 @@
             dataGridView1 = new DataGridView();
             tableLayoutPanel3 = new TableLayoutPanel();
             panel1 = new Panel();
-            radioButton2 = new RadioButton();
-            radioButton1 = new RadioButton();
             panel2 = new Panel();
             panel10 = new Panel();
+            dateTimePicker2 = new DateTimePicker();
+            dateTimePicker1 = new DateTimePicker();
+            button4 = new Button();
             button3 = new Button();
             button2 = new Button();
             button1 = new Button();
-            label9 = new Label();
-            comboBox4 = new ComboBox();
             label8 = new Label();
             numericUpDown2 = new NumericUpDown();
             textBox2 = new TextBox();
@@ -61,7 +60,6 @@
             tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             tableLayoutPanel3.SuspendLayout();
-            panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
@@ -144,36 +142,11 @@
             // 
             // panel1
             // 
-            panel1.Controls.Add(radioButton2);
-            panel1.Controls.Add(radioButton1);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(3, 3);
             panel1.Name = "panel1";
             panel1.Size = new Size(1234, 30);
             panel1.TabIndex = 0;
-            // 
-            // radioButton2
-            // 
-            radioButton2.AutoSize = true;
-            radioButton2.Location = new Point(141, 4);
-            radioButton2.Name = "radioButton2";
-            radioButton2.Size = new Size(95, 24);
-            radioButton2.TabIndex = 1;
-            radioButton2.TabStop = true;
-            radioButton2.Text = "Tìm kiếm ";
-            radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // radioButton1
-            // 
-            radioButton1.AutoSize = true;
-            radioButton1.Location = new Point(3, 4);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(132, 24);
-            radioButton1.TabIndex = 0;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "Thêm, Sửa, Xoá";
-            radioButton1.UseVisualStyleBackColor = true;
-            radioButton1.CheckedChanged += radioButton1_CheckedChanged;
             // 
             // panel2
             // 
@@ -186,11 +159,12 @@
             // 
             // panel10
             // 
+            panel10.Controls.Add(dateTimePicker2);
+            panel10.Controls.Add(dateTimePicker1);
+            panel10.Controls.Add(button4);
             panel10.Controls.Add(button3);
             panel10.Controls.Add(button2);
             panel10.Controls.Add(button1);
-            panel10.Controls.Add(label9);
-            panel10.Controls.Add(comboBox4);
             panel10.Controls.Add(label8);
             panel10.Controls.Add(numericUpDown2);
             panel10.Controls.Add(textBox2);
@@ -211,9 +185,37 @@
             panel10.Size = new Size(1234, 286);
             panel10.TabIndex = 1;
             // 
+            // dateTimePicker2
+            // 
+            dateTimePicker2.CustomFormat = "dd/MM/yyyy HH:mm:ss";
+            dateTimePicker2.Format = DateTimePickerFormat.Custom;
+            dateTimePicker2.Location = new Point(813, 155);
+            dateTimePicker2.Name = "dateTimePicker2";
+            dateTimePicker2.Size = new Size(250, 27);
+            dateTimePicker2.TabIndex = 22;
+            // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.CustomFormat = "dd/MM/yyyy HH:mm:ss";
+            dateTimePicker1.Format = DateTimePickerFormat.Custom;
+            dateTimePicker1.Location = new Point(813, 122);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(250, 27);
+            dateTimePicker1.TabIndex = 21;
+            // 
+            // button4
+            // 
+            button4.Location = new Point(813, 188);
+            button4.Name = "button4";
+            button4.Size = new Size(94, 29);
+            button4.TabIndex = 20;
+            button4.Text = "Lọc";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
+            // 
             // button3
             // 
-            button3.Location = new Point(605, 74);
+            button3.Location = new Point(326, 239);
             button3.Name = "button3";
             button3.Size = new Size(94, 29);
             button3.TabIndex = 19;
@@ -223,7 +225,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(605, 39);
+            button2.Location = new Point(226, 238);
             button2.Name = "button2";
             button2.Size = new Size(94, 29);
             button2.TabIndex = 18;
@@ -233,32 +235,13 @@
             // 
             // button1
             // 
-            button1.Location = new Point(605, 4);
+            button1.Location = new Point(126, 238);
             button1.Name = "button1";
             button1.Size = new Size(94, 29);
             button1.TabIndex = 17;
             button1.Text = "Thêm";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Location = new Point(20, 242);
-            label9.Name = "label9";
-            label9.Size = new Size(49, 20);
-            label9.TabIndex = 16;
-            label9.Text = "Mã kệ";
-            // 
-            // comboBox4
-            // 
-            comboBox4.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            comboBox4.AutoCompleteSource = AutoCompleteSource.ListItems;
-            comboBox4.FormattingEnabled = true;
-            comboBox4.Location = new Point(126, 239);
-            comboBox4.Name = "comboBox4";
-            comboBox4.Size = new Size(473, 28);
-            comboBox4.TabIndex = 15;
             // 
             // label8
             // 
@@ -396,8 +379,6 @@
             tableLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             tableLayoutPanel3.ResumeLayout(false);
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
             panel2.ResumeLayout(false);
             panel10.ResumeLayout(false);
             panel10.PerformLayout();
@@ -416,8 +397,6 @@
         private Panel panel1;
         private Panel panel2;
         private Panel panel10;
-        private Label label9;
-        private ComboBox comboBox4;
         private Label label8;
         private NumericUpDown numericUpDown2;
         private TextBox textBox2;
@@ -432,10 +411,11 @@
         private TextBox textBox1;
         private Label label3;
         private ComboBox comboBox1;
-        private RadioButton radioButton1;
-        private RadioButton radioButton2;
         private Button button3;
         private Button button2;
         private Button button1;
+        private Button button4;
+        private DateTimePicker dateTimePicker2;
+        private DateTimePicker dateTimePicker1;
     }
 }

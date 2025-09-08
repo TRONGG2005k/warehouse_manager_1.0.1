@@ -16,7 +16,6 @@ namespace warehouse_manager.dto.i
         public string NhaCungCap { get; set; } = string.Empty;
         public string MaNguoiLap { get; set; } = string.Empty;
         public string MaVatLieu { get; set; } = string.Empty;
-        public string Make { get; set; } = string.Empty;
 
         
     }

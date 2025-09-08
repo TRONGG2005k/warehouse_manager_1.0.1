@@ -111,7 +111,6 @@ namespace warehouse_manager.ui.user_control
                     NhaCungCap = comboBox3.SelectedItem.ToString(),
                     MaVatLieu = textBox2.Text,
                     SoLuong = (int)numericUpDown2.Value,
-                    Make = comboBox4.SelectedItem.ToString(),
                 });
             }
             catch (Exception ex)

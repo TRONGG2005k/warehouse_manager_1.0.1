@@ -60,7 +60,7 @@ namespace warehouse_manager.service
                     SoLuong = p.ChiTietPhieuNhaps!.FirstOrDefault()!.SoLuong ?? 0,
                     DonGia = p.ChiTietPhieuNhaps!.FirstOrDefault()!.DonGia ?? 0,
                     NhaCungCap = p.MaNhaCungCapNavigation!.TenNhaCungCap ?? "",
-                    Ke = p.ChiTietPhieuNhaps.First().VatLieu.Kes.First()!.MaKe,
+                    //Ke = p.ChiTietPhieuNhaps.First().VatLieu.Kes.First()!.MaKe,
                     NgayNhap = p.NgayNhap,
                     MaVatLieu = p.ChiTietPhieuNhaps!.FirstOrDefault()!.VatLieu!.MaVatLieu,
 
@@ -83,9 +83,9 @@ namespace warehouse_manager.service
                     SoLuong = (long)ct.SoLuong,
                     DonGia = ct.DonGia ?? 0,
                     NhaCungCap = pn.MaNhaCungCapNavigation.TenNhaCungCap,
-                    Ke = ct.VatLieu.Kes.FirstOrDefault() != null
-                         ? ct.VatLieu.Kes.FirstOrDefault().MaKe
-                         : null,
+                    //Ke = ct.VatLieu.Kes.FirstOrDefault() != null
+                    //     ? ct.VatLieu.Kes.FirstOrDefault().MaKe
+                    //     : null,
                     NgayNhap = pn.NgayNhap,
                     MaVatLieu = ct.VatLieu.MaVatLieu,
                     LoaiVatLieu = ct.VatLieu.MaLoaiNavigation.TenLoai
@@ -112,7 +112,7 @@ namespace warehouse_manager.service
                     SoLuong = (long)x.ct.SoLuong,
                     DonGia = x.ct.DonGia ?? 0,
                     NhaCungCap = x.pn.MaNhaCungCapNavigation.TenNhaCungCap,
-                    Ke = k != null ? k.MaKe : null,  // Nếu vật liệu không có kệ, vẫn ra 1 bản ghi với null
+                    //Ke = k != null ? k.MaKe : null,  // Nếu vật liệu không có kệ, vẫn ra 1 bản ghi với null
                     NgayNhap = x.pn.NgayNhap,
                     MaVatLieu = x.ct.VatLieu.MaVatLieu,
                     LoaiVatLieu = x.ct.VatLieu.MaLoaiNavigation.TenLoai
@@ -129,21 +129,23 @@ namespace warehouse_manager.service
                 .Include(pn => pn.ChiTietPhieuNhaps)
                     .ThenInclude(ct => ct.VatLieu)
                         .ThenInclude(v => v.Kes)
-                .SelectMany(pn => pn.ChiTietPhieuNhaps, (pn, ct) => new { pn, ct })
-                .SelectMany(x => x.ct.VatLieu.Kes.DefaultIfEmpty(), (x, k) => new dto.o.PhieuNhapDto
+                .SelectMany(pn => pn.ChiTietPhieuNhaps, (pn, ct) => new dto.o.PhieuNhapDto
                 {
-                    Id = x.pn.Id,
-                    TenHang = x.ct.VatLieu.Ten,
-                    DonViTinh = x.ct.VatLieu.DonViTinh,
-                    SoLuong = (long)x.ct.SoLuong,
-                    DonGia = x.ct.DonGia ?? 0,
-                    NhaCungCap = x.pn.MaNhaCungCapNavigation.TenNhaCungCap,
-                    Ke = k != null ? k.MaKe : null,  // Nếu vật liệu không có kệ, vẫn ra 1 bản ghi với null
-                    NgayNhap = x.pn.NgayNhap,
-                    MaVatLieu = x.ct.VatLieu.MaVatLieu,
-                    LoaiVatLieu = x.ct.VatLieu.MaLoaiNavigation.TenLoai
-
-                }).OrderByDescending(p => p.NgayNhap).ToList();
+                    Id = pn.Id,
+                    TenHang = ct.VatLieu.Ten,
+                    DonViTinh = ct.VatLieu.DonViTinh,
+                    SoLuong = (long)ct.SoLuong,
+                    DonGia = ct.DonGia ?? 0,
+                    NhaCungCap = pn.MaNhaCungCapNavigation.TenNhaCungCap,
+                    //Ke = ct.VatLieu.Kes.FirstOrDefault() != null
+                    //     ? ct.VatLieu.Kes.FirstOrDefault().MaKe
+                    //     : null,
+                    NgayNhap = pn.NgayNhap,
+                    MaVatLieu = ct.VatLieu.MaVatLieu,
+                    LoaiVatLieu = ct.VatLieu.MaLoaiNavigation.TenLoai
+                })
+                .OrderByDescending(p => p.NgayNhap)
+                .ToList();
 
         }
 
@@ -165,7 +167,7 @@ namespace warehouse_manager.service
                     SoLuong = (long)x.ct.SoLuong,
                     DonGia = x.ct.DonGia ?? 0,
                     NhaCungCap = x.pn.MaNhaCungCapNavigation.TenNhaCungCap,
-                    Ke = k != null ? k.MaKe : null,  // Nếu vật liệu không có kệ, vẫn ra 1 bản ghi với null
+                    //Ke = k != null ? k.MaKe : null,  // Nếu vật liệu không có kệ, vẫn ra 1 bản ghi với null
                     NgayNhap = x.pn.NgayNhap,
                     MaVatLieu = x.ct.VatLieu.MaVatLieu,
                     LoaiVatLieu = x.ct.VatLieu.MaLoaiNavigation.TenLoai
@@ -192,7 +194,7 @@ namespace warehouse_manager.service
                     SoLuong = (long)x.ct.SoLuong,
                     DonGia = x.ct.DonGia ?? 0,
                     NhaCungCap = x.pn.MaNhaCungCapNavigation.TenNhaCungCap,
-                    Ke = k != null ? k.MaKe : null,  // Nếu vật liệu không có kệ, vẫn ra 1 bản ghi với null
+                    //Ke = k != null ? k.MaKe : null,  // Nếu vật liệu không có kệ, vẫn ra 1 bản ghi với null
                     NgayNhap = x.pn.NgayNhap,
                     MaVatLieu = x.ct.VatLieu.MaVatLieu,
                     LoaiVatLieu = x.ct.VatLieu.MaLoaiNavigation.TenLoai
@@ -218,7 +220,7 @@ namespace warehouse_manager.service
                     SoLuong = (long)x.ct.SoLuong,
                     DonGia = x.ct.DonGia ?? 0,
                     NhaCungCap = x.pn.MaNhaCungCapNavigation.TenNhaCungCap,
-                    Ke = k != null ? k.MaKe : null,  // Nếu vật liệu không có kệ, vẫn ra 1 bản ghi với null
+                    //Ke = k != null ? k.MaKe : null,  // Nếu vật liệu không có kệ, vẫn ra 1 bản ghi với null
                     NgayNhap = x.pn.NgayNhap,
                     MaVatLieu = x.ct.VatLieu.MaVatLieu,
                     LoaiVatLieu = x.ct.VatLieu.MaLoaiNavigation.TenLoai
@@ -240,10 +242,7 @@ namespace warehouse_manager.service
                 var nhaCungCapTonTai = context.NhaCungCaps
                     .FirstOrDefault(ncc => ncc.TenNhaCungCap == taoPhieuNhap.NhaCungCap)
                     ?? throw new Exception("Nhà cung cấp không tồn tại");
-                var keTonTai = context.Kes
-                  .FirstOrDefault(k => k.MaKe == taoPhieuNhap.Make)
-                  ?? throw new Exception("kệ không tồn tại");
-
+               
                 var vatLieuTonTai = context.VatLieus
                     .FirstOrDefault(v => v.MaVatLieu == taoPhieuNhap.MaVatLieu);
 
@@ -261,19 +260,8 @@ namespace warehouse_manager.service
                         TrangThai = "Còn hàng",
                         MaNhaCungCap = nhaCungCapTonTai.Id
                     };
-
-                    // Gán kệ ngay tại đây
-                    vatLieu.Kes.Add(keTonTai);
                     context.VatLieus.Add(vatLieu);
                     context.SaveChanges();
-
-                    var vatLieu1 = context.VatLieus.First(v => v.MaVatLieu == taoPhieuNhap.MaVatLieu);
-                    if (!vatLieu1.Kes.Contains(keTonTai))
-                    {
-                        vatLieu1.Kes.Add(keTonTai);
-                        context.SaveChanges();
-                    }
-
                 }
                 else
                 {

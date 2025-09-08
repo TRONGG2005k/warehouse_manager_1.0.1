@@ -153,7 +153,7 @@
             // 
             dateTimePicker2.CustomFormat = "dd/MM/yyyy HH:mm:ss";
             dateTimePicker2.Format = DateTimePickerFormat.Custom;
-            dateTimePicker2.Location = new Point(3, 38);
+            dateTimePicker2.Location = new Point(-3, 73);
             dateTimePicker2.Name = "dateTimePicker2";
             dateTimePicker2.Size = new Size(250, 27);
             dateTimePicker2.TabIndex = 10;
@@ -163,7 +163,7 @@
             // 
             dateTimePicker1.CustomFormat = "dd/MM/yyyy HH:mm:ss";
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
-            dateTimePicker1.Location = new Point(259, 39);
+            dateTimePicker1.Location = new Point(253, 71);
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new Size(250, 27);
             dateTimePicker1.TabIndex = 9;

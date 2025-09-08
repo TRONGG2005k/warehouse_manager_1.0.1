@@ -410,6 +410,7 @@
             dataGridView1.Size = new Size(486, 472);
             dataGridView1.TabIndex = 1;
             dataGridView1.CellClick += dataGridView1_CellClick;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             dataGridView1.CellFormatting += dataGridView1_CellFormatting;
             // 
             // tableLayoutPanel4

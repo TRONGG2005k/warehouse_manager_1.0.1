@@ -15,8 +15,10 @@ namespace warehouse_manager.ui.uiController.phieuNhap
     public partial class PhieuNhap : UserControl
     {
         private PhieuNhapService phieuNhapService;
+        private NguoiDungService nguoiDungService;
         public PhieuNhap()
         {
+            nguoiDungService = new NguoiDungService();
             phieuNhapService = new PhieuNhapService();
             InitializeComponent();
             LoadDataChodataGridView();
@@ -27,19 +29,7 @@ namespace warehouse_manager.ui.uiController.phieuNhap
 
         }
 
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-            
-                comboBox1.Visible = radioButton1.Checked;
-                comboBox2.Visible = radioButton1.Checked;
-                comboBox3.Visible = radioButton1.Checked;
-                comboBox4.Visible = radioButton1.Checked;
-                textBox1.Visible = radioButton1.Checked;
-                textBox2.Visible = radioButton1.Checked;
-                numericUpDown1.Visible = radioButton1.Checked;
-                numericUpDown2.Visible = radioButton1.Checked;
-            
-        }
+        
         private void LoadDataChodataGridView()
         {
             dataGridView1.DataSource = null;
@@ -82,11 +72,7 @@ namespace warehouse_manager.ui.uiController.phieuNhap
                 comboBox3.Items.Add(item);
             }
             List<String> kes = new KeService().danhSachKe();
-            foreach (var item in kes)
-            {
-                comboBox4.Items.Add(item);
-            }
-
+           
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -107,16 +93,12 @@ namespace warehouse_manager.ui.uiController.phieuNhap
                 {
                     throw new Exception("Nhà cung cấp không tồn tại");
                 }
-                else if (comboBox4.Items.Contains(comboBox4.Text) == false)
-                {
-                    throw new Exception("Kệ không tồn tại");
-                }
+               
                 if (string.IsNullOrEmpty(comboBox1.SelectedItem.ToString()) ||
                   string.IsNullOrEmpty(textBox1.Text) ||
                   string.IsNullOrEmpty(comboBox2.SelectedItem.ToString()) ||
                   string.IsNullOrEmpty(comboBox3.SelectedItem.ToString()) ||
                   string.IsNullOrEmpty(textBox2.Text) ||
-                  string.IsNullOrEmpty(comboBox4.SelectedItem.ToString()) ||
                   (int)numericUpDown2.Value == 0
                 )
                 {
@@ -132,14 +114,16 @@ namespace warehouse_manager.ui.uiController.phieuNhap
                     NhaCungCap = comboBox3.SelectedItem.ToString(),
                     MaVatLieu = textBox2.Text,
                     SoLuong = (int)numericUpDown2.Value,
-                    Make = comboBox4.SelectedItem.ToString(),
+                   
                 });
                 LoadDataChodataGridView();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                //MessageBox.Show(ex.Message);
                 //throw new Exception("lỗi " + ex.Message);
+                throw new Exception("Thêm phiếu nhập thất bại: " + ex.Message + " |" + ex.InnerException);
+
             }
         }
 
@@ -166,17 +150,14 @@ namespace warehouse_manager.ui.uiController.phieuNhap
                 {
                     throw new Exception("Nhà cung cấp không tồn tại");
                 }
-                else if (comboBox4.Items.Contains(comboBox4.Text) == false)
-                {
-                    throw new Exception("Kệ không tồn tại");
-                }
+               
 
                 if (string.IsNullOrEmpty(comboBox1.SelectedItem.ToString()) ||
                 string.IsNullOrEmpty(textBox1.Text) ||
                 string.IsNullOrEmpty(comboBox2.SelectedItem.ToString()) ||
                 string.IsNullOrEmpty(comboBox3.SelectedItem.ToString()) ||
                 string.IsNullOrEmpty(textBox2.Text) ||
-                string.IsNullOrEmpty(comboBox4.SelectedItem.ToString()) ||
+               
                 (int)numericUpDown2.Value == 0
                 )
                 {
@@ -184,7 +165,7 @@ namespace warehouse_manager.ui.uiController.phieuNhap
                     throw new Exception("vui lòng nhập đủ thông tìn");
                 }
 
-               
+
                 var isSuccess = phieuNhapService.suaPhieuNhap(new SuaPhieuNhapDto
                 {
                     Id = Convert.ToInt32(dataGridView1.CurrentRow.Cells["Id"].Value),
@@ -195,7 +176,7 @@ namespace warehouse_manager.ui.uiController.phieuNhap
                     NhaCungCap = comboBox3.SelectedItem.ToString(),
                     MaVatLieu = textBox2.Text,
                     SoLuong = Convert.ToInt32(numericUpDown2.Value),
-                    Ke = comboBox4.SelectedItem.ToString()
+                  
                 });
                 if (isSuccess)
                 {
@@ -222,7 +203,7 @@ namespace warehouse_manager.ui.uiController.phieuNhap
                 comboBox3.SelectedItem = row.Cells["NhaCungCap"].Value.ToString();
                 textBox2.Text = row.Cells["MaVatLieu"].Value.ToString();
                 numericUpDown2.Value = Convert.ToDecimal(row.Cells["SoLuong"].Value);
-                comboBox4.SelectedItem = row.Cells["Ke"].Value.ToString();
+                //comboBox4.SelectedItem = row.Cells["Ke"].Value.ToString();
 
             }
         }
@@ -231,6 +212,10 @@ namespace warehouse_manager.ui.uiController.phieuNhap
         {
             try
             {
+                if (!nguoiDungService.kiemTraVaiTroAdmin())
+                {
+                    throw new Exception("Bạn không có quyền xoá phiếu");
+                }
                 if (dataGridView1.CurrentCell == null)
                 {
                     MessageBox.Show("Vui lòng chọn phiếu nhập cần xóa");
@@ -242,7 +227,33 @@ namespace warehouse_manager.ui.uiController.phieuNhap
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Xóa phiếu nhập thất bại");
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dateTimePicker1.Value > dateTimePicker2.Value)
+                {
+                    throw new Exception("Ngày bắt đầu phải nhỏ hơn ngày kết thúc");
+                }
+                //MessageBox.Show("Tính năng tìm ngày đang được phát triển");
+                
+                List<dto.o.PhieuNhapDto> list = phieuNhapService.TimPhieuTheoKhoangThoiGian(
+                        new LocTheoNgayDto
+                        {
+                            Start = dateTimePicker1.Value,
+                            End = dateTimePicker2.Value
+                        }
+                    );
+                dataGridView1.DataSource = list;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi" + ex.Message);
+                return;
             }
         }
     }
