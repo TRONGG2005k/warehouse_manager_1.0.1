@@ -28,8 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            SuspendLayout();
+            // 
+            // HomePage
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = Properties.Resources.transport_company_1;
+            BackgroundImageLayout = ImageLayout.Stretch;
+            Name = "HomePage";
+            Size = new Size(1060, 617);
+            ResumeLayout(false);
         }
 
         #endregion

@@ -96,6 +96,7 @@
             // 
             // tableLayoutPanel2
             // 
+            tableLayoutPanel2.BackColor = Color.Transparent;
             tableLayoutPanel2.ColumnCount = 1;
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel2.Controls.Add(dataGridView1, 0, 1);
@@ -150,6 +151,7 @@
             // 
             // panel2
             // 
+            panel2.BackColor = Color.Transparent;
             panel2.Controls.Add(panel10);
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(3, 39);
@@ -370,6 +372,8 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = Properties.Resources.transport_company_1;
+            BackgroundImageLayout = ImageLayout.Center;
             Controls.Add(tableLayoutPanel1);
             Name = "PhieuNhap";
             Size = new Size(1252, 673);

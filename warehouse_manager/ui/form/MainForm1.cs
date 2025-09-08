@@ -171,7 +171,7 @@ namespace warehouse_manager.ui.form
 
         private void xuấtFilePdfToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           
+
             if (nguoiDungService.KiemTraDangNhap())
             {
                 LoadPage(new XuatPhieuNhapPDF());
@@ -181,6 +181,16 @@ namespace warehouse_manager.ui.form
                 MessageBox.Show("Bạn chưa đăng nhập" +
                     "");
             }
+        }
+
+        private void quảnLýKệToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void quảnLýVậtLiệToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
