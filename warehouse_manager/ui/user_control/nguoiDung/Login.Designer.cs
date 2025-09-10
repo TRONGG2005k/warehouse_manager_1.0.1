@@ -42,7 +42,6 @@
             textBox2 = new TextBox();
             textBox1 = new TextBox();
             panel3 = new Panel();
-            button2 = new Button();
             button1 = new Button();
             panel4 = new Panel();
             tableLayoutPanel1.SuspendLayout();
@@ -193,23 +192,12 @@
             // 
             // panel3
             // 
-            panel3.Controls.Add(button2);
             panel3.Controls.Add(button1);
             panel3.Dock = DockStyle.Fill;
             panel3.Location = new Point(3, 416);
             panel3.Name = "panel3";
             panel3.Size = new Size(534, 226);
             panel3.TabIndex = 2;
-            // 
-            // button2
-            // 
-            button2.Location = new Point(423, 43);
-            button2.Name = "button2";
-            button2.Size = new Size(94, 29);
-            button2.TabIndex = 4;
-            button2.Text = "đăng ký";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
             // 
             // button1
             // 
@@ -276,6 +264,5 @@
         private Button button1;
         private Panel panel4;
         private CheckBox checkBox1;
-        private Button button2;
     }
 }

@@ -135,7 +135,7 @@ namespace warehouse_manager.service
 
                 workbook.SaveAs(duongDan);
 
-                MessageBox.Show("Xuất Excel thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Xuất Excel thành công!", "Thông báo file của bạn ở " + duongDan, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {

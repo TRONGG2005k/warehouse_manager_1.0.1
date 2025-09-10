@@ -98,7 +98,6 @@ namespace warehouse_manager.ui.form
                     if (nguoiDungService.kiemTraVaiTroAdmin())
                     {
                         LoadPage(new uiController.phieuxuat.DuyetPhieu());
-
                     }
                     else
                     {
@@ -191,6 +190,11 @@ namespace warehouse_manager.ui.form
         private void quảnLýVậtLiệToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void quảnLýKệToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+           
         }
     }
 }

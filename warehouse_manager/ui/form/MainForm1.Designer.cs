@@ -40,15 +40,15 @@
             báoCáoToolStripMenuItem = new ToolStripMenuItem();
             báoCáoNhậpXuấtTồnToolStripMenuItem = new ToolStripMenuItem();
             báoCáoKiểmKêToolStripMenuItem = new ToolStripMenuItem();
-            panel1 = new Panel();
             hàngTồnKhoToolStripMenuItem = new ToolStripMenuItem();
             tìmKiếnVậtLiệuToolStripMenuItem = new ToolStripMenuItem();
+            quảnLýVậtLiệToolStripMenuItem = new ToolStripMenuItem();
             danhMụcQuảnLýToolStripMenuItem = new ToolStripMenuItem();
             quảnLýKệToolStripMenuItem1 = new ToolStripMenuItem();
             quảnLýNhàCungCấpToolStripMenuItem1 = new ToolStripMenuItem();
-            quảnLýCơSởSảnXuấtToolStripMenuItem = new ToolStripMenuItem();
             quảnLýLoạiVậtLiệuToolStripMenuItem = new ToolStripMenuItem();
-            quảnLýVậtLiệToolStripMenuItem = new ToolStripMenuItem();
+            quảnLýCơSởSảnXuấtToolStripMenuItem = new ToolStripMenuItem();
+            panel1 = new Panel();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -142,14 +142,6 @@
             báoCáoKiểmKêToolStripMenuItem.Text = "Báo cáo kiểm kê";
             báoCáoKiểmKêToolStripMenuItem.Click += báoCáoKiểmKêToolStripMenuItem_Click;
             // 
-            // panel1
-            // 
-            panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(0, 28);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(1156, 544);
-            panel1.TabIndex = 1;
-            // 
             // hàngTồnKhoToolStripMenuItem
             // 
             hàngTồnKhoToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { tìmKiếnVậtLiệuToolStripMenuItem, quảnLýVậtLiệToolStripMenuItem });
@@ -160,8 +152,14 @@
             // tìmKiếnVậtLiệuToolStripMenuItem
             // 
             tìmKiếnVậtLiệuToolStripMenuItem.Name = "tìmKiếnVậtLiệuToolStripMenuItem";
-            tìmKiếnVậtLiệuToolStripMenuItem.Size = new Size(237, 26);
+            tìmKiếnVậtLiệuToolStripMenuItem.Size = new Size(202, 26);
             tìmKiếnVậtLiệuToolStripMenuItem.Text = "Tìm kiến Vật liệu";
+            // 
+            // quảnLýVậtLiệToolStripMenuItem
+            // 
+            quảnLýVậtLiệToolStripMenuItem.Name = "quảnLýVậtLiệToolStripMenuItem";
+            quảnLýVậtLiệToolStripMenuItem.Size = new Size(202, 26);
+            quảnLýVậtLiệToolStripMenuItem.Text = "Quản lý vật liệu";
             // 
             // danhMụcQuảnLýToolStripMenuItem
             // 
@@ -173,20 +171,15 @@
             // quảnLýKệToolStripMenuItem1
             // 
             quảnLýKệToolStripMenuItem1.Name = "quảnLýKệToolStripMenuItem1";
-            quảnLýKệToolStripMenuItem1.Size = new Size(234, 26);
+            quảnLýKệToolStripMenuItem1.Size = new Size(239, 26);
             quảnLýKệToolStripMenuItem1.Text = "Quản lý kệ";
+            quảnLýKệToolStripMenuItem1.Click += quảnLýKệToolStripMenuItem1_Click;
             // 
             // quảnLýNhàCungCấpToolStripMenuItem1
             // 
             quảnLýNhàCungCấpToolStripMenuItem1.Name = "quảnLýNhàCungCấpToolStripMenuItem1";
-            quảnLýNhàCungCấpToolStripMenuItem1.Size = new Size(234, 26);
+            quảnLýNhàCungCấpToolStripMenuItem1.Size = new Size(239, 26);
             quảnLýNhàCungCấpToolStripMenuItem1.Text = "Quản lý nhà cung cấp";
-            // 
-            // quảnLýCơSởSảnXuấtToolStripMenuItem
-            // 
-            quảnLýCơSởSảnXuấtToolStripMenuItem.Name = "quảnLýCơSởSảnXuấtToolStripMenuItem";
-            quảnLýCơSởSảnXuấtToolStripMenuItem.Size = new Size(239, 26);
-            quảnLýCơSởSảnXuấtToolStripMenuItem.Text = "Quản lý cơ sở sản xuất";
             // 
             // quảnLýLoạiVậtLiệuToolStripMenuItem
             // 
@@ -194,11 +187,19 @@
             quảnLýLoạiVậtLiệuToolStripMenuItem.Size = new Size(239, 26);
             quảnLýLoạiVậtLiệuToolStripMenuItem.Text = "Quản lý loại vật liệu";
             // 
-            // quảnLýVậtLiệToolStripMenuItem
+            // quảnLýCơSởSảnXuấtToolStripMenuItem
             // 
-            quảnLýVậtLiệToolStripMenuItem.Name = "quảnLýVậtLiệToolStripMenuItem";
-            quảnLýVậtLiệToolStripMenuItem.Size = new Size(224, 26);
-            quảnLýVậtLiệToolStripMenuItem.Text = "Quản lý vật liệu";
+            quảnLýCơSởSảnXuấtToolStripMenuItem.Name = "quảnLýCơSởSảnXuấtToolStripMenuItem";
+            quảnLýCơSởSảnXuấtToolStripMenuItem.Size = new Size(239, 26);
+            quảnLýCơSởSảnXuấtToolStripMenuItem.Text = "Quản lý cơ sở sản xuất";
+            // 
+            // panel1
+            // 
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(0, 28);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1156, 544);
+            panel1.TabIndex = 1;
             // 
             // MainForm1
             // 

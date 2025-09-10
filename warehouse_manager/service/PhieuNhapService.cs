@@ -231,73 +231,72 @@ namespace warehouse_manager.service
 
         }
         // chức năng không liên quan đến select
-        public void themPhieuNhap(dto.i.TaoPhieuNhapKhoDto taoPhieuNhap)
+        public void ThemPhieuNhap(dto.i.TaoPhieuNhapKhoDto taoPhieuNhap)
         {
-
             try
             {
-               
-                var loaiVatLieuTonTai = context.LoaiVatLieus
-                .FirstOrDefault(l => l.TenLoai == taoPhieuNhap.LoaiVatLieu)
-                ?? throw new Exception("Loại vật liệu không tồn tại");
-                //MessageBox.Show("laoi: " + taoPhieuNhap.LoaiVatLieu);
-                var nhaCungCapTonTai = context.NhaCungCaps
+                // 1. Kiểm tra loại vật liệu & nhà cung cấp
+                var loaiVatLieu = context.LoaiVatLieus
+                    .FirstOrDefault(l => l.TenLoai == taoPhieuNhap.LoaiVatLieu)
+                    ?? throw new Exception("Loại vật liệu không tồn tại");
+
+                var nhaCungCap = context.NhaCungCaps
                     .FirstOrDefault(ncc => ncc.TenNhaCungCap == taoPhieuNhap.NhaCungCap)
                     ?? throw new Exception("Nhà cung cấp không tồn tại");
-               
-                var vatLieuTonTai = context.VatLieus
+
+                // 2. Tìm hoặc tạo vật liệu
+                var vatLieu = context.VatLieus
                     .FirstOrDefault(v => v.MaVatLieu == taoPhieuNhap.MaVatLieu);
 
-
-                if (vatLieuTonTai == null)
+                if (vatLieu == null)
                 {
-                    var vatLieu = new Models.VatLieu
+                    vatLieu = new Models.VatLieu
                     {
                         MaVatLieu = taoPhieuNhap.MaVatLieu,
                         Ten = taoPhieuNhap.TenVatLieu,
-                        MaLoai = loaiVatLieuTonTai.Id,
+                        MaLoai = loaiVatLieu.Id,
                         SoLuongTon = taoPhieuNhap.SoLuong,
                         DonGia = taoPhieuNhap.DonGia,
                         DonViTinh = taoPhieuNhap.DonViTinh,
                         TrangThai = "Còn hàng",
-                        MaNhaCungCap = nhaCungCapTonTai.Id
+                        MaNhaCungCap = nhaCungCap.Id
                     };
                     context.VatLieus.Add(vatLieu);
-                    context.SaveChanges();
                 }
                 else
                 {
-                    vatLieuTonTai.SoLuongTon += taoPhieuNhap.SoLuong;
-                    context.SaveChanges();
+                    vatLieu.SoLuongTon += taoPhieuNhap.SoLuong;
                 }
 
-                // 3. Đọc người dùng từ file
+                // 3. Đọc người dùng hiện tại
                 string content = File.Exists("user.txt") ? File.ReadAllText("user.txt") : "";
-                var nguoiDung = context.NguoiDungs.FirstOrDefault(n => n.TenDangNhap == content)
+                var nguoiDung = context.NguoiDungs
+                    .FirstOrDefault(n => n.TenDangNhap == content)
                     ?? throw new Exception("Người dùng không tồn tại");
 
-               
-                var phieuNhap = context.PhieuNhaps.Add(new Models.PhieuNhap
+                // 4. Tạo phiếu nhập kèm chi tiết
+                var phieuNhap = new Models.PhieuNhap
                 {
                     NgayNhap = DateTime.Now,
                     NguoiDungId = nguoiDung.Id,
-                    MaNhaCungCap = nhaCungCapTonTai.Id,
-                    TongTien = taoPhieuNhap.SoLuong * taoPhieuNhap.DonGia
-                });
-                context.SaveChanges();
+                    MaNhaCungCap = nhaCungCap.Id,
+                    TongTien = taoPhieuNhap.SoLuong * taoPhieuNhap.DonGia,
+                    ChiTietPhieuNhaps = new List<Models.ChiTietPhieuNhap>
+                    {
+                        new Models.ChiTietPhieuNhap
+                        {
+                            SoLuong = taoPhieuNhap.SoLuong,
+                            DonGia = taoPhieuNhap.DonGia,
+                            DonViTinh = taoPhieuNhap.DonViTinh,
+                            ThanhTien = taoPhieuNhap.SoLuong * taoPhieuNhap.DonGia,
+                            VatLieu = vatLieu
+                        }
+                    }
+                };
 
-                var vatLieuTonTai1 = context.VatLieus.First(v => v.MaVatLieu == taoPhieuNhap.MaVatLieu);
+                context.PhieuNhaps.Add(phieuNhap);
 
-                var chiTietPhieuNhap = context.ChiTietPhieuNhaps.Add(new Models.ChiTietPhieuNhap
-                {
-                    SoLuong = taoPhieuNhap.SoLuong,
-                    DonGia = taoPhieuNhap.DonGia,
-                    DonViTinh = taoPhieuNhap.DonViTinh,
-                    ThanhTien = taoPhieuNhap.SoLuong * taoPhieuNhap.DonGia,
-                    PhieuNhapId = phieuNhap.Entity.Id,
-                    VatLieuId = vatLieuTonTai1.Id,
-                    VatLieu = vatLieuTonTai1
-                });
+                // 5. Lưu thay đổi
                 context.SaveChanges();
 
                 MessageBox.Show("Thêm phiếu nhập thành công");
@@ -307,6 +306,7 @@ namespace warehouse_manager.service
                 throw new Exception("Thêm phiếu nhập thất bại: " + ex.Message);
             }
         }
+
 
         public Boolean suaPhieuNhap(SuaPhieuNhapDto suaPhieuNhap)
         {
