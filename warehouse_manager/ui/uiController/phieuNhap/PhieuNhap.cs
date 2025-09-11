@@ -120,9 +120,9 @@ namespace warehouse_manager.ui.uiController.phieuNhap
             }
             catch (Exception ex)
             {
-                //MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message);
                 //throw new Exception("lỗi " + ex.Message);
-                throw new Exception("Thêm phiếu nhập thất bại: " + ex.Message + " |" + ex.InnerException);
+                //throw new Exception("Thêm phiếu nhập thất bại: " + ex.Message + " |" + ex.InnerException);
 
             }
         }
