@@ -38,7 +38,32 @@ namespace warehouse_manager.ui.form
         {
 
         }
-
+        private void kiểmTraVaiTròTrướcKiVào(UserControl control)
+        {
+            try
+            {
+                if (nguoiDungService.KiemTraDangNhap())
+                {
+                    if (nguoiDungService.kiemTraVaiTroAdmin())
+                    {
+                        LoadPage(control);
+                    }
+                    else
+                    {
+                        throw new Exception("bạn không có quyền dùng chức năng này");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Bạn chưa đăng nhập" +
+                        "");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         private void MainForm1_FormClosing(object sender, FormClosingEventArgs e)
         {
             string filePath = "user.txt";
@@ -189,12 +214,27 @@ namespace warehouse_manager.ui.form
 
         private void quảnLýVậtLiệToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            kiểmTraVaiTròTrướcKiVào(new uiController.vatlieu.VatLieu());
         }
 
         private void quảnLýKệToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-           
+
+        }
+
+       
+
+        private void tìmKiếnVậtLiệuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (nguoiDungService.KiemTraDangNhap())
+            {
+                LoadPage(new uiController.timkiemvitrivatlieu.TimKiemViTriVatLieu());
+            }
+            else
+            {
+                MessageBox.Show("Bạn chưa đăng nhập" +
+                    "");
+            }
         }
     }
 }

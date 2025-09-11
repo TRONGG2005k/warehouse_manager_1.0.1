@@ -452,7 +452,7 @@ namespace warehouse_manager.service
 
                         chiTiet.SoLuongThucXuat = (long)vatLieu.SoLuongTon;
                         vatLieu.SoLuongTon = 0;
-                        vatLieu.TrangThai = "hết hàng";
+                        vatLieu.TrangThai = "HET_HANG";
                     }
                     else
                     {

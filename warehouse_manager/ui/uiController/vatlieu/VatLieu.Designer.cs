@@ -41,6 +41,8 @@
             label11 = new Label();
             label5 = new Label();
             panel2 = new Panel();
+            comboBox5 = new ComboBox();
+            label12 = new Label();
             button3 = new Button();
             button2 = new Button();
             button1 = new Button();
@@ -56,8 +58,7 @@
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
-            label12 = new Label();
-            comboBox5 = new ComboBox();
+            button4 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
@@ -150,6 +151,7 @@
             // 
             // panel3
             // 
+            panel3.Controls.Add(button4);
             panel3.Controls.Add(comboBox3);
             panel3.Controls.Add(comboBox4);
             panel3.Controls.Add(label10);
@@ -229,6 +231,24 @@
             panel2.Size = new Size(474, 256);
             panel2.TabIndex = 16;
             // 
+            // comboBox5
+            // 
+            comboBox5.FormattingEnabled = true;
+            comboBox5.Location = new Point(166, 202);
+            comboBox5.Name = "comboBox5";
+            comboBox5.Size = new Size(180, 28);
+            comboBox5.TabIndex = 32;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 163);
+            label12.Location = new Point(8, 204);
+            label12.Name = "label12";
+            label12.Size = new Size(94, 23);
+            label12.TabIndex = 31;
+            label12.Text = "Đơn vị tính";
+            // 
             // button3
             // 
             button3.Location = new Point(368, 75);
@@ -237,6 +257,7 @@
             button3.TabIndex = 30;
             button3.Text = "Xoá";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // button2
             // 
@@ -246,6 +267,7 @@
             button2.TabIndex = 29;
             button2.Text = "Sửa";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // button1
             // 
@@ -361,23 +383,15 @@
             label2.TabIndex = 16;
             label2.Text = "Mã vật liệu";
             // 
-            // label12
+            // button4
             // 
-            label12.AutoSize = true;
-            label12.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 163);
-            label12.Location = new Point(8, 204);
-            label12.Name = "label12";
-            label12.Size = new Size(94, 23);
-            label12.TabIndex = 31;
-            label12.Text = "Đơn vị tính";
-            // 
-            // comboBox5
-            // 
-            comboBox5.FormattingEnabled = true;
-            comboBox5.Location = new Point(166, 202);
-            comboBox5.Name = "comboBox5";
-            comboBox5.Size = new Size(180, 28);
-            comboBox5.TabIndex = 32;
+            button4.Location = new Point(221, 75);
+            button4.Name = "button4";
+            button4.Size = new Size(180, 54);
+            button4.TabIndex = 32;
+            button4.Text = "Lọc";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // VatLieu
             // 
@@ -432,5 +446,6 @@
         private Label label2;
         private ComboBox comboBox5;
         private Label label12;
+        private Button button4;
     }
 }

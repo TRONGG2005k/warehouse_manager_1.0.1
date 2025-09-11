@@ -155,12 +155,14 @@
             tìmKiếnVậtLiệuToolStripMenuItem.Name = "tìmKiếnVậtLiệuToolStripMenuItem";
             tìmKiếnVậtLiệuToolStripMenuItem.Size = new Size(224, 26);
             tìmKiếnVậtLiệuToolStripMenuItem.Text = "Tìm kiến Vật liệu";
+            tìmKiếnVậtLiệuToolStripMenuItem.Click += tìmKiếnVậtLiệuToolStripMenuItem_Click;
             // 
             // quảnLýVậtLiệToolStripMenuItem
             // 
             quảnLýVậtLiệToolStripMenuItem.Name = "quảnLýVậtLiệToolStripMenuItem";
             quảnLýVậtLiệToolStripMenuItem.Size = new Size(224, 26);
             quảnLýVậtLiệToolStripMenuItem.Text = "Quản lý vật liệu";
+            quảnLýVậtLiệToolStripMenuItem.Click += quảnLýVậtLiệToolStripMenuItem_Click;
             // 
             // danhMụcQuảnLýToolStripMenuItem
             // 

@@ -26,6 +26,10 @@ namespace warehouse_manager.service
             return context.VatLieus.FirstOrDefault(vl => vl.MaVatLieu == mavatLieu);
         }
 
+        public List<string > danhSachTrangThaiVatLieu()
+        {
+            return context.VatLieus.Select(vl => vl.TrangThai).ToList();
+        }
         public List<VatLieu> layVatLieuTheoMa()
         {
             return context.VatLieus
