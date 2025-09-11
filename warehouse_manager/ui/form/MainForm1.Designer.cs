@@ -1,4 +1,5 @@
-﻿namespace warehouse_manager.ui.form
+﻿
+namespace warehouse_manager.ui.form
 {
     partial class MainForm1
     {
@@ -155,12 +156,14 @@
             tìmKiếnVậtLiệuToolStripMenuItem.Name = "tìmKiếnVậtLiệuToolStripMenuItem";
             tìmKiếnVậtLiệuToolStripMenuItem.Size = new Size(202, 26);
             tìmKiếnVậtLiệuToolStripMenuItem.Text = "Tìm kiến Vật liệu";
+            tìmKiếnVậtLiệuToolStripMenuItem.Click += tìmKiếnVậtLiệuToolStripMenuItem_Click;
             // 
             // quảnLýVậtLiệToolStripMenuItem
             // 
             quảnLýVậtLiệToolStripMenuItem.Name = "quảnLýVậtLiệToolStripMenuItem";
             quảnLýVậtLiệToolStripMenuItem.Size = new Size(202, 26);
             quảnLýVậtLiệToolStripMenuItem.Text = "Quản lý vật liệu";
+            quảnLýVậtLiệToolStripMenuItem.Click += quảnLýVậtLiệToolStripMenuItem_Click;
             // 
             // danhMụcQuảnLýToolStripMenuItem
             // 
@@ -225,6 +228,8 @@
             ResumeLayout(false);
             PerformLayout();
         }
+
+       
 
         #endregion
 

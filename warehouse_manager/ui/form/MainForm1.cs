@@ -215,11 +215,12 @@ namespace warehouse_manager.ui.form
 
         private void quảnLýVậtLiệToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            kiểmTraVaiTròTrướcKiVào(new uiController.vatlieu.VatLieu());
         }
 
         private void quảnLýNhàCungCấpToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+
             kiểmTraVaiTròTrướcKiVào(new uiController.nhacungcap.NhaCungCap());
         }
 
@@ -231,6 +232,24 @@ namespace warehouse_manager.ui.form
         private void quảnLýCơSởSảnXuấtToolStripMenuItem_Click(object sender, EventArgs e)
         {
             kiểmTraVaiTròTrướcKiVào(new uiController.cososanxuat.CoSoSanXuat());
+
+
+        }
+
+       
+
+        private void tìmKiếnVậtLiệuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (nguoiDungService.KiemTraDangNhap())
+            {
+                LoadPage(new uiController.timkiemvitrivatlieu.TimKiemViTriVatLieu());
+            }
+            else
+            {
+                MessageBox.Show("Bạn chưa đăng nhập" +
+                    "");
+            }
+
         }
     }
 }

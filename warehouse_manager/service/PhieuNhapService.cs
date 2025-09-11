@@ -258,7 +258,7 @@ namespace warehouse_manager.service
                         SoLuongTon = taoPhieuNhap.SoLuong,
                         DonGia = taoPhieuNhap.DonGia,
                         DonViTinh = taoPhieuNhap.DonViTinh,
-                        TrangThai = "Còn hàng",
+                        TrangThai = "CON_HANG",
                         MaNhaCungCap = nhaCungCap.Id
                     };
                     context.VatLieus.Add(vatLieu);
@@ -350,7 +350,7 @@ namespace warehouse_manager.service
                         vatLieu.MaVatLieu = suaPhieuNhap.MaVatLieu;
                         vatLieu.Ten = suaPhieuNhap.TenVatLieu;
                         vatLieu.SoLuongTon = suaPhieuNhap.SoLuong;
-                        vatLieu.TrangThai = "Còn hàng";
+                        vatLieu.TrangThai = "CON_HANG";
                         vatLieu.MaNhaCungCap = context.NhaCungCaps
                             .First(ncc => ncc.TenNhaCungCap == suaPhieuNhap.NhaCungCap).Id;
                         vatLieu.MaLoai = context.LoaiVatLieus
@@ -366,7 +366,7 @@ namespace warehouse_manager.service
                         chiTietPhieuNhap.VatLieuId = vatLieuTonTai2.Id;
                         if(vatLieuTonTai2.SoLuongTon > 0)
                         {
-                            vatLieuTonTai2.TrangThai = "còn hàng";
+                            vatLieuTonTai2.TrangThai = "CON_HANG";
                         }
                     }
                 }
