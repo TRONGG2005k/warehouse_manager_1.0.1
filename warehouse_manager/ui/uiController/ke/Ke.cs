@@ -1,4 +1,5 @@
 ﻿using DocumentFormat.OpenXml.Office2010.Excel;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,6 +33,10 @@ namespace warehouse_manager.ui.uiController.ke
                 if (string.IsNullOrEmpty(textBox3.Text))
                 {
                     throw new Exception("Vị trí không được để trống");
+                }
+                if(context.Kes.FirstOrDefault(k => k.MaKe == textBox1.Text) != null)
+                {
+                    throw new Exception("Mã kệ đã tồn tại");
                 }
                 context.Kes.Add(new Models.Ke
                 {

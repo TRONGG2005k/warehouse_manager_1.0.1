@@ -210,6 +210,8 @@
             // 
             // comboBox2
             // 
+            comboBox2.AutoCompleteMode = AutoCompleteMode.Suggest;
+            comboBox2.AutoCompleteSource = AutoCompleteSource.ListItems;
             comboBox2.FormattingEnabled = true;
             comboBox2.Location = new Point(20, 44);
             comboBox2.Name = "comboBox2";
