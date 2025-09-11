@@ -287,7 +287,7 @@
             label1.Name = "label1";
             label1.Size = new Size(1002, 65);
             label1.TabIndex = 1;
-            label1.Text = "Quản lý phiếu nhập";
+            label1.Text = "Quản lý nhà cung cấp\r\n";
             label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel2

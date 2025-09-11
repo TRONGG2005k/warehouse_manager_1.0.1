@@ -142,7 +142,11 @@ namespace warehouse_manager.ui.uiController.ke
         {
             try
             {
-                long id = (long)dataGridView1.CurrentRow.Cells["Id"].Value;
+                if (string.IsNullOrEmpty(textBox4.Text))
+                {
+                    throw new Exception("vui long nhập giá trị vào ô tìm kiếm" +
+                        "");
+                }
 
                 var ke = context.Kes.Where(
                     k => k.MaKe == textBox4.Text)
@@ -155,7 +159,7 @@ namespace warehouse_manager.ui.uiController.ke
                     }).ToList();
                 if (ke == null)
                 {
-                    throw new Exception("không tìm thấy kệ với id" + id);
+                    throw new Exception("không tìm thấy kệ với ");
                 }
                 dataGridView1.DataSource = ke;
             }
