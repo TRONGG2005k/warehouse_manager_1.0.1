@@ -56,7 +56,7 @@ namespace warehouse_manager.service
                     DonViTinh = ct.VatLieu.DonViTinh ?? "",
                     TonHeThong = ct.TonHeThong,
                     TonThucTe = ct.TonThucTe,
-                    GhiChu = kk.GhiChu
+                    GhiChu = kk.GhiChu ?? ""
                 })
                 .ToList();
         }
@@ -73,7 +73,7 @@ namespace warehouse_manager.service
                     DonViTinh = ct.VatLieu.DonViTinh ?? "",
                     TonHeThong = ct.TonHeThong,
                     TonThucTe = ct.TonThucTe,
-                    GhiChu = kk.GhiChu
+                    GhiChu = kk.GhiChu ?? ""
                 })
                 .ToList();
         }

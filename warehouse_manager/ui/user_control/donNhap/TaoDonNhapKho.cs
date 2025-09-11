@@ -102,7 +102,7 @@ namespace warehouse_manager.ui.user_control
                     //MessageBox.Show("vui lòng nhập đủ thông tìn");
                     throw new Exception("vui lòng nhập đủ thông tìn");
                 }
-                phieuService.themPhieuNhap(new TaoPhieuNhapKhoDto
+                phieuService.ThemPhieuNhap(new TaoPhieuNhapKhoDto
                 {
                     LoaiVatLieu = comboBox1.SelectedItem.ToString(),
                     TenVatLieu = textBox1.Text,

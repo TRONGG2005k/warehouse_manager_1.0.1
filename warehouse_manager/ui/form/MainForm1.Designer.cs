@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm1));
             menuStrip1 = new MenuStrip();
             logoutToolStripMenuItem = new ToolStripMenuItem();
             phiếuNhậpToolStripMenuItem = new ToolStripMenuItem();
@@ -152,13 +153,13 @@
             // tìmKiếnVậtLiệuToolStripMenuItem
             // 
             tìmKiếnVậtLiệuToolStripMenuItem.Name = "tìmKiếnVậtLiệuToolStripMenuItem";
-            tìmKiếnVậtLiệuToolStripMenuItem.Size = new Size(202, 26);
+            tìmKiếnVậtLiệuToolStripMenuItem.Size = new Size(224, 26);
             tìmKiếnVậtLiệuToolStripMenuItem.Text = "Tìm kiến Vật liệu";
             // 
             // quảnLýVậtLiệToolStripMenuItem
             // 
             quảnLýVậtLiệToolStripMenuItem.Name = "quảnLýVậtLiệToolStripMenuItem";
-            quảnLýVậtLiệToolStripMenuItem.Size = new Size(202, 26);
+            quảnLýVậtLiệToolStripMenuItem.Size = new Size(224, 26);
             quảnLýVậtLiệToolStripMenuItem.Text = "Quản lý vật liệu";
             // 
             // danhMụcQuảnLýToolStripMenuItem
@@ -209,9 +210,10 @@
             ClientSize = new Size(1156, 572);
             Controls.Add(panel1);
             Controls.Add(menuStrip1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
             Name = "MainForm1";
-            Text = "MainForm1";
+            Text = "Quản lý kho";
             WindowState = FormWindowState.Maximized;
             FormClosing += MainForm1_FormClosing;
             Load += MainForm1_Load;

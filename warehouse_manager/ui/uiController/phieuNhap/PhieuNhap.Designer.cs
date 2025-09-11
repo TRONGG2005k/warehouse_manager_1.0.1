@@ -115,6 +115,7 @@
             // 
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.BackgroundColor = SystemColors.Control;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Dock = DockStyle.Fill;
@@ -207,42 +208,46 @@
             // 
             // button4
             // 
+            button4.BackColor = Color.FromArgb(128, 128, 255);
             button4.Location = new Point(813, 188);
             button4.Name = "button4";
             button4.Size = new Size(94, 29);
             button4.TabIndex = 20;
             button4.Text = "Lọc";
-            button4.UseVisualStyleBackColor = true;
+            button4.UseVisualStyleBackColor = false;
             button4.Click += button4_Click;
             // 
             // button3
             // 
+            button3.BackColor = Color.Red;
             button3.Location = new Point(326, 239);
             button3.Name = "button3";
             button3.Size = new Size(94, 29);
             button3.TabIndex = 19;
             button3.Text = "Xoá";
-            button3.UseVisualStyleBackColor = true;
+            button3.UseVisualStyleBackColor = false;
             button3.Click += button3_Click;
             // 
             // button2
             // 
+            button2.BackColor = Color.Yellow;
             button2.Location = new Point(226, 238);
             button2.Name = "button2";
             button2.Size = new Size(94, 29);
             button2.TabIndex = 18;
             button2.Text = "Sửa";
-            button2.UseVisualStyleBackColor = true;
+            button2.UseVisualStyleBackColor = false;
             button2.Click += button2_Click;
             // 
             // button1
             // 
+            button1.BackColor = Color.FromArgb(0, 192, 0);
             button1.Location = new Point(126, 238);
             button1.Name = "button1";
             button1.Size = new Size(94, 29);
             button1.TabIndex = 17;
             button1.Text = "Thêm";
-            button1.UseVisualStyleBackColor = true;
+            button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
             // label8
