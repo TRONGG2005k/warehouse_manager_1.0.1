@@ -39,6 +39,32 @@ namespace warehouse_manager.ui.form
 
         }
 
+        private void kiểmTraVaiTròTrướcKiVào(UserControl control)
+        {
+            try
+            {
+                if (nguoiDungService.KiemTraDangNhap())
+                {
+                    if (nguoiDungService.kiemTraVaiTroAdmin())
+                    {
+                        LoadPage(control);
+                    }
+                    else
+                    {
+                        throw new Exception("bạn không có quyền dùng chức năng này");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Bạn chưa đăng nhập" +
+                        "");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         private void MainForm1_FormClosing(object sender, FormClosingEventArgs e)
         {
             string filePath = "user.txt";
@@ -184,7 +210,7 @@ namespace warehouse_manager.ui.form
 
         private void quảnLýKệToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            kiểmTraVaiTròTrướcKiVào(new uiController.ke.Ke());
         }
 
         private void quảnLýVậtLiệToolStripMenuItem_Click(object sender, EventArgs e)
@@ -192,9 +218,19 @@ namespace warehouse_manager.ui.form
 
         }
 
-        private void quảnLýKệToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void quảnLýNhàCungCấpToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-           
+            kiểmTraVaiTròTrướcKiVào(new uiController.nhacungcap.NhaCungCap());
+        }
+
+        private void quảnLýLoạiVậtLiệuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            kiểmTraVaiTròTrướcKiVào(new uiController.ke.LoaiVatLieu());
+        }
+
+        private void quảnLýCơSởSảnXuấtToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            kiểmTraVaiTròTrướcKiVào(new uiController.cososanxuat.CoSoSanXuat());
         }
     }
 }
