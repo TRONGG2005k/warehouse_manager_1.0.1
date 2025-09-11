@@ -23,14 +23,18 @@ namespace warehouse_manager.ui.uiController.phieuxuat
         {
             try
             {
-                if (comboBox1.Items.Contains(comboBox1.Text) == false)
+                if (string.IsNullOrWhiteSpace(comboBox1.Text) || !comboBox1.Items.Contains(comboBox1.Text))
                 {
-                    throw new Exception("Tên chuyền sản xuất không tồn tại");
+                    MessageBox.Show("Tên chuyền sản xuất không tồn tại");
+                    return;
                 }
-                else if (comboBox2.Items.Contains(comboBox2.Text) == false)
+
+                if (string.IsNullOrWhiteSpace(comboBox2.Text) || !comboBox2.Items.Contains(comboBox2.Text))
                 {
-                    throw new Exception("Mã vật liệu không tồn tại vui lòng báo cáo quản lý");
+                    MessageBox.Show("Mã vật liệu không tồn tại, vui lòng báo cáo quản lý");
+                    return;
                 }
+
                 var service = new service.PhieuXuatService();
                 var phieuXuat = new ThemPhieuXuatDto
                 {

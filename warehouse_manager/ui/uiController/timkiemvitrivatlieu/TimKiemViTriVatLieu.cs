@@ -62,37 +62,62 @@ namespace warehouse_manager.ui.uiController.timkiemvitrivatlieu
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = context.VatLieus
-               .Where(vl => vl.MaVatLieu == textBox1.Text)
-               .Include(vl => vl.Kes)
-               .SelectMany(vl => vl.Kes, (vl, ke) => new
-               {
-                   Id = vl.Id,
-                   MaLieu = vl.MaVatLieu,
-                   Ten = vl.Ten,
-                   SoluonTon = vl.SoLuongTon,
-                   MaKe = ke.MaKe,
-                   Khu = ke.Khu,
-                   TrangThai = vl.TrangThai == "CON_HANG" ? "Còn hàng" : "Hết hàng"
+            try
+            {
+                if (string.IsNullOrWhiteSpace(textBox1.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập mã vật liệu!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-               }).ToList();
+                dataGridView1.DataSource = context.VatLieus
+                   .Where(vl => vl.MaVatLieu == textBox1.Text)
+                   .Include(vl => vl.Kes)
+                   .SelectMany(vl => vl.Kes, (vl, ke) => new
+                   {
+                       Id = vl.Id,
+                       MaLieu = vl.MaVatLieu,
+                       Ten = vl.Ten,
+                       SoluonTon = vl.SoLuongTon,
+                       MaKe = ke.MaKe,
+                       Khu = ke.Khu,
+                       TrangThai = vl.TrangThai == "CON_HANG" ? "Còn hàng" : "Hết hàng"
+                   }).ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lỗi xảy ra: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = context.VatLieus
-               .Where(vl => vl.TrangThai == comboBox1.SelectedItem.ToString())
-               .Include(vl => vl.Kes)
-               .SelectMany(vl => vl.Kes, (vl, ke) => new
-               {
-                   Id = vl.Id,
-                   MaLieu = vl.MaVatLieu,
-                   Ten = vl.Ten,
-                   SoluonTon = vl.SoLuongTon,
-                   MaKe = ke.MaKe,
-                   Khu = ke.Khu,
-                   TrangThai = vl.TrangThai == "CON_HANG" ? "Còn hàng" : "Hết hàng"
-               }).ToList();
+            try
+            {
+                if (comboBox1.SelectedItem == null)
+                {
+                    MessageBox.Show("Vui lòng chọn trạng thái!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                dataGridView1.DataSource = context.VatLieus
+                   .Where(vl => vl.TrangThai == comboBox1.SelectedItem.ToString())
+                   .Include(vl => vl.Kes)
+                   .SelectMany(vl => vl.Kes, (vl, ke) => new
+                   {
+                       Id = vl.Id,
+                       MaLieu = vl.MaVatLieu,
+                       Ten = vl.Ten,
+                       SoluonTon = vl.SoLuongTon,
+                       MaKe = ke.MaKe,
+                       Khu = ke.Khu,
+                       TrangThai = vl.TrangThai == "CON_HANG" ? "Còn hàng" : "Hết hàng"
+                   }).ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lỗi xảy ra: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
@@ -109,19 +134,32 @@ namespace warehouse_manager.ui.uiController.timkiemvitrivatlieu
 
         private void button3_Click(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = context.Kes
-                .Where(k => k.Khu == comboBox2.SelectedItem.ToString())
-                .Include(k => k.VatLieus)
-                .SelectMany(k => k.VatLieus, (k, vl) => new
+            try
+            {
+                if (comboBox2.SelectedItem == null)
                 {
-                    Id = vl.Id,
-                    MaLieu = vl.MaVatLieu,
-                    Ten = vl.Ten,
-                    SoluonTon = vl.SoLuongTon,
-                    MaKe = k.MaKe,
-                    Khu = k.Khu,
-                    TrangThai = vl.TrangThai == "CON_HANG" ? "Còn hàng" : "Hết hàng"
-                }).ToList();
+                    MessageBox.Show("Vui lòng chọn khu!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                dataGridView1.DataSource = context.Kes
+                    .Where(k => k.Khu == comboBox2.SelectedItem.ToString())
+                    .Include(k => k.VatLieus)
+                    .SelectMany(k => k.VatLieus, (k, vl) => new
+                    {
+                        Id = vl.Id,
+                        MaLieu = vl.MaVatLieu,
+                        Ten = vl.Ten,
+                        SoluonTon = vl.SoLuongTon,
+                        MaKe = k.MaKe,
+                        Khu = k.Khu,
+                        TrangThai = vl.TrangThai == "CON_HANG" ? "Còn hàng" : "Hết hàng"
+                    }).ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lỗi xảy ra: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
