@@ -45,22 +45,22 @@ namespace warehouse_manager.ui.uiController.nhacungcap
 
         private bool ValidateInput()
         {
-            if (string.IsNullOrWhiteSpace(txtTenNCC.Text))
+            if (string.IsNullOrEmpty(txtTenNCC.Text) || txtTenNCC.Text == "")
             {
                 MessageBox.Show("Tên nhà cung cấp không được để trống!");
                 return false;
             }
-            if (string.IsNullOrWhiteSpace(txtDiaChi.Text))
+            if (string.IsNullOrEmpty(txtDiaChi.Text) || txtDiaChi.Text =="")
             {
                 MessageBox.Show("Địa chỉ không được để trống!");
                 return false;
             }
-            if (!string.IsNullOrWhiteSpace(txtSoDienThoai.Text) && !txtSoDienThoai.Text.All(char.IsDigit))
+            if (!string.IsNullOrEmpty(txtSoDienThoai.Text) && !txtSoDienThoai.Text.All(char.IsDigit) || txtSoDienThoai.Text == "")
             {
                 MessageBox.Show("Số điện thoại chỉ được nhập số!");
                 return false;
             }
-            if (!string.IsNullOrWhiteSpace(txtEmail.Text) && !txtEmail.Text.Contains("@"))
+            if (!string.IsNullOrEmpty(txtEmail.Text) && !txtEmail.Text.Contains("@") || txtEmail.Text =="")
             {
                 MessageBox.Show("Email không hợp lệ!");
                 return false;

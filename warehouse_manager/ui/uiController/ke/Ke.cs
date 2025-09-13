@@ -110,14 +110,8 @@ namespace warehouse_manager.ui.uiController.ke
             try
             {
                 long id = (long)dataGridView1.CurrentRow.Cells["Id"].Value;
-                if (string.IsNullOrEmpty(textBox1.Text))
-                {
-                    throw new Exception("Mã kệ không được để trống");
-                }
-                if (string.IsNullOrEmpty(textBox3.Text))
-                {
-                    throw new Exception("Vị trí không được để trống");
-                }
+                
+              
                 var ke = context.Kes.Find(id);
                 if (ke == null)
                 {
@@ -138,6 +132,7 @@ namespace warehouse_manager.ui.uiController.ke
             var row = dataGridView1.CurrentRow;
             if (dataGridView1.CurrentRow != null)
             {
+                MessageBox.Show("bạn chọn kệ có mã:" + row.Cells["MaKe"].Value.ToString());
                 textBox1.Text = row.Cells["MaKe"].Value.ToString();
                 textBox2.Text = row.Cells["Ghichu"].Value.ToString();
                 textBox3.Text = row.Cells["Khu"].Value.ToString();
