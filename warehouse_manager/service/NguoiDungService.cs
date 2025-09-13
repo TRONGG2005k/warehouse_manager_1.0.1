@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using warehouse_manager.context;
 using warehouse_manager.Models;
 using warehouse_manager.ui;
-using warehouse_manager.ui.user_control;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace warehouse_manager.service

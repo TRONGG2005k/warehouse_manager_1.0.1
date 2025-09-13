@@ -17,6 +17,7 @@ namespace warehouse_manager.service
         }
         public List<String> danhSachKe()
         {
+            
             return context.Kes.Select(k => k.MaKe!).ToList();
         }
        

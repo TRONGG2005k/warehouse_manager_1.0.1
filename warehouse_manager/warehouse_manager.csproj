@@ -46,12 +46,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="ui\user_control\donNhap\XoaPhieuNhap.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="ui\user_control\donNhap\SuaPhieuNhap.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
   </ItemGroup>
 
   <ItemGroup>

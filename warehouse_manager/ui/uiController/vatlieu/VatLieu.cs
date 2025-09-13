@@ -196,6 +196,7 @@ namespace warehouse_manager.ui.uiController.vatlieu
         }
         private void LoadData()
         {
+            
             dataGridView1.DataSource = context.VatLieus
                 .Include(vl => vl.MaNhaCungCapNavigation)
                 .Include(vl => vl.MaLoaiNavigation)
@@ -214,6 +215,7 @@ namespace warehouse_manager.ui.uiController.vatlieu
 
                 }
             ).ToList(); ;
+
         }
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {

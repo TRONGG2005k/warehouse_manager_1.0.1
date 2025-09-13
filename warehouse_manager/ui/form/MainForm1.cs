@@ -14,7 +14,6 @@ using warehouse_manager.service;
 using warehouse_manager.ui.uiController.kiemke;
 using warehouse_manager.ui.uiController.phieuNhap;
 using warehouse_manager.ui.uiController.phieuxuat;
-using warehouse_manager.ui.user_control.baocao;
 namespace warehouse_manager.ui.form
 {
     public partial class MainForm1 : Form

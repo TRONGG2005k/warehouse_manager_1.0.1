@@ -14,7 +14,6 @@ using warehouse_manager.Models;
 using warehouse_manager.service;
 using warehouse_manager.ui.form;
 using warehouse_manager.ui.uiController;
-using warehouse_manager.ui.user_control;
 
 namespace warehouse_manager.ui
 {
