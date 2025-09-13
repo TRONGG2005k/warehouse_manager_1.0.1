@@ -179,7 +179,7 @@ namespace warehouse_manager.ui.uiController.cososanxuat
             {
                 var keyword = txtSearch.Text.Trim().ToLower();
                 dataGridView1.DataSource = context.CoSoSanXuats
-                    .Where(x => x.TenCoSo.ToLower().Contains(keyword))
+                    .Where(x => x.TenCoSo.ToLower().Contains(keyword) && x.IsDeleted != true)
                     .Select(x => new
                     {
                         x.Id,
