@@ -210,7 +210,7 @@
             label1.Name = "label1";
             label1.Size = new Size(1210, 112);
             label1.TabIndex = 1;
-            label1.Text = "Tạo phiếu nhập";
+            label1.Text = "Tạo phiếu xuất";
             label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel2
