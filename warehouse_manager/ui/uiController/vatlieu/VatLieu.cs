@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DocumentFormat.OpenXml.Office2010.Excel;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -109,6 +110,10 @@ namespace warehouse_manager.ui.uiController.vatlieu
         {
             try
             {
+                if (context.VatLieus.FirstOrDefault(vl => vl.MaVatLieu == textBox1.Text) != null)
+                {
+                    throw new Exception("mã vật liệu đã tồn tại");
+                }
                 if (!KiemTraNhapLieu()) return;
                 var loai = context.LoaiVatLieus.FirstOrDefault(l => l.TenLoai == comboBox2.SelectedItem.ToString());
                 var ncc = context.NhaCungCaps.FirstOrDefault(n => n.TenNhaCungCap == comboBox1.SelectedItem.ToString());
@@ -119,6 +124,9 @@ namespace warehouse_manager.ui.uiController.vatlieu
                     return;
                 }
 
+                var selectedKes = checkedListBox1.CheckedItems
+                                   .Cast<Ke>()
+                                   .ToList();
 
                 int sl = int.TryParse(textBox4.Text, out int result1) ? result1 : 0;
 
@@ -131,7 +139,8 @@ namespace warehouse_manager.ui.uiController.vatlieu
                     SoLuongTon = sl,
                     MaLoai = loai.Id,
                     MaNhaCungCap = ncc.Id,
-                    TrangThai = sl > 0 ? "Còn hàng" : "Hết hàng"
+                    TrangThai = sl > 0 ? "Còn hàng" : "Hết hàng",
+                    Kes = selectedKes
                 };
 
                 context.VatLieus.Add(vl);
@@ -181,13 +190,16 @@ namespace warehouse_manager.ui.uiController.vatlieu
             {
                 comboBox5.Items.Add(item);
             }
-
+            checkedListBox1.DataSource = context.Kes.ToList();
+            checkedListBox1.DisplayMember = "MaKe";
+            checkedListBox1.ValueMember = "Id";
         }
         private void LoadData()
         {
             dataGridView1.DataSource = context.VatLieus
                 .Include(vl => vl.MaNhaCungCapNavigation)
                 .Include(vl => vl.MaLoaiNavigation)
+                .Where(vl => vl.IsDeleted != true)
                 .Select(
                 vl => new
                 {
@@ -199,6 +211,7 @@ namespace warehouse_manager.ui.uiController.vatlieu
                     LoaiVatLieu = vl.MaLoaiNavigation.TenLoai,
                     TenNhaCungCap = vl.MaNhaCungCapNavigation.TenNhaCungCap,
                     TrangThai = vl.TrangThai
+
                 }
             ).ToList(); ;
         }
@@ -206,6 +219,14 @@ namespace warehouse_manager.ui.uiController.vatlieu
         {
             if (e.RowIndex < 0) return;
 
+            var ma = dataGridView1.CurrentRow.Cells["MaVatLieu"].Value;
+            var vatLieu = context.VatLieus
+            .Include(vl => vl.MaLoaiNavigation)
+            .Include(vl => vl.MaNhaCungCapNavigation)
+            .Include(vl => vl.Kes) // load luôn Kes nếu cần
+            .FirstOrDefault(vl => vl.MaVatLieu == ma);
+
+            if (vatLieu == null) return;
             DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
             textBox1.Text = row.Cells["MaVatLieu"].Value?.ToString();
             textBox2.Text = row.Cells["DonGia"].Value?.ToString();
@@ -214,12 +235,18 @@ namespace warehouse_manager.ui.uiController.vatlieu
             comboBox1.SelectedItem = row.Cells["TenNhaCungCap"].Value?.ToString();
             comboBox2.SelectedItem = row.Cells["LoaiVatLieu"].Value?.ToString();
             comboBox5.SelectedItem = row.Cells["DonViTinh"].Value?.ToString();
+            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+            {
+                var ke = (Ke)checkedListBox1.Items[i];
+                checkedListBox1.SetItemChecked(i, vatLieu.Kes.Any(k => k.Id == ke.Id));
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             try
             {
+
                 if (!KiemTraNhapLieu()) return;
 
                 // Tìm bản ghi theo Mã vật liệu
@@ -229,7 +256,9 @@ namespace warehouse_manager.ui.uiController.vatlieu
                     MessageBox.Show("Không tìm thấy vật liệu cần sửa!");
                     return;
                 }
-
+                var selectedKes = checkedListBox1.CheckedItems
+                                   .Cast<Ke>()
+                                   .ToList();
                 // Lấy loại vật liệu và nhà cung cấp
                 var loai = context.LoaiVatLieus.FirstOrDefault(l => l.TenLoai == comboBox2.SelectedItem.ToString());
                 var ncc = context.NhaCungCaps.FirstOrDefault(n => n.TenNhaCungCap == comboBox1.SelectedItem.ToString());
@@ -247,7 +276,7 @@ namespace warehouse_manager.ui.uiController.vatlieu
                 vl.MaLoai = loai.Id;
                 vl.MaNhaCungCap = ncc.Id;
                 vl.TrangThai = vl.SoLuongTon > 0 ? "Còn hàng" : "Hết hàng";
-
+                vl.Kes = selectedKes;
                 context.SaveChanges();
                 MessageBox.Show("Cập nhật vật liệu thành công!");
                 LoadData();
@@ -281,7 +310,7 @@ namespace warehouse_manager.ui.uiController.vatlieu
                     return;
                 }
 
-                context.VatLieus.Remove(vl);
+                vl.IsDeleted = true;
                 context.SaveChanges();
                 MessageBox.Show("Xoá vật liệu thành công!");
                 LoadData();
@@ -297,14 +326,16 @@ namespace warehouse_manager.ui.uiController.vatlieu
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Có lỗi khi xoá: " + ex.Message);
+                //MessageBox.Show("Có lỗi khi xoá: " + ex.Message);
+                throw new Exception("Có lỗi khi xoá: " + ex.Message);
+
             }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
 
-            
+
             if (comboBox3.SelectedIndex != -1 && comboBox4.SelectedIndex != -1)
             {
                 var loai = context.LoaiVatLieus.FirstOrDefault(
@@ -313,7 +344,7 @@ namespace warehouse_manager.ui.uiController.vatlieu
                 var ncc = context.NhaCungCaps.FirstOrDefault(
                     n => n.TenNhaCungCap == comboBox4.SelectedItem.ToString());
                 dataGridView1.DataSource = context.VatLieus
-                .Where(v => v.MaLoai == loai.Id && v.MaNhaCungCap == ncc.Id)
+                .Where(v => v.MaLoai == loai.Id && v.MaNhaCungCap == ncc.Id && v.IsDeleted != true)
                 .Include(vl => vl.MaNhaCungCapNavigation)
                 .Include(vl => vl.MaLoaiNavigation)
                 .Select(
@@ -336,7 +367,7 @@ namespace warehouse_manager.ui.uiController.vatlieu
                 l => l.TenLoai == comboBox3.SelectedItem.ToString());
 
                 dataGridView1.DataSource = context.VatLieus
-                .Where(v => v.MaLoai == loai.Id)
+                .Where(v => v.MaLoai == loai.Id && v.IsDeleted != true)
                 .Include(vl => vl.MaNhaCungCapNavigation)
                 .Include(vl => vl.MaLoaiNavigation)
                 .Select(
@@ -353,11 +384,12 @@ namespace warehouse_manager.ui.uiController.vatlieu
                 }
                 ).ToList(); ;
             }
-            else if (comboBox4.SelectedIndex != -1) {
+            else if (comboBox4.SelectedIndex != -1)
+            {
                 var ncc = context.NhaCungCaps.FirstOrDefault(
                     n => n.TenNhaCungCap == comboBox4.SelectedItem.ToString());
                 dataGridView1.DataSource = context.VatLieus
-                .Where(v => v.MaNhaCungCap == ncc.Id)
+                .Where(v => v.MaNhaCungCap == ncc.Id &&  v.IsDeleted != true)
                 .Include(vl => vl.MaNhaCungCapNavigation)
                 .Include(vl => vl.MaLoaiNavigation)
                 .Select(
@@ -373,10 +405,16 @@ namespace warehouse_manager.ui.uiController.vatlieu
                     TrangThai = vl.TrangThai
                 }
                 ).ToList(); ;
-            } else
+            }
+            else
             {
                 MessageBox.Show("vui lòng chọn giá trị");
             }
+        }
+
+        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

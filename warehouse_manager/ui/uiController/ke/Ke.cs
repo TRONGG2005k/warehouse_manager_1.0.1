@@ -54,7 +54,7 @@ namespace warehouse_manager.ui.uiController.ke
                 //throw new Exception("Lỗi: " + ex.Message);
             }
         }
-
+       
         private void Ke_Load(object sender, EventArgs e)
         {
             LoadData();
@@ -76,6 +76,10 @@ namespace warehouse_manager.ui.uiController.ke
             try
             {
                 long id = (long)dataGridView1.CurrentRow.Cells["Id"].Value;
+                if (context.Kes.FirstOrDefault(k => k.MaKe == textBox1.Text) != null)
+                {
+                    throw new Exception("Mã kệ đã tồn tại");
+                }
                 if (string.IsNullOrEmpty(textBox1.Text))
                 {
                     throw new Exception("Mã kệ không được để trống");
@@ -98,8 +102,8 @@ namespace warehouse_manager.ui.uiController.ke
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("Lỗi: " + ex.Message);
-                throw new Exception("Lỗi: " + ex.Message);
+                MessageBox.Show("Lỗi: " + ex.Message);
+                //throw new Exception("Lỗi: " + ex.Message);
 
             }
         }

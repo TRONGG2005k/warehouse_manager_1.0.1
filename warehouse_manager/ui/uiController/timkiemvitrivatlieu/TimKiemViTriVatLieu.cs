@@ -49,6 +49,7 @@ namespace warehouse_manager.ui.uiController.timkiemvitrivatlieu
         {
             dataGridView1.DataSource = context.VatLieus
                 .Include(vl => vl.Kes)
+                .Where(vl => vl.IsDeleted != true)
                 .SelectMany(vl => vl.Kes, (vl, ke) => new
                 {
                     Id = vl.Id,
@@ -71,7 +72,7 @@ namespace warehouse_manager.ui.uiController.timkiemvitrivatlieu
                 }
 
                 dataGridView1.DataSource = context.VatLieus
-                   .Where(vl => vl.MaVatLieu == textBox1.Text)
+                   .Where(vl => vl.MaVatLieu == textBox1.Text && vl.IsDeleted != true)
                    .Include(vl => vl.Kes)
                    .SelectMany(vl => vl.Kes, (vl, ke) => new
                    {
@@ -101,7 +102,8 @@ namespace warehouse_manager.ui.uiController.timkiemvitrivatlieu
                 }
 
                 dataGridView1.DataSource = context.VatLieus
-                   .Where(vl => vl.TrangThai == comboBox1.SelectedItem.ToString())
+                   .Where(vl => vl.TrangThai == comboBox1.SelectedItem.ToString()
+                   && vl.IsDeleted != true)
                    .Include(vl => vl.Kes)
                    .SelectMany(vl => vl.Kes, (vl, ke) => new
                    {
@@ -143,9 +145,9 @@ namespace warehouse_manager.ui.uiController.timkiemvitrivatlieu
                 }
 
                 dataGridView1.DataSource = context.Kes
-                    .Where(k => k.Khu == comboBox2.SelectedItem.ToString())
                     .Include(k => k.VatLieus)
-                    .SelectMany(k => k.VatLieus, (k, vl) => new
+                    .Where(k => k.Khu == comboBox2.SelectedItem.ToString())
+                    .SelectMany(k => k.VatLieus.Where(vl => vl.IsDeleted != true), (k, vl) => new
                     {
                         Id = vl.Id,
                         MaLieu = vl.MaVatLieu,

@@ -35,12 +35,15 @@
             panel1 = new Panel();
             label9 = new Label();
             panel3 = new Panel();
+            button4 = new Button();
             comboBox3 = new ComboBox();
             comboBox4 = new ComboBox();
             label10 = new Label();
             label11 = new Label();
             label5 = new Label();
             panel2 = new Panel();
+            checkedListBox1 = new CheckedListBox();
+            label13 = new Label();
             comboBox5 = new ComboBox();
             label12 = new Label();
             button3 = new Button();
@@ -58,7 +61,6 @@
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
-            button4 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
@@ -133,9 +135,9 @@
             panel1.Controls.Add(panel3);
             panel1.Controls.Add(label5);
             panel1.Controls.Add(panel2);
-            panel1.Location = new Point(78, 71);
+            panel1.Location = new Point(78, 6);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1031, 319);
+            panel1.Size = new Size(1031, 449);
             panel1.TabIndex = 4;
             // 
             // label9
@@ -160,6 +162,16 @@
             panel3.Name = "panel3";
             panel3.Size = new Size(433, 256);
             panel3.TabIndex = 18;
+            // 
+            // button4
+            // 
+            button4.Location = new Point(221, 75);
+            button4.Name = "button4";
+            button4.Size = new Size(180, 54);
+            button4.TabIndex = 32;
+            button4.Text = "Lọc";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // comboBox3
             // 
@@ -209,6 +221,8 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(checkedListBox1);
+            panel2.Controls.Add(label13);
             panel2.Controls.Add(comboBox5);
             panel2.Controls.Add(label12);
             panel2.Controls.Add(button3);
@@ -228,8 +242,27 @@
             panel2.Controls.Add(label2);
             panel2.Location = new Point(14, 51);
             panel2.Name = "panel2";
-            panel2.Size = new Size(474, 256);
+            panel2.Size = new Size(474, 398);
             panel2.TabIndex = 16;
+            // 
+            // checkedListBox1
+            // 
+            checkedListBox1.FormattingEnabled = true;
+            checkedListBox1.Location = new Point(166, 236);
+            checkedListBox1.Name = "checkedListBox1";
+            checkedListBox1.Size = new Size(180, 114);
+            checkedListBox1.TabIndex = 35;
+            checkedListBox1.SelectedIndexChanged += checkedListBox1_SelectedIndexChanged;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 163);
+            label13.Location = new Point(8, 237);
+            label13.Name = "label13";
+            label13.Size = new Size(29, 23);
+            label13.TabIndex = 34;
+            label13.Text = "Kệ";
             // 
             // comboBox5
             // 
@@ -383,16 +416,6 @@
             label2.TabIndex = 16;
             label2.Text = "Mã vật liệu";
             // 
-            // button4
-            // 
-            button4.Location = new Point(221, 75);
-            button4.Name = "button4";
-            button4.Size = new Size(180, 54);
-            button4.TabIndex = 32;
-            button4.Text = "Lọc";
-            button4.UseVisualStyleBackColor = true;
-            button4.Click += button4_Click;
-            // 
             // VatLieu
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -447,5 +470,7 @@
         private ComboBox comboBox5;
         private Label label12;
         private Button button4;
+        private Label label13;
+        private CheckedListBox checkedListBox1;
     }
 }

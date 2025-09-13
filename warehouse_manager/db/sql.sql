@@ -23,4 +23,8 @@ SET @id = 123; -- id phiếu nhập cần lọc
 
 select * from vat_lieu
 
+select * from [nha_cung_cap]
 
+
+ALTER TABLE vat_lieu
+ADD is_deleted BIT NOT NULL CONSTRAINT DF_vat_lieu_is_deleted DEFAULT(0);

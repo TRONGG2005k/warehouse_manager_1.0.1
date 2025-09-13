@@ -51,6 +51,9 @@ public partial class VatLieu
     [Column("ma_loai")]
     public long? MaLoai { get; set; }
 
+    [Column("is_deleted")]
+    public bool IsDeleted { get; set; } = false;
+
     [InverseProperty("VatLieu")]
     public virtual ICollection<ChiTietPhieuNhap> ChiTietPhieuNhaps { get; set; } = new List<ChiTietPhieuNhap>();
 
