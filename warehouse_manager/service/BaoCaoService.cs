@@ -78,105 +78,47 @@ namespace warehouse_manager.service
                 })
                 .ToList();
         }
-        public void XuatExcel(List<BCNXT> danhSach, string duongDan, DateTime tu, DateTime den)
+        
+
+        public void XuatExcel<T>(
+            List<T> danhSach,
+            string filePath,
+            DateTime tuNgay,
+            DateTime denNgay,
+            string tieuDeBaoCao,
+            string tienToSheet,
+            string[] headers,
+            Action<IXLWorksheet, T, int> mapRow // hàm ánh xạ dữ liệu từng dòng
+        )
         {
             try
             {
                 XLWorkbook workbook;
-
-                if (System.IO.File.Exists(duongDan))
-                {
-                    workbook = new XLWorkbook(duongDan);
-                }
-                else
-                {
-                    workbook = new XLWorkbook();
-                }
-
-                string sheetName = $"BaoCaoNXT_{tu:ddMMyyyy}_{den:ddMMyyyy}";
-                int count = 1;
-                while (workbook.Worksheets.Any(ws => ws.Name == sheetName))
-                {
-                    sheetName = $"BaoCaoNXT_{tu:ddMMyyyy}_{den:ddMMyyyy}_{count++}";
-                }
-
-                var ws = workbook.Worksheets.Add(sheetName);
-
-                ws.Cell(1, 1).Value = $"Báo cáo Nhập - Xuất - Tồn từ {tu:dd/MM/yyyy} đến {den:dd/MM/yyyy}";
-                ws.Range(1, 1, 1, 7).Merge();
-                ws.Cell(1, 1).Style.Font.Bold = true;
-                ws.Cell(1, 1).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
-
-                ws.Cell(2, 1).Value = "Mã vật liệu";
-                ws.Cell(2, 2).Value = "Tên vật liệu";
-                ws.Cell(2, 3).Value = "Đơn vị tính";
-                ws.Cell(2, 4).Value = "Tồn đầu kỳ";
-                ws.Cell(2, 5).Value = "Nhập trong kỳ";
-                ws.Cell(2, 6).Value = "Xuất trong kỳ";
-                ws.Cell(2, 7).Value = "Tồn cuối kỳ";
-
-                int row = 3;
-                foreach (var item in danhSach)
-                {
-                    ws.Cell(row, 1).Value = item.MaVatLieu;
-                    ws.Cell(row, 2).Value = item.TenVatLieu;
-                    ws.Cell(row, 3).Value = item.DonViTinh;
-                    ws.Cell(row, 4).Value = item.TonDauKy;
-                    ws.Cell(row, 5).Value = item.NhapTrongKy;
-                    ws.Cell(row, 6).Value = item.XuatTrongKy;
-                    ws.Cell(row, 7).Value = item.TonCuoiKy;
-                    row++;
-                }
-
-                ws.Columns().AdjustToContents();
-
-                workbook.SaveAs(duongDan);
-
-                MessageBox.Show("Xuất Excel thành công!", "Thông báo file của bạn ở " + duongDan, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Lỗi khi xuất Excel: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-
-        public void XuatExcel(List<BCKienKeDto> danhSach, string filePath, DateTime tuNgay, DateTime denNgay)
-        {
-            try
-            {
-                XLWorkbook workbook;
-  
-             
-
                 if (System.IO.File.Exists(filePath))
-                {
                     workbook = new XLWorkbook(filePath);
-                }
                 else
-                {
                     workbook = new XLWorkbook();
-                }
 
-                string sheetName = $"BCKiemKe_{tuNgay:ddMMyyyy}_{denNgay:ddMMyyyy}";
+                string sheetName = $"{tienToSheet}_{tuNgay:ddMMyyyy}_{denNgay:ddMMyyyy}";
                 int count = 1;
                 while (workbook.Worksheets.Any(ws => ws.Name == sheetName))
                 {
-                    sheetName = $"BCKiemKe_{tuNgay:ddMMyyyy}_{denNgay:ddMMyyyy}_{count++}";
+                    sheetName = $"{tienToSheet}_{tuNgay:ddMMyyyy}_{denNgay:ddMMyyyy}_{count++}";
                 }
 
                 var ws = workbook.Worksheets.Add(sheetName);
 
-                ws.Cell(1, 1).Value = "BÁO CÁO KIỂM KÊ HÀNG HÓA";
-                ws.Range(1, 1, 1, 8).Merge();
+                ws.Cell(1, 1).Value = tieuDeBaoCao;
+                ws.Range(1, 1, 1, headers.Length).Merge();
                 ws.Cell(1, 1).Style.Font.Bold = true;
                 ws.Cell(1, 1).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
 
+                
                 ws.Cell(2, 1).Value = $"Từ ngày: {tuNgay:dd/MM/yyyy}  đến ngày: {denNgay:dd/MM/yyyy}";
-                ws.Range(2, 1, 2, 8).Merge();
+                ws.Range(2, 1, 2, headers.Length).Merge();
                 ws.Cell(2, 1).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
 
-                string[] headers = { "STT", "Mã vật liệu", "Tên vật liệu", "Đơn vị tính", "Tồn hệ thống", "Tồn thực tế", "Chênh lệch", "Ghi chú" };
+                
                 for (int i = 0; i < headers.Length; i++)
                 {
                     ws.Cell(4, i + 1).Value = headers[i];
@@ -184,24 +126,15 @@ namespace warehouse_manager.service
                     ws.Cell(4, i + 1).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
                 }
 
+                
                 int row = 5;
-                int stt = 1;
                 foreach (var item in danhSach)
                 {
-                    ws.Cell(row, 1).Value = stt++;
-                    ws.Cell(row, 2).Value = item.MaVatLieu;
-                    ws.Cell(row, 3).Value = item.TenVatLieu;
-                    ws.Cell(row, 4).Value = item.DonViTinh;
-                    ws.Cell(row, 5).Value = item.TonHeThong;
-                    ws.Cell(row, 6).Value = item.TonThucTe;
-                    ws.Cell(row, 7).Value = item.ChenhLech;
-                    ws.Cell(row, 8).Value = item.GhiChu;
+                    mapRow(ws, item, row);
                     row++;
                 }
 
-                // Auto-fit cột
                 ws.Columns().AdjustToContents();
-
                 workbook.SaveAs(filePath);
 
                 MessageBox.Show("Xuất Excel thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);

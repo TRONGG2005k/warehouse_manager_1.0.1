@@ -36,11 +36,26 @@ namespace warehouse_manager.ui.uiController.baocao
                 {
                     string filePath = saveFileDialog.FileName;
 
-                    baoCao.XuatExcel(
+                    baoCao.XuatExcel<warehouse_manager.dto.o.BCNXT>(
                         baoCao.baoCaoNXT(dateTimePicker1.Value, dateTimePicker2.Value),
                         filePath,
                         dateTimePicker1.Value,
-                        dateTimePicker2.Value
+                        dateTimePicker2.Value,
+                        "BAO CAO NHAP-XUAT-TON",
+                        "BaoCaoNXT",
+                        new string[] { "Mã vật liệu", "Tên vật liệu", "Đơn vị tính", "Tồn đầu kỳ", "Nhập trong kỳ", "Xuất trong kỳ", "Tồn cuối kỳ" },
+                        (ws, item, row) =>
+                        {
+                            ws.Cell(row, 1).Value = item.MaVatLieu?.ToString();
+                            ws.Cell(row, 2).Value = item.TenVatLieu?.ToString();
+                            ws.Cell(row, 3).Value = item.DonViTinh?.ToString();
+                            ws.Cell(row, 4).Value = item.TonDauKy;
+                            ws.Cell(row, 5).Value = item.NhapTrongKy;
+                            ws.Cell(row, 6).Value = item.XuatTrongKy;
+                            ws.Cell(row, 7).Value = item.TonCuoiKy;
+                            //ws.Cell(row, 1).Value = item.MaVatLieu?.ToString();
+                            //ws.Cell(row, 1).Value = item.MaVatLieu?.ToString();
+                        }
                     );
 
                     MessageBox.Show("Xuất báo cáo thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);

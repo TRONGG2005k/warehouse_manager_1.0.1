@@ -71,16 +71,36 @@ namespace warehouse_manager.ui.uiController.baocao
                 {
                     string filePath = saveFileDialog.FileName;
 
-                    baoCao.XuatExcel(
+                    baoCao.XuatExcel<BCKienKeDto>(
                         baoCao.bCKienKe(tam),
                         filePath,
                         dateTimePicker1.Value,
-                        dateTimePicker2.Value
+                        dateTimePicker2.Value,
+                        $"BÁO CÁO KIỂM KÊ HÀNG HÓA",
+                        "BCKiemKe",
+                        new string[] { "STT", "Mã vật liệu", "Tên vật liệu", "Đơn vị tính", "Tồn hệ thống", "Tồn thực tế", "Chênh lệch", "Ghi chú" },
+                         (ws, item, row) =>
+                         {
+                             ws.Cell(row, 1).Value = row - 4; // STT
+                             ws.Cell(row, 2).Value = item.MaVatLieu;
+                             ws.Cell(row, 3).Value = item.TenVatLieu;
+                             ws.Cell(row, 4).Value = item.DonViTinh;
+                             ws.Cell(row, 5).Value = item.TonHeThong;
+                             ws.Cell(row, 6).Value = item.TonThucTe;
+                             ws.Cell(row, 7).Value = item.ChenhLech;
+                             ws.Cell(row, 8).Value = item.GhiChu;
+                         }
                     );
 
                     MessageBox.Show("Xuất báo cáo thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string maPhieu = dataGridView1.CurrentRow.Cells["MaPhieuKiemKe"].Value.ToString();
+            tam = maPhieu;
         }
     }
 }
