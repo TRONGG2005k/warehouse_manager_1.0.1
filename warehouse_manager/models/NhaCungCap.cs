@@ -23,6 +23,9 @@ public partial class NhaCungCap
     [Unicode(false)]
     public string? DiaChi { get; set; }
 
+    [Column("is_deleted")]
+    public bool IsDeleted { get; set; } = false;
+
     [Column("so_dien_thoai")]
     [StringLength(20)]
     [Unicode(false)]

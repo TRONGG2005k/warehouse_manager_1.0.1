@@ -26,6 +26,7 @@ namespace warehouse_manager.ui.uiController.nhacungcap
             try
             {
                 dataGridView1.DataSource = context.NhaCungCaps
+                    .Where(x =>  x.IsDeleted != true)
                     .Select(x => new
                     {
                         x.Id,
@@ -141,7 +142,7 @@ namespace warehouse_manager.ui.uiController.nhacungcap
                 var ncc = context.NhaCungCaps.FirstOrDefault(x => x.Id == selectedId);
                 if (ncc != null)
                 {
-                    context.NhaCungCaps.Remove(ncc);
+                    ncc.IsDeleted = true;
                     context.SaveChanges();
                     selectedId = 0;
                     LoadData();
@@ -160,7 +161,7 @@ namespace warehouse_manager.ui.uiController.nhacungcap
             {
                 var keyword = txtSearch.Text.Trim().ToLower();
                 dataGridView1.DataSource = context.NhaCungCaps
-                    .Where(x => x.TenNhaCungCap.ToLower().Contains(keyword))
+                    .Where(x => x.TenNhaCungCap.ToLower().Contains(keyword) && x.IsDeleted != true)
                     .Select(x => new
                     {
                         x.Id,
