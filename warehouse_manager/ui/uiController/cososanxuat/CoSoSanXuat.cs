@@ -28,6 +28,7 @@ namespace warehouse_manager.ui.uiController.cososanxuat
         private void LoadData()
         {
             dataGridView1.DataSource = context.CoSoSanXuats
+                .Where(x => x.IsDeleted != true)
                 .Select(x => new
                 {
                     x.Id,
@@ -159,7 +160,7 @@ namespace warehouse_manager.ui.uiController.cososanxuat
                 var csx = context.CoSoSanXuats.FirstOrDefault(x => x.Id == selectedId);
                 if (csx != null)
                 {
-                    context.CoSoSanXuats.Remove(csx);
+                    csx.IsDeleted = true;
                     context.SaveChanges();
                     selectedId = 0;
                     LoadData();

@@ -22,6 +22,9 @@ namespace warehouse_manager.Models
         [Unicode(true)]
         public string TenCoSo { get; set; } = null!;
 
+        [Column("is_deleted")]
+        public bool IsDeleted { get; set; } = false;
+
         [MaxLength(500)]
         public string? DiaChi { get; set; }
 

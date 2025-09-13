@@ -26,8 +26,26 @@ namespace warehouse_manager.ui.uiController.baocao
 
         private void button11_Click(object sender, EventArgs e)
         {
-            baoCao.XuatExcel(baoCao.baoCaoNXT(dateTimePicker1.Value, dateTimePicker2.Value),
-                @"C:\Users\Hi ASUS TUF\Documents\BaoCaoNXT.xlsx", dateTimePicker1.Value, dateTimePicker2.Value);
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.Title = "Lưu báo cáo NXT";
+                saveFileDialog.Filter = "Excel Files (*.xlsx)|*.xlsx";
+                saveFileDialog.FileName = "BaoCaoNXT.xlsx"; // gợi ý tên mặc định
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string filePath = saveFileDialog.FileName;
+
+                    baoCao.XuatExcel(
+                        baoCao.baoCaoNXT(dateTimePicker1.Value, dateTimePicker2.Value),
+                        filePath,
+                        dateTimePicker1.Value,
+                        dateTimePicker2.Value
+                    );
+
+                    MessageBox.Show("Xuất báo cáo thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
     }
 }

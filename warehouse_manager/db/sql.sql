@@ -28,3 +28,7 @@ select * from [nha_cung_cap]
 
 ALTER TABLE vat_lieu
 ADD is_deleted BIT NOT NULL CONSTRAINT DF_vat_lieu_is_deleted DEFAULT(0);
+
+
+ALTER TABLE loai_vat_lieu
+ADD is_deleted BIT NOT NULL CONSTRAINT DF_loai_vat_lieu_is_deleted DEFAULT(0);

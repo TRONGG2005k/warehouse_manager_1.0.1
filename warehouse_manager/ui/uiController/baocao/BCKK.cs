@@ -61,8 +61,26 @@ namespace warehouse_manager.ui.uiController.baocao
 
         private void button11_Click(object sender, EventArgs e)
         {
-            baoCao.XuatExcel(baoCao.bCKienKe(tam),
-                @"C:\Users\Hi ASUS TUF\Documents\BaoCaoKiemKe.xlsx", dateTimePicker1.Value, dateTimePicker2.Value);
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.Title = "Lưu báo cáo kiểm kê";
+                saveFileDialog.Filter = "Excel Files (*.xlsx)|*.xlsx";
+                saveFileDialog.FileName = "BaoCaoKiemKe.xlsx"; // gợi ý tên file mặc định
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string filePath = saveFileDialog.FileName;
+
+                    baoCao.XuatExcel(
+                        baoCao.bCKienKe(tam),
+                        filePath,
+                        dateTimePicker1.Value,
+                        dateTimePicker2.Value
+                    );
+
+                    MessageBox.Show("Xuất báo cáo thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
     }
 }
