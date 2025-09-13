@@ -36,13 +36,27 @@ namespace warehouse_manager.service
                                 .Where(c => c.PhieuXuat.NgayXuat >= tu && c.PhieuXuat.NgayXuat <= den 
                                 && c.PhieuXuat.TrangThai == "DA_DUYET")
                                 .Sum(c => c.SoLuongThucXuat),
+                TonCuoiKy = (vl.ChiTietPhieuNhaps
+                             .Where(c => c.PhieuNhap!.NgayNhap < tu )
+                             .Sum(c => (c.SoLuong ?? 0)
+                            )
+                             -
+                             (vl.ChiTietPhieuXuats
+                             .Where(c => c.PhieuXuat.NgayXuat < den && c.PhieuXuat.TrangThai == "DA_DUYET")
+                             .Sum(c => (c.SoLuongThucXuat)
+                            )
+                             + 
+                            (vl.ChiTietPhieuNhaps
+                                .Where(c => c.PhieuNhap!.NgayNhap >= tu && c.PhieuNhap.NgayNhap <= den)
+                                .Sum(c => c.SoLuong ?? 0)
+                            )
+                            -
+                            (vl.ChiTietPhieuXuats
+                                .Where(c => c.PhieuXuat.NgayXuat >= tu && c.PhieuXuat.NgayXuat <= den
+                                && c.PhieuXuat.TrangThai == "DA_DUYET").Sum(c => c.SoLuongThucXuat)
+                            )))
             })
-            .AsEnumerable()
-            .Select(dto =>
-            {
-                dto.TonCuoiKy = dto.TonDauKy + dto.NhapTrongKy - dto.XuatTrongKy;
-                return dto;
-            })
+           
             .ToList();
         }
 
