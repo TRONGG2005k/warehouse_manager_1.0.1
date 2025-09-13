@@ -76,10 +76,7 @@ namespace warehouse_manager.ui.uiController.ke
             try
             {
                 long id = (long)dataGridView1.CurrentRow.Cells["Id"].Value;
-                if (context.Kes.FirstOrDefault(k => k.MaKe == textBox1.Text) != null)
-                {
-                    throw new Exception("Mã kệ đã tồn tại");
-                }
+                
                 if (string.IsNullOrEmpty(textBox1.Text))
                 {
                     throw new Exception("Mã kệ không được để trống");
