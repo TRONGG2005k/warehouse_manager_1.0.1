@@ -75,7 +75,7 @@ namespace warehouse_manager.ui.uiController.ke
         {
             try
             {
-                long id = (long)dataGridView1.CurrentRow.Cells["Id"].Value;
+                //long id = (long)dataGridView1.CurrentRow.Cells["Id"].Value;
                 
                 if (string.IsNullOrEmpty(textBox1.Text))
                 {
@@ -85,10 +85,10 @@ namespace warehouse_manager.ui.uiController.ke
                 {
                     throw new Exception("Vị trí không được để trống");
                 }
-                var ke = context.Kes.Find(id);
+                var ke = context.Kes.FirstOrDefault(k => k.MaKe == textBox1.Text.ToString());
                 if (ke == null)
                 {
-                    throw new Exception("không tìm thấy kệ với id" + id);
+                    throw new Exception("không tìm thấy kệ với mã kệ" + textBox1.Text.ToString());
                 }
                 ke.Khu = textBox3.Text;
                 ke.MaKe = textBox1.Text;
