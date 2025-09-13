@@ -21,6 +21,9 @@ public partial class LoaiVatLieu
     [Column("mo_ta")]
     public string? MoTa { get; set; }
 
+    [Column("is_deleted")]
+    public bool IsDeleted { get; set; } = false;
+
     [InverseProperty("MaLoaiNavigation")]
     public virtual ICollection<VatLieu> VatLieus { get; set; } = new List<VatLieu>();
 }

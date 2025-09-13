@@ -52,7 +52,9 @@ namespace warehouse_manager.ui.uiController.ke
         }
         private void LoadData()
         {
-            dataGridView1.DataSource = context.LoaiVatLieus.Select(
+            dataGridView1.DataSource = context.LoaiVatLieus
+                .Where(l => l.IsDeleted != true)
+                .Select(
                 l => new
                 {
                     id = l.Id,
@@ -109,7 +111,8 @@ namespace warehouse_manager.ui.uiController.ke
                 string keyword = textBox4.Text.Trim().ToLower();
              
 
-                var loai = context.LoaiVatLieus.Where(l => l.TenLoai.ToLower().Contains(keyword))
+                var loai = context.LoaiVatLieus
+                    .Where(l => l.TenLoai.ToLower().Contains(keyword) && l.IsDeleted != true)
                     .Select(l => new
                     {
                         id = l.Id,
@@ -147,15 +150,15 @@ namespace warehouse_manager.ui.uiController.ke
                     throw new Exception("loại vật liệu khôg tồn tại");
 
                 }
-                context.LoaiVatLieus.Remove(loai);
+                loai.IsDeleted = true;
                 context.SaveChanges();
                 LoadData();
 
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("Lỗi: " + ex.Message);
-                throw new Exception("Lỗi: " + ex.Message);
+                MessageBox.Show("Lỗi: " + ex.Message);
+                //throw new Exception("Lỗi: " + ex.Message);
 
             }
         }
