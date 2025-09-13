@@ -41,20 +41,21 @@ namespace warehouse_manager.ui.uiController.cososanxuat
         }
         private bool ValidateInput()
         {
-            if (string.IsNullOrWhiteSpace(txtTenCoSo.Text))
+            if (string.IsNullOrWhiteSpace(txtTenCoSo.Text) || txtTenCoSo.Text == "")
             {
                 MessageBox.Show("Tên cơ sở không được để trống!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
-            if (!string.IsNullOrWhiteSpace(txtSoDienThoai.Text) && !Regex.IsMatch(txtSoDienThoai.Text, @"^\d+$"))
+            if (!string.IsNullOrWhiteSpace(txtSoDienThoai.Text) && !Regex.IsMatch(txtSoDienThoai.Text, @"^\d+$") || txtSoDienThoai.Text == "")
             {
                 MessageBox.Show("Số điện thoại chỉ được chứa chữ số!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
             if (!string.IsNullOrWhiteSpace(txtEmail.Text) &&
-                !Regex.IsMatch(txtEmail.Text, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+                !Regex.IsMatch(txtEmail.Text, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"
+                ) || txtEmail.Text == "")
             {
                 MessageBox.Show("Email không hợp lệ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
