@@ -83,7 +83,6 @@ namespace warehouse_manager.service
             {
                 XLWorkbook workbook;
 
-                // Nếu file đã tồn tại thì mở ra, không tạo mới
                 if (System.IO.File.Exists(duongDan))
                 {
                     workbook = new XLWorkbook(duongDan);
@@ -93,7 +92,6 @@ namespace warehouse_manager.service
                     workbook = new XLWorkbook();
                 }
 
-                // Tạo tên sheet không trùng (ví dụ: BaoCaoNXT, BaoCaoNXT1, BaoCaoNXT2...)
                 string sheetName = $"BaoCaoNXT_{tu:ddMMyyyy}_{den:ddMMyyyy}";
                 int count = 1;
                 while (workbook.Worksheets.Any(ws => ws.Name == sheetName))
@@ -103,13 +101,11 @@ namespace warehouse_manager.service
 
                 var ws = workbook.Worksheets.Add(sheetName);
 
-                // Ghi kỳ báo cáo ở dòng đầu
                 ws.Cell(1, 1).Value = $"Báo cáo Nhập - Xuất - Tồn từ {tu:dd/MM/yyyy} đến {den:dd/MM/yyyy}";
                 ws.Range(1, 1, 1, 7).Merge();
                 ws.Cell(1, 1).Style.Font.Bold = true;
                 ws.Cell(1, 1).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
 
-                // Header
                 ws.Cell(2, 1).Value = "Mã vật liệu";
                 ws.Cell(2, 2).Value = "Tên vật liệu";
                 ws.Cell(2, 3).Value = "Đơn vị tính";
@@ -150,7 +146,6 @@ namespace warehouse_manager.service
             {
                 XLWorkbook workbook;
 
-                // Nếu file đã tồn tại thì mở, còn không thì tạo mới
                 if (System.IO.File.Exists(filePath))
                 {
                     workbook = new XLWorkbook(filePath);
@@ -160,7 +155,6 @@ namespace warehouse_manager.service
                     workbook = new XLWorkbook();
                 }
 
-                // Tạo tên sheet động để tránh trùng
                 string sheetName = $"BCKiemKe_{tuNgay:ddMMyyyy}_{denNgay:ddMMyyyy}";
                 int count = 1;
                 while (workbook.Worksheets.Any(ws => ws.Name == sheetName))
@@ -170,7 +164,6 @@ namespace warehouse_manager.service
 
                 var ws = workbook.Worksheets.Add(sheetName);
 
-                // Tiêu đề báo cáo
                 ws.Cell(1, 1).Value = "BÁO CÁO KIỂM KÊ HÀNG HÓA";
                 ws.Range(1, 1, 1, 8).Merge();
                 ws.Cell(1, 1).Style.Font.Bold = true;
@@ -180,7 +173,6 @@ namespace warehouse_manager.service
                 ws.Range(2, 1, 2, 8).Merge();
                 ws.Cell(2, 1).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
 
-                // Header cột
                 string[] headers = { "STT", "Mã vật liệu", "Tên vật liệu", "Đơn vị tính", "Tồn hệ thống", "Tồn thực tế", "Chênh lệch", "Ghi chú" };
                 for (int i = 0; i < headers.Length; i++)
                 {
@@ -189,7 +181,6 @@ namespace warehouse_manager.service
                     ws.Cell(4, i + 1).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
                 }
 
-                // Dữ liệu
                 int row = 5;
                 int stt = 1;
                 foreach (var item in danhSach)
@@ -208,7 +199,6 @@ namespace warehouse_manager.service
                 // Auto-fit cột
                 ws.Columns().AdjustToContents();
 
-                // Lưu file
                 workbook.SaveAs(filePath);
 
                 MessageBox.Show("Xuất Excel thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
