@@ -47,7 +47,7 @@ public partial class WarehouseManagerContext : DbContext
     public virtual DbSet<VaiTro> VaiTros { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer(Config.GetConnectionString("MyDb"));
+        optionsBuilder.UseSqlServer("Server=.;Initial Catalog=warehouse_manager;Integrated Security=True;TrustServerCertificate=True");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -71,7 +71,8 @@ public partial class WarehouseManagerContext : DbContext
 
             entity.HasOne(d => d.PhieuXuat).WithMany(p => p.ChiTietPhieuXuats).HasConstraintName("fk_ctpx_px");
 
-            entity.HasOne(d => d.VatLieu).WithMany(p => p.ChiTietPhieuXuats).HasConstraintName("fk_ctpx_vl");
+            entity.HasOne(d => d.VatLieu).WithMany(p => p.ChiTietPhieuXuats)
+            .HasConstraintName("fk_ctpx_vl");
         });
 
         modelBuilder.Entity<Ke>(entity =>
@@ -163,9 +164,12 @@ public partial class WarehouseManagerContext : DbContext
             entity.Property(e => e.SoLuongTon).HasDefaultValue(0);
 
             entity.HasOne(d => d.MaLoaiNavigation).WithMany(p => p.VatLieus)
+            .OnDelete(DeleteBehavior.Cascade)
             .HasConstraintName("fk_vl_loai");
 
-            entity.HasOne(d => d.MaNhaCungCapNavigation).WithMany(p => p.VatLieus).HasConstraintName("fk_vl_ncc");
+            entity.HasOne(d => d.MaNhaCungCapNavigation).WithMany(p => p.VatLieus)
+            .OnDelete(DeleteBehavior.Cascade)
+            .HasConstraintName("fk_vl_ncc");
             
             entity.HasMany(d => d.Kes).WithMany(p => p.VatLieus)
                 .UsingEntity<Dictionary<string, object>>(

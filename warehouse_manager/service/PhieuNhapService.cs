@@ -235,7 +235,7 @@ namespace warehouse_manager.service
         {
             try
             {
-                // 1. Kiểm tra loại vật liệu & nhà cung cấp
+                
                 var loaiVatLieu = context.LoaiVatLieus
                     .FirstOrDefault(l => l.TenLoai == taoPhieuNhap.LoaiVatLieu)
                     ?? throw new Exception("Loại vật liệu không tồn tại");
@@ -244,7 +244,7 @@ namespace warehouse_manager.service
                     .FirstOrDefault(ncc => ncc.TenNhaCungCap == taoPhieuNhap.NhaCungCap)
                     ?? throw new Exception("Nhà cung cấp không tồn tại");
 
-                // 2. Tìm hoặc tạo vật liệu
+
                 var vatLieu = context.VatLieus
                     .FirstOrDefault(v => v.MaVatLieu == taoPhieuNhap.MaVatLieu);
 

@@ -29,7 +29,7 @@ namespace warehouse_manager.ui.uiController.phieuNhap
 
         }
 
-        
+
         private void LoadDataChodataGridView()
         {
             dataGridView1.DataSource = null;
@@ -39,10 +39,7 @@ namespace warehouse_manager.ui.uiController.phieuNhap
         {
             List<String> loaiVatlieus = new LoaiVatLieuService().danhSachLoaiVatLieu();
             comboBox1.Items.Add("");
-            foreach (var item in loaiVatlieus)
-            {
-                comboBox1.Items.Add(item);
-            }
+            comboBox1.DataSource = loaiVatlieus;
 
             List<String> donViTinhs = new List<string>
             {
@@ -60,19 +57,15 @@ namespace warehouse_manager.ui.uiController.phieuNhap
                 "Lít",
                 "Chiều"
             };
-            foreach (var item in donViTinhs)
-            {
-                comboBox2.Items.Add(item);
-            }
-            comboBox1.SelectedIndex = 0;
-            comboBox2.SelectedIndex = 0;
+            comboBox2.DataSource = donViTinhs;
+            comboBox2.SelectedIndex = -1;
+            comboBox1.SelectedIndex = -1;
+
             List<String> nhaCungCaps = new NhaCungCapService().danhSachNhaCungCap();
-            foreach (var item in nhaCungCaps)
-            {
-                comboBox3.Items.Add(item);
-            }
+            comboBox3.DataSource = nhaCungCaps;
+            comboBox3.SelectedIndex = -1;
             List<String> kes = new KeService().danhSachKe();
-           
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -93,7 +86,7 @@ namespace warehouse_manager.ui.uiController.phieuNhap
                 {
                     throw new Exception("Nhà cung cấp không tồn tại");
                 }
-               
+
                 if (string.IsNullOrEmpty(comboBox1.SelectedItem.ToString()) ||
                   string.IsNullOrEmpty(textBox1.Text) ||
                   string.IsNullOrEmpty(comboBox2.SelectedItem.ToString()) ||
@@ -114,7 +107,7 @@ namespace warehouse_manager.ui.uiController.phieuNhap
                     NhaCungCap = comboBox3.SelectedItem.ToString(),
                     MaVatLieu = textBox2.Text,
                     SoLuong = (int)numericUpDown2.Value,
-                   
+
                 });
                 LoadDataChodataGridView();
             }
@@ -150,14 +143,14 @@ namespace warehouse_manager.ui.uiController.phieuNhap
                 {
                     throw new Exception("Nhà cung cấp không tồn tại");
                 }
-               
+
 
                 if (string.IsNullOrEmpty(comboBox1.SelectedItem.ToString()) ||
                 string.IsNullOrEmpty(textBox1.Text) ||
                 string.IsNullOrEmpty(comboBox2.SelectedItem.ToString()) ||
                 string.IsNullOrEmpty(comboBox3.SelectedItem.ToString()) ||
                 string.IsNullOrEmpty(textBox2.Text) ||
-               
+
                 (int)numericUpDown2.Value == 0
                 )
                 {
@@ -176,7 +169,7 @@ namespace warehouse_manager.ui.uiController.phieuNhap
                     NhaCungCap = comboBox3.SelectedItem.ToString(),
                     MaVatLieu = textBox2.Text,
                     SoLuong = Convert.ToInt32(numericUpDown2.Value),
-                  
+
                 });
                 if (isSuccess)
                 {
@@ -240,7 +233,7 @@ namespace warehouse_manager.ui.uiController.phieuNhap
                     throw new Exception("Ngày bắt đầu phải nhỏ hơn ngày kết thúc");
                 }
                 //MessageBox.Show("Tính năng tìm ngày đang được phát triển");
-                
+
                 List<dto.o.PhieuNhapDto> list = phieuNhapService.TimPhieuTheoKhoangThoiGian(
                         new LocTheoNgayDto
                         {
@@ -255,6 +248,11 @@ namespace warehouse_manager.ui.uiController.phieuNhap
                 MessageBox.Show("Lỗi" + ex.Message);
                 return;
             }
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

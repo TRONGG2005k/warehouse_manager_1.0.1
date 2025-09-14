@@ -65,7 +65,7 @@ namespace warehouse_manager.service
             return context.PhieuKiemKes
                 .SelectMany(kk => kk.ChiTietPhieuKiemKes, (kk, ct) => new BCKienKeDto
                 {
-         
+
                     MaVatLieu = ct.VatLieu.MaVatLieu ?? "",
                     TenVatLieu = ct.VatLieu.Ten ?? "",
                     DonViTinh = ct.VatLieu.DonViTinh ?? "",

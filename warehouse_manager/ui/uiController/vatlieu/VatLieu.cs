@@ -139,7 +139,7 @@ namespace warehouse_manager.ui.uiController.vatlieu
                     SoLuongTon = sl,
                     MaLoai = loai.Id,
                     MaNhaCungCap = ncc.Id,
-                    TrangThai = sl > 0 ? "Còn hàng" : "Hết hàng",
+                    TrangThai = sl > 0 ? "CON_HANG" : "HET_HANG",
                     Kes = selectedKes
                 };
 

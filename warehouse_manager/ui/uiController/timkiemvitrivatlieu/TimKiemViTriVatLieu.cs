@@ -35,10 +35,9 @@ namespace warehouse_manager.ui.uiController.timkiemvitrivatlieu
                 "HET_HANG"
             };
 
-            foreach (var item in trangThais)
-            {
-                comboBox1.Items.Add(item);
-            }
+
+            comboBox1.DataSource = trangThais;
+            
             var danhSachKhu = context.Kes.Select(k => k.Khu!).ToList();
             foreach (var item in danhSachKhu) {
                 comboBox2.Items.Add(item);
@@ -58,7 +57,7 @@ namespace warehouse_manager.ui.uiController.timkiemvitrivatlieu
                     SoluonTon = vl.SoLuongTon,
                     MaKe = ke.MaKe,
                     Khu = ke.Khu,
-                    TrangThai = vl.TrangThai
+                    TrangThai = vl.TrangThai == "CON_HANG" ? "Còn hàng" : "Hết hàng"
                 }).ToList();
         }
         private void button1_Click(object sender, EventArgs e)

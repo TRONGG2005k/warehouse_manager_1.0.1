@@ -337,6 +337,7 @@
             comboBox2.Name = "comboBox2";
             comboBox2.Size = new Size(473, 28);
             comboBox2.TabIndex = 4;
+            comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
             // 
             // label2
             // 

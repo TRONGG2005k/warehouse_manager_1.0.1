@@ -23,7 +23,7 @@ namespace warehouse_manager.service
         //các hàm select
         public List<PhieuXuatDto> LayTatCaPhieu()
         {
-            string trangThai ="";
+            
 
             return context.PhieuXuats
             .Include(p => p.CoSoSanXuat)

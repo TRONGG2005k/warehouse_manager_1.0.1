@@ -75,16 +75,13 @@ namespace warehouse_manager.ui.uiController.phieuxuat
         {
             var vatLieuService = new service.VatLieuService();
             List<String> vatLieus = vatLieuService.danhSachVatLieu();
-            foreach (var item in vatLieus)
-            {
-                comboBox2.Items.Add(item);
-            }
+            
+            comboBox2.DataSource = vatLieus;
+            comboBox2.SelectedIndex = -1; 
             var chuyenSanXuatService = new service.ChuyenSanXuatService();
             List<String> chuyenSanXuats = chuyenSanXuatService.danhSachCoSoSanXuat();
-            foreach (var item in chuyenSanXuats)
-            {
-                comboBox1.Items.Add(item);
-            }
+            comboBox1.DataSource = chuyenSanXuats;
+            comboBox1.SelectedIndex = -1;
         }
 
         private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
