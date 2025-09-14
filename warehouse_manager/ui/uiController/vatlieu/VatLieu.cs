@@ -277,7 +277,7 @@ namespace warehouse_manager.ui.uiController.vatlieu
                 vl.DonViTinh = comboBox5.SelectedItem?.ToString();
                 vl.MaLoai = loai.Id;
                 vl.MaNhaCungCap = ncc.Id;
-                vl.TrangThai = vl.SoLuongTon > 0 ? "Còn hàng" : "Hết hàng";
+                vl.TrangThai = vl.SoLuongTon > 0 ? "CON_HANG" : "HET_HANG";
                 vl.Kes = selectedKes;
                 context.SaveChanges();
                 MessageBox.Show("Cập nhật vật liệu thành công!");

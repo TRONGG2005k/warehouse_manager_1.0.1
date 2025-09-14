@@ -431,7 +431,6 @@ namespace warehouse_manager.service
                     if (phieuXuat.TrangThai != "CHO_DUYET")
                         throw new Exception("Phiếu xuất đã được xử lý");
 
-                    // lấy chi tiết duy nhất
                     var chiTiet = phieuXuat.ChiTietPhieuXuats.FirstOrDefault()
                         ?? throw new Exception("Phiếu xuất không có chi tiết");
 
@@ -465,7 +464,7 @@ namespace warehouse_manager.service
                 }
                 else
                 {
-                    // Người dùng chọn No → bỏ qua
+                    
                     MessageBox.Show("Đã hủy xác nhận.");
                     return false;
                 }
