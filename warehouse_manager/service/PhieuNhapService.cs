@@ -24,50 +24,7 @@ namespace warehouse_manager.service
 
 
         // hàm select phiếu nhập và xuất
-        
 
-        public List<PhieuDto> danhSachPhieuNhap()
-        {
-
-            var query = context.PhieuNhaps.Select(
-                p => new PhieuDto
-                {
-                    Id = p.Id,
-                    NgayLap = p.NgayNhap,
-                    TongTien = p.TongTien,
-                    NguoiLap = p.NguoiDung!.TenDangNhap!,
-                    LoaiPhieu = "Phiếu nhập ⬅️",
-                    TenHang = p.ChiTietPhieuNhaps!.FirstOrDefault()!.VatLieu!.Ten ?? "",
-                    SoLuong = p.ChiTietPhieuNhaps!.FirstOrDefault()!.SoLuong ?? 0
-                }
-            ).OrderByDescending(p => p.NgayLap); ;
-
-            return query.ToList();
-        }
-
-        
-
-        public List<dto.o.PhieuNhapDto> phieuNhapResponse()
-        {
-            return context.PhieuNhaps.Select(
-                
-                p => new dto.o.PhieuNhapDto
-                {
-                    Id = p.Id,
-                    LoaiVatLieu = p.ChiTietPhieuNhaps.First()!.VatLieu.MaLoaiNavigation.TenLoai,
-                    TenHang = p.ChiTietPhieuNhaps!.FirstOrDefault()!.VatLieu!.Ten ,
-                    DonViTinh = p.ChiTietPhieuNhaps!.FirstOrDefault()!.DonViTinh ,
-                    SoLuong = p.ChiTietPhieuNhaps!.FirstOrDefault()!.SoLuong ?? 0,
-                    DonGia = p.ChiTietPhieuNhaps!.FirstOrDefault()!.DonGia ?? 0,
-                    NhaCungCap = p.MaNhaCungCapNavigation!.TenNhaCungCap ?? "",
-                    //Ke = p.ChiTietPhieuNhaps.First().VatLieu.Kes.First()!.MaKe,
-                    NgayNhap = p.NgayNhap,
-                    MaVatLieu = p.ChiTietPhieuNhaps!.FirstOrDefault()!.VatLieu!.MaVatLieu,
-
-                }
-            ).OrderByDescending(p => p.NgayNhap).ToList();
-
-        }
         public List<dto.o.PhieuNhapDto> phieuNhapDtos()
         {
             return context.PhieuNhaps
@@ -83,9 +40,6 @@ namespace warehouse_manager.service
                     SoLuong = (long)ct.SoLuong,
                     DonGia = ct.DonGia ?? 0,
                     NhaCungCap = pn.MaNhaCungCapNavigation.TenNhaCungCap,
-                    //Ke = ct.VatLieu.Kes.FirstOrDefault() != null
-                    //     ? ct.VatLieu.Kes.FirstOrDefault().MaKe
-                    //     : null,
                     NgayNhap = pn.NgayNhap,
                     MaVatLieu = ct.VatLieu.MaVatLieu,
                     LoaiVatLieu = ct.VatLieu.MaLoaiNavigation.TenLoai
@@ -111,9 +65,6 @@ namespace warehouse_manager.service
                     SoLuong = (long)ct.SoLuong,
                     DonGia = ct.DonGia ?? 0,
                     NhaCungCap = pn.MaNhaCungCapNavigation.TenNhaCungCap,
-                    //Ke = ct.VatLieu.Kes.FirstOrDefault() != null
-                    //     ? ct.VatLieu.Kes.FirstOrDefault().MaKe
-                    //     : null,
                     NgayNhap = pn.NgayNhap,
                     MaVatLieu = ct.VatLieu.MaVatLieu,
                     LoaiVatLieu = ct.VatLieu.MaLoaiNavigation.TenLoai
@@ -139,9 +90,6 @@ namespace warehouse_manager.service
                     SoLuong = (long)ct.SoLuong,
                     DonGia = ct.DonGia ?? 0,
                     NhaCungCap = pn.MaNhaCungCapNavigation.TenNhaCungCap,
-                    //Ke = ct.VatLieu.Kes.FirstOrDefault() != null
-                    //     ? ct.VatLieu.Kes.FirstOrDefault().MaKe
-                    //     : null,
                     NgayNhap = pn.NgayNhap,
                     MaVatLieu = ct.VatLieu.MaVatLieu,
                     LoaiVatLieu = ct.VatLieu.MaLoaiNavigation.TenLoai
@@ -169,7 +117,6 @@ namespace warehouse_manager.service
                     SoLuong = (long)x.ct.SoLuong,
                     DonGia = x.ct.DonGia ?? 0,
                     NhaCungCap = x.pn.MaNhaCungCapNavigation.TenNhaCungCap,
-                    //Ke = k != null ? k.MaKe : null,  // Nếu vật liệu không có kệ, vẫn ra 1 bản ghi với null
                     NgayNhap = x.pn.NgayNhap,
                     MaVatLieu = x.ct.VatLieu.MaVatLieu,
                     LoaiVatLieu = x.ct.VatLieu.MaLoaiNavigation.TenLoai
@@ -196,7 +143,6 @@ namespace warehouse_manager.service
                     SoLuong = (long)x.ct.SoLuong,
                     DonGia = x.ct.DonGia ?? 0,
                     NhaCungCap = x.pn.MaNhaCungCapNavigation.TenNhaCungCap,
-                    //Ke = k != null ? k.MaKe : null,  // Nếu vật liệu không có kệ, vẫn ra 1 bản ghi với null
                     NgayNhap = x.pn.NgayNhap,
                     MaVatLieu = x.ct.VatLieu.MaVatLieu,
                     LoaiVatLieu = x.ct.VatLieu.MaLoaiNavigation.TenLoai
@@ -222,7 +168,6 @@ namespace warehouse_manager.service
                     SoLuong = (long)x.ct.SoLuong,
                     DonGia = x.ct.DonGia ?? 0,
                     NhaCungCap = x.pn.MaNhaCungCapNavigation.TenNhaCungCap,
-                    //Ke = k != null ? k.MaKe : null,  // Nếu vật liệu không có kệ, vẫn ra 1 bản ghi với null
                     NgayNhap = x.pn.NgayNhap,
                     MaVatLieu = x.ct.VatLieu.MaVatLieu,
                     LoaiVatLieu = x.ct.VatLieu.MaLoaiNavigation.TenLoai

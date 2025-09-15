@@ -56,6 +56,7 @@ namespace warehouse_manager.ui.uiController.phieuxuat
                     numericUpDown1.Value = 0;
                     MessageBox.Show("Tạo phiếu xuất kho thành công");
                 }
+                LoadData();
                 //MessageBox.Show("Tạo phiếu xuất kho thành công");
             }
             catch (ValidationException ex)
@@ -67,9 +68,7 @@ namespace warehouse_manager.ui.uiController.phieuxuat
         private void PhieuXuat_Load(object sender, EventArgs e)
         {
             LoadData();
-            var service = new service.PhieuXuatService();
-            var phieuXuatDtos = service.SelectPhieuThieu();
-            dataGridView2.DataSource = phieuXuatDtos;
+           
         }
         private void LoadData()
         {
@@ -82,6 +81,9 @@ namespace warehouse_manager.ui.uiController.phieuxuat
             List<String> chuyenSanXuats = chuyenSanXuatService.danhSachCoSoSanXuat();
             comboBox1.DataSource = chuyenSanXuats;
             comboBox1.SelectedIndex = -1;
+            var service = new service.PhieuXuatService();
+            var phieuXuatDtos = service.SelectPhieuThieu();
+            dataGridView2.DataSource = phieuXuatDtos;
         }
 
         private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
