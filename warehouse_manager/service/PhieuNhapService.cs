@@ -268,13 +268,13 @@ namespace warehouse_manager.service
                     vatLieu.SoLuongTon += taoPhieuNhap.SoLuong;
                 }
 
-                // 3. Đọc người dùng hiện tại
+                //đọc người dùng hiện tại
                 string content = File.Exists("user.txt") ? File.ReadAllText("user.txt") : "";
                 var nguoiDung = context.NguoiDungs
                     .FirstOrDefault(n => n.TenDangNhap == content)
                     ?? throw new Exception("Người dùng không tồn tại");
 
-                // 4. Tạo phiếu nhập kèm chi tiết
+
                 var phieuNhap = new Models.PhieuNhap
                 {
                     NgayNhap = DateTime.Now,
@@ -296,7 +296,6 @@ namespace warehouse_manager.service
 
                 context.PhieuNhaps.Add(phieuNhap);
 
-                // 5. Lưu thay đổi
                 context.SaveChanges();
 
                 MessageBox.Show("Thêm phiếu nhập thành công");
